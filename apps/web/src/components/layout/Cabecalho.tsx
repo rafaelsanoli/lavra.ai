@@ -32,7 +32,7 @@ export function Cabecalho() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50',
         'transition-all duration-normal',
-        scrolled
+        scrolled || menuAberto
           ? 'bg-white/80 dark:bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-neutral-200 dark:border-neutral-800'
           : 'bg-transparent'
       )}
