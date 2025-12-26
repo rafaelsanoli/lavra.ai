@@ -79,11 +79,11 @@ O produtor rural brasileiro toma decisões que envolvem milhões de reais basead
 
 ## 🛣️ Roadmap
 
-- [x] 🚀 **2024** — Landing page e lista de espera
-- [ ] 📱 **Q1 2025** — Lançamento do MVP
-- [ ] 🌍 **Q2 2025** — Expansão para principais regiões produtoras
-- [ ] 🤖 **Q3 2025** — IA generativa para insights personalizados
-- [ ] 🌎 **2026** — Expansão LATAM
+- [x] 🚀 **2025** — Landing page e lista de espera
+- [ ] 📱 **Q1 2026** — Lançamento do MVP
+- [ ] 🌍 **Q2 2026** — Expansão para principais regiões produtoras
+- [ ] 🤖 **Q3 2026** — IA generativa para insights personalizados
+- [ ] 🌎 **2027** — Expansão LATAM
 
 <br>
 
