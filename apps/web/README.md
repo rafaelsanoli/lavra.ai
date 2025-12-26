@@ -11,7 +11,7 @@
 
 <br>
 
-[� Acesse](https://lavra.ai) · [� Monorepo](../README.md)
+[🌐 Acesse](https://lavra.com.br) · [📂 Monorepo](../README.md)
 
 ---
 

@@ -13,7 +13,7 @@
 
 <br>
 
-[🌐 Acesse o Site](https://lavra.ai) · [📧 Contato](mailto:contato@lavra.ai) · [🚀 Lista de Espera](https://lavra.ai/#waitlist)
+[🌐 Acesse o Site](https://lavra.com.br) · [📧 Contato](mailto:contato@lavra.com.br) · [🚀 Lista de Espera](https://lavra.com.br/#waitlist)
 
 <br>
 
@@ -93,7 +93,7 @@ Seja um dos primeiros a ter acesso à plataforma que vai revolucionar a tomada d
 
 <div align="center">
 
-### [🚀 Quero Acesso Antecipado](https://lavra.ai)
+### [🚀 Quero Acesso Antecipado](https://lavra.com.br)
 
 </div>
 
@@ -107,7 +107,7 @@ Seja um dos primeiros a ter acesso à plataforma que vai revolucionar a tomada d
 
 <br>
 
-[Website](https://lavra.ai) · [LinkedIn](https://linkedin.com/company/lavra-ai) · [Twitter](https://twitter.com/lavra_ai)
+[Website](https://lavra.com.br) · [LinkedIn](https://linkedin.com/company/lavra-ai) · [Twitter](https://twitter.com/lavra_ai)
 
 <br>
 
