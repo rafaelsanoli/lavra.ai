@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================
+   CSS VARIABLES - LAVRA.AI
+   ========================================== */
+@layer base {
+  :root {
+    /* Brand */
+    --color-brand: 23 82 44;
+    --color-brand-light: 74 222 128;
+    --color-gold: 201 162 39;
+    
+    /* Light Mode */
+    --color-background: 255 255 255;
+    --color-background-alt: 250 250 250;
+    --color-surface: 255 255 255;
+    --color-surface-hover: 245 245 245;
+    --color-border: 229 229 229;
+    --color-border-strong: 212 212 212;
+    
+    --color-text-primary: 23 23 23;
+    --color-text-secondary: 82 82 82;
+    --color-text-tertiary: 115 115 115;
+    
+    /* Semantic */
+    --color-success: 34 197 94;
+    --color-warning: 234 179 8;
+    --color-error: 220 38 38;
+    --color-info: 37 99 235;
+  }
+  
+  .dark {
+    --color-background: 10 10 10;
+    --color-background-alt: 20 20 20;
+    --color-surface: 26 26 26;
+    --color-surface-hover: 38 38 38;
+    --color-border: 38 38 38;
+    --color-border-strong: 64 64 64;
+    
+    --color-text-primary: 250 250 250;
+    --color-text-secondary: 163 163 163;
+    --color-text-tertiary: 115 115 115;
+    
+    --color-success: 74 222 128;
+    --color-warning: 250 204 21;
+    --color-error: 248 113 113;
+    --color-info: 96 165 250;
+  }
+}
+
+/* ==========================================
+   BASE STYLES
+   ========================================== */
+@layer base {
+  html {
+    @apply antialiased scroll-smooth;
+  }
+  
+  body {
+    @apply bg-white dark:bg-[#0A0A0A] text-neutral-900 dark:text-neutral-100;
+    @apply transition-colors duration-normal;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  
+  /* Typography defaults */
+  h1 { @apply text-h1; }
+  h2 { @apply text-h2; }
+  h3 { @apply text-h3; }
+  h4 { @apply text-h4; }
+  
+  /* Focus visible */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-brand-900 dark:ring-brand-400 ring-offset-2;
+    @apply ring-offset-white dark:ring-offset-[#0A0A0A];
+  }
+  
+  /* Selection */
+  ::selection {
+    @apply bg-brand-900/20 dark:bg-brand-400/30;
+  }
+}
+
+/* ==========================================
+   COMPONENT CLASSES
+   ========================================== */
+@layer components {
+  /* Containers */
+  .container-main {
+    @apply max-w-content mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .container-narrow {
+    @apply max-w-narrow mx-auto px-4 sm:px-6;
+  }
+  
+  /* Cards */
+  .card {
+    @apply bg-white dark:bg-[#1A1A1A];
+    @apply border border-neutral-200 dark:border-neutral-800;
+    @apply rounded-lg p-6;
+    @apply shadow-sm;
+    @apply transition-all duration-normal;
+  }
+  
+  .card-hover {
+    @apply hover:shadow-md hover:border-neutral-300 dark:hover:border-neutral-700;
+    @apply hover:-translate-y-0.5;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply font-medium text-sm;
+    @apply rounded-lg;
+    @apply transition-all duration-fast;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-primary {
+    @apply btn;
+    @apply bg-brand-900 hover:bg-brand-950 active:bg-brand-950;
+    @apply text-white;
+    @apply px-6 py-3;
+    @apply shadow-sm hover:shadow-md;
+    @apply hover:-translate-y-px;
+  }
+  
+  .btn-secondary {
+    @apply btn;
+    @apply bg-transparent;
+    @apply border border-neutral-300 dark:border-neutral-700;
+    @apply text-neutral-900 dark:text-neutral-100;
+    @apply hover:bg-neutral-100 dark:hover:bg-neutral-800;
+    @apply px-6 py-3;
+  }
+  
+  .btn-ghost {
+    @apply btn;
+    @apply bg-transparent;
+    @apply text-brand-900 dark:text-brand-400;
+    @apply hover:bg-brand-50 dark:hover:bg-brand-950/20;
+    @apply px-4 py-2;
+  }
+  
+  /* Inputs */
+  .input {
+    @apply w-full h-12 px-4;
+    @apply bg-white dark:bg-[#1A1A1A];
+    @apply border border-neutral-200 dark:border-neutral-700;
+    @apply rounded-lg;
+    @apply text-base text-neutral-900 dark:text-neutral-100;
+    @apply placeholder:text-neutral-500;
+    @apply transition-all duration-fast;
+    @apply focus:outline-none focus:border-brand-900 dark:focus:border-brand-400;
+    @apply focus:ring-2 focus:ring-brand-900/10 dark:focus:ring-brand-400/20;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5;
+    @apply text-xs font-medium rounded-full;
+  }
+  
+  .badge-brand {
+    @apply badge bg-brand-900 text-white;
+  }
+  
+  .badge-success {
+    @apply badge bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400;
+  }
+  
+  .badge-gold {
+    @apply badge bg-gold text-white;
+  }
+}
+
+/* ==========================================
+   UTILITIES
+   ========================================== */
+@layer utilities {
+  /* Text gradient */
+  .text-gradient-brand {
+    @apply bg-gradient-to-r from-brand-600 to-brand-900 bg-clip-text text-transparent;
+  }
+  
+  /* Glassmorphism */
+  .glass {
+    @apply bg-white/80 dark:bg-[#1A1A1A]/80 backdrop-blur-xl;
+  }
+  
+  /* Hide scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
