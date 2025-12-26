@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { Botao, Logo } from '@/components/ui'
+import { Logo } from '@/components/ui'
 import { useIdioma, useTema } from '@/hooks'
 import { Menu, X, Sun, Moon, Globe } from 'lucide-react'
 
@@ -88,7 +88,7 @@ export function Cabecalho() {
             >
               {tema === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
             </button>
-            
+
             <button
               className="p-2 text-neutral-600 dark:text-neutral-400"
               onClick={() => setMenuAberto(!menuAberto)}
@@ -112,7 +112,7 @@ export function Cabecalho() {
                   {link.nome}
                 </Link>
               ))}
-              
+
               {/* Seletor de Idioma Mobile */}
               <button
                 onClick={() => setIdioma(idioma === 'pt' ? 'en' : 'pt')}
