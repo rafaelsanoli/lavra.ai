@@ -8,7 +8,7 @@ export const traducoes = {
       entrar: 'Entrar',
       comecarGratis: 'Começar grátis',
     },
-    
+
     // Hero
     hero: {
       emblema: 'Lançamento em breve',
@@ -33,7 +33,7 @@ export const traducoes = {
         vendaSoja: 'Venda de soja em 3 dias',
       },
     },
-    
+
     // Features
     features: {
       badge: 'Funcionalidades',
@@ -63,7 +63,7 @@ export const traducoes = {
         },
       ],
     },
-    
+
     // Pricing
     pricing: {
       badge: 'Preços',
@@ -119,7 +119,7 @@ export const traducoes = {
         },
       ],
     },
-    
+
     // Waitlist
     waitlist: {
       titulo: 'Seja um dos primeiros',
@@ -130,8 +130,59 @@ export const traducoes = {
       sucessoTitulo: 'Você está na lista! 🎉',
       sucessoMsg: 'Vamos te avisar assim que abrirmos as vagas. Fique de olho no seu email.',
     },
-    
-    // Footer
+
+    // FAQ
+    faq: {
+      badge: 'Dúvidas Frequentes',
+      titulo: 'Perguntas',
+      tituloDestaque: 'frequentes',
+      subtitulo: 'Tudo que você precisa saber sobre o Lavra.ai.',
+      items: [
+        {
+          pergunta: 'Como funciona a previsão?',
+          resposta: 'Utilizamos modelos de IA que analisam dados históricos de 5 anos da sua região, combinados com dados de satélite e estações meteorológicas em tempo real para gerar previsões hiper-localizadas.',
+        },
+        {
+          pergunta: 'Qual a diferença para o FieldView?',
+          resposta: 'O FieldView foca em dados agronômicos e de plantio. O Lavra.ai conecta esses dados com o mercado financeiro para te dizer QUANDO vender e QUANTO travar de preço.',
+        },
+        {
+          pergunta: 'Preciso instalar sensores?',
+          resposta: 'Não necessariamente. Nossa IA funciona com dados de satélite e estações públicas. Porém, se você já tiver sensores ou estações, podemos integrar para aumentar a precisão.',
+        },
+        {
+          pergunta: 'Quanto custa?',
+          resposta: 'Temos planos a partir de R$ 297/mês. O retorno sobre o investimento (ROI) médio dos nossos clientes é de 10x já na primeira safra.',
+        },
+      ],
+    },
+
+    // How it Works
+    howItWorks: {
+      badge: 'Como Funciona',
+      titulo: 'Da terra ao',
+      tituloDestaque: 'lucro',
+      subtitulo: 'Um processo simples para transformar dados em dinheiro no bolso.',
+      steps: [
+        {
+          titulo: 'Conecte seus dados',
+          descricao: 'Faça upload do shapefile da fazenda ou integre com seu ERP atual.',
+        },
+        {
+          titulo: 'IA analisa cenários',
+          descricao: 'Nossos algoritmos processam clima, mercado e histórico de produção.',
+        },
+        {
+          titulo: 'Receba recomendações',
+          descricao: 'Alertas precisos de quando vender, colher ou fazer hedge.',
+        },
+        {
+          titulo: 'Maximize lucros',
+          descricao: 'Execute as ordens e acompanhe o resultado financeiro em tempo real.',
+        },
+      ],
+    },
+
     footer: {
       descricao: 'Inteligência preditiva para o agronegócio brasileiro. Tome decisões de milhões com confiança.',
       produto: 'Produto',
@@ -158,7 +209,7 @@ export const traducoes = {
       direitos: 'Todos os direitos reservados.',
     },
   },
-  
+
   en: {
     // Navigation
     nav: {
@@ -168,7 +219,7 @@ export const traducoes = {
       entrar: 'Sign in',
       comecarGratis: 'Start free',
     },
-    
+
     // Hero
     hero: {
       emblema: 'Coming soon',
@@ -193,7 +244,7 @@ export const traducoes = {
         vendaSoja: 'Sell soy in 3 days',
       },
     },
-    
+
     // Features
     features: {
       badge: 'Features',
@@ -223,7 +274,7 @@ export const traducoes = {
         },
       ],
     },
-    
+
     // Pricing
     pricing: {
       badge: 'Pricing',
@@ -279,7 +330,7 @@ export const traducoes = {
         },
       ],
     },
-    
+
     // Waitlist
     waitlist: {
       titulo: 'Be one of the first',
@@ -290,7 +341,59 @@ export const traducoes = {
       sucessoTitulo: 'You\'re on the list! 🎉',
       sucessoMsg: 'We\'ll let you know as soon as we open spots. Keep an eye on your email.',
     },
-    
+
+    // FAQ
+    faq: {
+      badge: 'FAQ',
+      titulo: 'Frequently Asked',
+      tituloDestaque: 'Questions',
+      subtitulo: 'Everything you need to know about Lavra.ai.',
+      items: [
+        {
+          pergunta: 'How does the forecast work?',
+          resposta: 'We use AI models that analyze 5 years of historical data from your region, combined with satellite data and real-time weather stations to generate hyper-localized forecasts.',
+        },
+        {
+          pergunta: 'How is it different from FieldView?',
+          resposta: 'FieldView focuses on agronomic and planting data. Lavra.ai connects this data with the financial market to tell you WHEN to sell and HOW MUCH to hedge.',
+        },
+        {
+          pergunta: 'Do I need to install sensors?',
+          resposta: 'Not necessarily. Our AI works with satellite data and public stations. However, if you already have sensors or stations, we can integrate them to increase accuracy.',
+        },
+        {
+          pergunta: 'How much does it cost?',
+          resposta: 'Plans start at $59/month. The average Return on Investment (ROI) for our clients is 10x in the first harvest.',
+        },
+      ],
+    },
+
+    // How it Works
+    howItWorks: {
+      badge: 'How it Works',
+      titulo: 'From soil to',
+      tituloDestaque: 'profit',
+      subtitulo: 'A simple process to turn data into money in your pocket.',
+      steps: [
+        {
+          titulo: 'Connect your data',
+          descricao: 'Upload farm shapefiles or integrate with your current ERP.',
+        },
+        {
+          titulo: 'AI analyzes scenarios',
+          descricao: 'Our algorithms process weather, market, and production history.',
+        },
+        {
+          titulo: 'Get recommendations',
+          descricao: 'Precise alerts on when to sell, harvest, or hedge.',
+        },
+        {
+          titulo: 'Maximize profits',
+          descricao: 'Execute orders and track financial results in real-time.',
+        },
+      ],
+    },
+
     // Footer
     footer: {
       descricao: 'Predictive intelligence for agribusiness. Make million-dollar decisions with confidence.',

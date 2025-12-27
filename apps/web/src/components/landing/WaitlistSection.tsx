@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Botao, CampoTexto } from '@/components/ui'
+import { Botao, CampoTexto, Toast } from '@/components/ui'
 import { useIdioma, useAnimateOnScroll, useCountUp } from '@/hooks'
 import { ArrowRight, CheckCircle, Users } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -11,6 +11,7 @@ export function WaitlistSection() {
   const [email, setEmail] = useState('')
   const [enviado, setEnviado] = useState(false)
   const [carregando, setCarregando] = useState(false)
+  const [showToast, setShowToast] = useState(false)
   const { ref: sectionRef, isVisible } = useAnimateOnScroll<HTMLDivElement>()
 
   // Contador de pessoas na waitlist (número fictício para prova social)
@@ -30,10 +31,17 @@ export function WaitlistSection() {
 
     setEnviado(true)
     setCarregando(false)
+    setShowToast(true)
   }
 
   return (
     <section id="waitlist" className="py-20 lg:py-32 bg-brand-900 relative overflow-hidden">
+      <Toast
+        message={t.waitlist.sucessoTitulo}
+        isVisible={showToast}
+        onClose={() => setShowToast(false)}
+      />
+
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center" />
@@ -102,7 +110,7 @@ export function WaitlistSection() {
                   type="submit"
                   variante="secundario"
                   carregando={carregando}
-                  className="bg-white text-brand-900 hover:bg-brand-50 border-0 whitespace-nowrap hover:scale-[1.02] transition-transform"
+                  className="bg-white text-brand-900 dark:text-brand-900 hover:bg-brand-50 border-0 whitespace-nowrap hover:scale-[1.02] transition-transform"
                 >
                   {t.waitlist.botao}
                   <ArrowRight className="w-4 h-4" />

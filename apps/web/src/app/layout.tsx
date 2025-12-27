@@ -18,11 +18,20 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: "Lavra.ai",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Lavra.ai - Inteligência Preditiva",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lavra.ai | Inteligência Preditiva para o Agro",
     description: "Tome decisões de milhões com confiança. IA que conecta clima, mercado e sua fazenda.",
+    images: ["/og-image.png"],
   },
 };
 

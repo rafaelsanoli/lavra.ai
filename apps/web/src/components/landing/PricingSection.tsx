@@ -74,7 +74,7 @@ function PricingCard({
         tamanho="md"
         className={cn(
           'w-full mb-8 transition-transform hover:scale-[1.02]',
-          isDestaque && 'bg-white text-brand-900 hover:bg-brand-50 border-0'
+          isDestaque && 'bg-white text-brand-900 dark:text-brand-900 hover:bg-brand-50 border-0'
         )}
       >
         {isSobConsulta ? t.falarVendas : t.comecarAgora}
