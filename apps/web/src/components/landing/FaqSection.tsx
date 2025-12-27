@@ -64,13 +64,20 @@ export function FaqSection() {
         <section id="faq" className="py-20 lg:py-32 bg-white dark:bg-[#0A0A0A]">
             <div className="container-main">
                 <div className="grid lg:grid-cols-12 gap-12 lg:gap-24">
-                    {/* Header */}
-                    <div className="lg:col-span-4">
+                    {/* Chat Mockup (Left) */}
+                    <div className="lg:col-span-5 order-2 lg:order-1">
+                        <div className="sticky top-32">
+                            <AiChatMockup />
+                        </div>
+                    </div>
+
+                    {/* Content (Right) */}
+                    <div className="lg:col-span-7 order-1 lg:order-2">
                         <div
                             ref={headerRef}
                             className={cn(
-                                'sticky top-32 opacity-0',
-                                headerVisible && 'animate-fade-in-right'
+                                'mb-12 opacity-0',
+                                headerVisible && 'animate-fade-in-up'
                             )}
                         >
                             <p className="text-overline text-brand-900 dark:text-brand-400 uppercase tracking-wider mb-4">
@@ -80,19 +87,11 @@ export function FaqSection() {
                                 {t.faq.titulo}{' '}
                                 <span className="text-gradient-brand">{t.faq.tituloDestaque}</span>
                             </h2>
-                            <p className="text-body-lg text-neutral-600 dark:text-neutral-400 mb-8">
+                            <p className="text-body-lg text-neutral-600 dark:text-neutral-400">
                                 {t.faq.subtitulo}
                             </p>
-
-                            {/* AI Chat Mockup */}
-                            <div className="hidden lg:block mt-8">
-                                <AiChatMockup />
-                            </div>
                         </div>
-                    </div>
 
-                    {/* Questions */}
-                    <div className="lg:col-span-8">
                         <div className="bg-neutral-50 dark:bg-[#141414] rounded-2xl p-8 border border-neutral-200 dark:border-neutral-800">
                             {t.faq.items.map((item, index) => (
                                 <FaqItem
