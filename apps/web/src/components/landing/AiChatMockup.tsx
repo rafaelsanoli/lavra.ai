@@ -71,42 +71,96 @@ export function AiChatMockup() {
                     <div className="w-8 h-8 bg-brand-900 rounded-full flex items-center justify-center mr-2 flex-shrink-0 mt-1">
                         <Bot className="w-5 h-5 text-white" />
                     </div>
-                    <div className="bg-white dark:bg-[#1A1A1A] border border-neutral-200 dark:border-neutral-800 p-4 rounded-2xl rounded-tl-sm max-w-[90%] shadow-sm">
-                        <p className="text-sm text-neutral-800 dark:text-neutral-200 mb-3">
-                            Analisei seu cenário. <strong>Não recomendo vender hoje.</strong>
+                    <div className="bg-white dark:bg-[#1A1A1A] border border-neutral-200 dark:border-neutral-800 p-4 rounded-2xl rounded-tl-sm max-w-[95%] shadow-sm">
+                        <p className="text-sm text-neutral-800 dark:text-neutral-200 mb-4">
+                            Analisei seu cenário. <strong className="text-red-600 dark:text-red-400">Não recomendo vender hoje.</strong>
                         </p>
 
                         {/* Data Card */}
-                        <div className="bg-neutral-50 dark:bg-[#141414] rounded-lg p-3 mb-3 border border-neutral-100 dark:border-neutral-800">
-                            <div className="flex items-center justify-between mb-2">
-                                <span className="text-xs text-neutral-500">Tendência (5 dias)</span>
-                                <span className="text-xs font-bold text-green-600 flex items-center gap-1">
-                                    <TrendingUp className="w-3 h-3" /> Alta Forte
-                                </span>
-                            </div>
-                            <div className="h-16 flex items-end gap-1 justify-between px-1">
-                                {[40, 45, 42, 55, 68, 85].map((h, i) => (
-                                    <div key={i} className="w-full bg-brand-200 dark:bg-brand-900/30 rounded-t relative group">
-                                        <div
-                                            className="absolute bottom-0 w-full bg-brand-500 rounded-t transition-all duration-1000"
-                                            style={{ height: `${h}%` }}
-                                        />
+                        <div className="bg-neutral-50 dark:bg-[#141414] rounded-xl p-4 mb-4 border border-neutral-100 dark:border-neutral-800">
+                            <div className="flex items-center justify-between mb-4">
+                                <div>
+                                    <p className="text-xs text-neutral-500 mb-1">Tendência (Próx. 5 dias)</p>
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-sm font-bold text-neutral-900 dark:text-white">R$ 142,50</span>
+                                        <span className="text-xs font-bold text-green-600 bg-green-100 dark:bg-green-900/30 px-1.5 py-0.5 rounded flex items-center gap-1">
+                                            <TrendingUp className="w-3 h-3" /> +4.2%
+                                        </span>
                                     </div>
-                                ))}
+                                </div>
+                            </div>
+
+                            {/* SVG Chart */}
+                            <div className="h-24 w-full relative">
+                                {/* Grid lines */}
+                                <div className="absolute inset-0 flex flex-col justify-between">
+                                    <div className="w-full h-px bg-neutral-200 dark:bg-neutral-800/50 border-dashed border-t border-neutral-200 dark:border-neutral-800" />
+                                    <div className="w-full h-px bg-neutral-200 dark:bg-neutral-800/50 border-dashed border-t border-neutral-200 dark:border-neutral-800" />
+                                    <div className="w-full h-px bg-neutral-200 dark:bg-neutral-800/50 border-dashed border-t border-neutral-200 dark:border-neutral-800" />
+                                </div>
+
+                                {/* Chart Line */}
+                                <svg className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none">
+                                    <defs>
+                                        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" stopColor="#16a34a" stopOpacity="0.2" />
+                                            <stop offset="100%" stopColor="#16a34a" stopOpacity="0" />
+                                        </linearGradient>
+                                    </defs>
+                                    <path
+                                        d="M0,80 C20,75 40,70 60,65 C80,60 100,62 120,50 C140,38 160,45 180,30 C200,15 220,20 240,10"
+                                        fill="url(#gradient)"
+                                        stroke="none"
+                                        className="w-full"
+                                    />
+                                    <path
+                                        d="M0,80 C20,75 40,70 60,65 C80,60 100,62 120,50 C140,38 160,45 180,30 C200,15 220,20 240,10"
+                                        fill="none"
+                                        stroke="#16a34a"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        className="drop-shadow-sm"
+                                    />
+                                    {/* Points */}
+                                    <circle cx="0" cy="80" r="3" className="fill-brand-500" />
+                                    <circle cx="60" cy="65" r="3" className="fill-brand-500" />
+                                    <circle cx="120" cy="50" r="3" className="fill-brand-500" />
+                                    <circle cx="180" cy="30" r="3" className="fill-brand-500" />
+                                    <circle cx="240" cy="10" r="3" className="fill-brand-500 animate-pulse" />
+                                </svg>
+                            </div>
+
+                            {/* X Axis Labels */}
+                            <div className="flex justify-between mt-2 text-[10px] text-neutral-400 font-mono">
+                                <span>Hoje</span>
+                                <span>+1d</span>
+                                <span>+2d</span>
+                                <span>+3d</span>
+                                <span>+4d</span>
                             </div>
                         </div>
 
-                        <div className="flex items-start gap-2 bg-yellow-50 dark:bg-yellow-900/10 p-2 rounded border border-yellow-100 dark:border-yellow-900/20">
-                            <AlertTriangle className="w-4 h-4 text-yellow-600 mt-0.5" />
-                            <p className="text-xs text-yellow-800 dark:text-yellow-200">
-                                Previsão de chuva no RS vai pressionar preços para cima em 48h.
-                            </p>
+                        <div className="flex items-start gap-3 bg-amber-50 dark:bg-amber-900/10 p-3 rounded-xl border border-amber-100 dark:border-amber-900/20">
+                            <div className="p-1.5 bg-amber-100 dark:bg-amber-900/30 rounded-full flex-shrink-0">
+                                <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-500" />
+                            </div>
+                            <div>
+                                <p className="text-xs font-medium text-amber-800 dark:text-amber-200 mb-0.5">
+                                    Oportunidade de Alta
+                                </p>
+                                <p className="text-xs text-amber-700 dark:text-amber-300/80 leading-relaxed">
+                                    Previsão de chuva no RS vai pressionar preços para cima em 48h.
+                                </p>
+                            </div>
                         </div>
 
-                        <div className="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                        <div className="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
                             <p className="text-xs text-neutral-500">
-                                Lucro projetado se esperar: <span className="text-green-600 font-bold">+ R$ 12.400</span>
+                                Lucro projetado:
                             </p>
+                            <span className="text-sm font-bold text-green-600 dark:text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-md border border-green-100 dark:border-green-900/30">
+                                + R$ 12.400
+                            </span>
                         </div>
                     </div>
                 </div>
