@@ -5,7 +5,8 @@ import {
   PricingSection,
   WaitlistSection,
   FaqSection,
-  HowItWorksSection
+  HowItWorksSection,
+  LogoCloud
 } from '@/components/landing'
 import { BackToTop } from '@/components/ui'
 
@@ -15,6 +16,7 @@ export default function Home() {
       <Cabecalho />
       <main>
         <HeroSection />
+        <LogoCloud />
         <FeaturesSection />
         <HowItWorksSection />
         <PricingSection />

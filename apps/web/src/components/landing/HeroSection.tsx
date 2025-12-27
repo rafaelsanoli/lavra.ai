@@ -145,11 +145,11 @@ export function HeroSection() {
                 </div>
 
                 {/* Chart placeholder with animation */}
-                <div className="h-40 bg-gradient-to-t from-brand-100/50 to-transparent dark:from-brand-900/20 rounded-lg flex items-end justify-around px-4 pb-2">
+                <div className="h-40 bg-gradient-to-t from-brand-100/50 to-transparent dark:from-brand-900/20 rounded-lg flex items-end justify-between px-2 pb-2 gap-1">
                   {[40, 65, 45, 80, 55, 90, 70, 85, 60, 95, 75, 88].map((height, i) => (
                     <div
                       key={i}
-                      className="w-4 bg-brand-500 dark:bg-brand-400 rounded-t transition-all duration-700 hover:bg-brand-600 dark:hover:bg-brand-300"
+                      className="flex-1 bg-brand-500 dark:bg-brand-400 rounded-t transition-all duration-700 hover:bg-brand-600 dark:hover:bg-brand-300 min-w-[4px]"
                       style={{
                         height: `${height}%`,
                         animationDelay: `${i * 50}ms`
@@ -177,7 +177,7 @@ export function HeroSection() {
             </div>
 
             {/* Floating card */}
-            <div className="absolute -top-6 -right-6 bg-white dark:bg-[#1A1A1A] rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-800 p-4 animate-float hover:shadow-xl transition-shadow">
+            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-auto lg:-top-6 lg:-right-6 bg-white dark:bg-[#1A1A1A] rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-800 p-4 animate-float hover:shadow-xl transition-shadow w-max z-20">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
                   <span className="text-green-600">✓</span>
