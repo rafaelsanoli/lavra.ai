@@ -12,6 +12,8 @@ import { cn } from '@/lib/utils'
 
 const icones = [CloudSun, TrendingUp, Tractor, Bell, Calculator]
 
+import Link from 'next/link'
+
 function FeatureCard({
   feature,
   index,
@@ -21,13 +23,14 @@ function FeatureCard({
   index: number
   Icone: typeof CloudSun
 }) {
-  const { ref, isVisible } = useAnimateOnScroll<HTMLDivElement>({ threshold: 0.2 })
+  const { ref, isVisible } = useAnimateOnScroll<HTMLAnchorElement>({ threshold: 0.2 })
 
   return (
-    <div
+    <Link
+      href="/docs/funcionalidades"
       ref={ref}
       className={cn(
-        'group card opacity-0',
+        'group card opacity-0 block',
         'hover:shadow-lg hover:border-brand-500/30 hover:-translate-y-1',
         'transition-all duration-500',
         isVisible && 'animate-fade-in-up'
@@ -53,7 +56,7 @@ function FeatureCard({
         <span className="text-sm font-medium">Saiba mais</span>
         <span>→</span>
       </div>
-    </div>
+    </Link>
   )
 }
 
