@@ -137,15 +137,45 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        fadeInDown: {
+          '0%': { opacity: '0', transform: 'translateY(-20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeInLeft: {
+          '0%': { opacity: '0', transform: 'translateX(-20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        fadeInRight: {
+          '0%': { opacity: '0', transform: 'translateX(20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
         },
+        pulse: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.5' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
       },
       animation: {
-        'fade-in': 'fadeIn 300ms ease-out forwards',
-        'fade-in-up': 'fadeInUp 400ms ease-out forwards',
+        'fade-in': 'fadeIn 500ms ease-out forwards',
+        'fade-in-up': 'fadeInUp 600ms ease-out forwards',
+        'fade-in-down': 'fadeInDown 600ms ease-out forwards',
+        'fade-in-left': 'fadeInLeft 600ms ease-out forwards',
+        'fade-in-right': 'fadeInRight 600ms ease-out forwards',
+        'scale-in': 'scaleIn 500ms ease-out forwards',
         'float': 'float 3s ease-in-out infinite',
+        'pulse-slow': 'pulse 2s ease-in-out infinite',
+        'shimmer': 'shimmer 2s linear infinite',
       },
 
       // ==========================================
