@@ -24,7 +24,7 @@ export function Cabecalho() {
   const linksNavegacao = [
     { nome: t.nav.produto, href: '#produto' },
     { nome: t.nav.precos, href: '#precos' },
-    { nome: t.nav.sobre, href: '#sobre' },
+    { nome: t.nav.sobre, href: '#faq' },
   ]
 
   return (

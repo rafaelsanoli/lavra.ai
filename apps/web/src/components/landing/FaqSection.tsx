@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useIdioma, useAnimateOnScroll } from '@/hooks'
 import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { AiChatMockup } from './AiChatMockup'
 
 function FaqItem({
     pergunta,
@@ -83,10 +84,9 @@ export function FaqSection() {
                                 {t.faq.subtitulo}
                             </p>
 
-                            {/* Decorative elements */}
-                            <div className="hidden lg:block relative h-40 w-full overflow-hidden rounded-2xl bg-brand-50 dark:bg-brand-950/20">
-                                <div className="absolute -right-10 -top-10 w-40 h-40 bg-brand-200 dark:bg-brand-800/20 rounded-full blur-3xl animate-pulse-slow" />
-                                <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-brand-400 dark:bg-brand-600/20 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+                            {/* AI Chat Mockup */}
+                            <div className="hidden lg:block mt-8">
+                                <AiChatMockup />
                             </div>
                         </div>
                     </div>
