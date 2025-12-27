@@ -100,7 +100,7 @@ export function AiChatMockup() {
                                 </div>
 
                                 {/* Chart Line */}
-                                <svg className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none">
+                                <svg className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="-10 0 260 100">
                                     <defs>
                                         <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
                                             <stop offset="0%" stopColor="#16a34a" stopOpacity="0.2" />
