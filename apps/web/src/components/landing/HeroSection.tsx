@@ -177,7 +177,7 @@ export function HeroSection() {
             </div>
 
             {/* Floating card */}
-            <div className="absolute -bottom-4 -left-4 bg-white dark:bg-[#1A1A1A] rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-800 p-4 animate-float hover:shadow-xl transition-shadow">
+            <div className="absolute -top-6 -right-6 bg-white dark:bg-[#1A1A1A] rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-800 p-4 animate-float hover:shadow-xl transition-shadow">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
                   <span className="text-green-600">✓</span>
