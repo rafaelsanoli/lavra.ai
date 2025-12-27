@@ -99,10 +99,13 @@ export function HeroSection() {
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-4">
-              <Botao variante="primario" tamanho="lg">
+              <a
+                href="#waitlist"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 rounded-lg transition-colors"
+              >
                 {t.hero.cta}
                 <ArrowRight className="w-4 h-4" />
-              </Botao>
+              </a>
               <Botao variante="secundario" tamanho="lg">
                 <Play className="w-4 h-4" />
                 {t.hero.ctaSecundario}
@@ -111,7 +114,7 @@ export function HeroSection() {
           </div>
 
           {/* Right Column - Dashboard Preview */}
-          <div className="relative lg:pl-8 animate-fade-in-up pb-20 lg:pb-0" style={{ animationDelay: '150ms' }}>
+          <div className="relative lg:pl-8 animate-fade-in-up" style={{ animationDelay: '150ms' }}>
             {/* Glow effect */}
             <div className="absolute -inset-4 bg-gradient-to-r from-brand-400/20 to-brand-600/20 blur-3xl rounded-3xl" />
 
@@ -177,7 +180,7 @@ export function HeroSection() {
             </div>
 
             {/* Floating card */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-auto lg:-top-6 lg:-right-6 lg:bottom-auto bg-white dark:bg-[#1A1A1A] rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-800 p-4 animate-float hover:shadow-xl transition-shadow w-max z-20">
+            <div className="hidden lg:block absolute -top-6 -right-6 bg-white dark:bg-[#1A1A1A] rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-800 p-4 animate-float hover:shadow-xl transition-shadow w-max z-20">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
                   <span className="text-green-600">✓</span>

@@ -35,7 +35,7 @@ export function WaitlistSection() {
   }
 
   return (
-    <section id="waitlist" className="py-20 lg:py-32 bg-brand-900 relative overflow-hidden">
+    <section id="waitlist" className="py-24 bg-white dark:bg-[#0A0A0A] relative overflow-hidden">
       <Toast
         message={t.waitlist.sucessoTitulo}
         isVisible={showToast}
