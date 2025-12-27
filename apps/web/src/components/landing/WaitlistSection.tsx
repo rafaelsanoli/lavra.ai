@@ -61,39 +61,39 @@ export function WaitlistSection() {
         >
           {enviado ? (
             <div className="animate-scale-in">
-              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-slow">
-                <CheckCircle className="w-8 h-8 text-brand-300" />
+              <div className="w-16 h-16 bg-brand-100 dark:bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-slow">
+                <CheckCircle className="w-8 h-8 text-brand-600 dark:text-brand-300" />
               </div>
-              <h2 className="text-display-md text-white mb-4">
+              <h2 className="text-display-md text-neutral-900 dark:text-white mb-4">
                 {t.waitlist.sucessoTitulo}
               </h2>
-              <p className="text-body-lg text-brand-100">
+              <p className="text-body-lg text-neutral-600 dark:text-brand-100">
                 {t.waitlist.sucessoMsg}
               </p>
             </div>
           ) : (
             <>
-              <h2 className="text-display-md md:text-display-lg text-white mb-6">
+              <h2 className="text-display-md md:text-display-lg text-neutral-900 dark:text-white mb-6">
                 {t.waitlist.titulo}
               </h2>
-              <p className="text-body-lg text-brand-100 mb-6">
+              <p className="text-body-lg text-neutral-600 dark:text-brand-100 mb-6">
                 {t.waitlist.subtitulo}
               </p>
 
               {/* Social proof counter */}
               <div
                 ref={countRef as React.RefObject<HTMLDivElement>}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-10 border border-white/20"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-white/10 backdrop-blur-sm rounded-full mb-10 border border-neutral-200 dark:border-white/20"
               >
-                <Users className="w-4 h-4 text-brand-300" />
-                <span className="text-sm font-medium text-white">
+                <Users className="w-4 h-4 text-brand-600 dark:text-brand-300" />
+                <span className="text-sm font-medium text-neutral-900 dark:text-white">
                   <span className="font-mono">{waitlistCount}</span>
                   {' '}
                   {idioma === 'pt' ? 'produtores na lista' : 'farmers on the list'}
                 </span>
                 <span className="flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-brand-300 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-400"></span>
+                  <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-brand-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
                 </span>
               </div>
 
@@ -104,20 +104,20 @@ export function WaitlistSection() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white focus:ring-white/20"
+                  className="flex-1 bg-neutral-50 dark:bg-white/10 border-neutral-200 dark:border-white/20 text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-white/50 focus:border-brand-500 dark:focus:border-white focus:ring-brand-500/20 dark:focus:ring-white/20"
                 />
                 <Botao
                   type="submit"
-                  variante="secundario"
+                  variante="primario"
                   carregando={carregando}
-                  className="bg-white text-brand-900 dark:text-brand-900 hover:bg-brand-50 border-0 whitespace-nowrap hover:scale-[1.02] transition-transform"
+                  className="whitespace-nowrap hover:scale-[1.02] transition-transform"
                 >
                   {t.waitlist.botao}
                   <ArrowRight className="w-4 h-4" />
                 </Botao>
               </form>
 
-              <p className="text-sm text-brand-200 mt-4">
+              <p className="text-sm text-neutral-500 dark:text-brand-200 mt-4">
                 {t.waitlist.spam}
               </p>
             </>
