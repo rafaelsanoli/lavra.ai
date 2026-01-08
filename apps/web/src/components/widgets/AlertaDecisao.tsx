@@ -128,7 +128,7 @@ export function AlertaDecisaoCard({ alerta, onDismiss }: AlertaDecisaoCardProps)
           onClick={handleDismiss}
           className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-lg transition-all z-10"
         >
-          <X className="w-4 h-4 text-gray-400 hover:text-white" />
+          <X className="w-4 h-4 text-neutral-400 dark:text-gray-400 hover:text-neutral-900 dark:hover:text-white" />
         </button>
       )}
 
@@ -140,16 +140,16 @@ export function AlertaDecisaoCard({ alerta, onDismiss }: AlertaDecisaoCardProps)
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
-              <IconeCategoria className="w-4 h-4 text-gray-400" />
-              <span className="text-xs text-gray-400 uppercase tracking-wider">
+              <IconeCategoria className="w-4 h-4 text-neutral-500 dark:text-gray-400" />
+              <span className="text-xs text-neutral-500 dark:text-gray-400 uppercase tracking-wider">
                 {alerta.categoria}
               </span>
               <span className={`px-2 py-1 rounded-lg text-xs font-medium border ${estilo.badge}`}>
                 {alerta.prioridade.toUpperCase()}
               </span>
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">{alerta.titulo}</h3>
-            <p className="text-gray-300">{alerta.descricao}</p>
+            <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">{alerta.titulo}</h3>
+            <p className="text-neutral-700 dark:text-gray-300">{alerta.descricao}</p>
           </div>
         </div>
 
@@ -160,7 +160,7 @@ export function AlertaDecisaoCard({ alerta, onDismiss }: AlertaDecisaoCardProps)
               <div className="flex items-center gap-2">
                 <DollarSign className="w-4 h-4 text-green-400" />
                 <div>
-                  <p className="text-xs text-gray-400">Impacto Financeiro</p>
+                  <p className="text-xs text-neutral-500 dark:text-gray-400">Impacto Financeiro</p>
                   <p className={`font-bold ${alerta.impactoFinanceiro > 0 ? 'text-green-400' : 'text-red-400'}`}>
                     {alerta.impactoFinanceiro > 0 ? '+' : ''}
                     {formatarMoeda(alerta.impactoFinanceiro)}
@@ -172,16 +172,16 @@ export function AlertaDecisaoCard({ alerta, onDismiss }: AlertaDecisaoCardProps)
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-yellow-400" />
                 <div>
-                  <p className="text-xs text-gray-400">Tempo Restante</p>
-                  <p className="font-bold text-white">{alerta.tempoRestante}</p>
+                  <p className="text-xs text-neutral-500 dark:text-gray-400">Tempo Restante</p>
+                  <p className="font-bold text-neutral-900 dark:text-white">{alerta.tempoRestante}</p>
                 </div>
               </div>
             )}
             {alerta.dados &&
               Object.entries(alerta.dados).map(([key, value]) => (
                 <div key={key}>
-                  <p className="text-xs text-gray-400 capitalize">{key.replace('_', ' ')}</p>
-                  <p className="font-bold text-white">{value}</p>
+                  <p className="text-xs text-neutral-500 dark:text-gray-400 capitalize">{key.replace('_', ' ')}</p>
+                  <p className="font-bold text-neutral-900 dark:text-white">{value}</p>
                 </div>
               ))}
           </div>
