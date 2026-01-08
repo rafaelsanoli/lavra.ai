@@ -8,9 +8,9 @@ export const metadata: Metadata = {
   keywords: ["agronegócio", "agro", "fazenda", "clima", "mercado", "IA", "inteligência artificial", "previsão", "soja", "milho"],
   authors: [{ name: "Lavra.ai" }],
   icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
   openGraph: {
     title: "Lavra.ai | Inteligência Preditiva para o Agro",
