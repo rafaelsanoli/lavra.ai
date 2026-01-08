@@ -96,8 +96,8 @@ export default function OperacoesPage() {
 
           <MapaInterativo
             talhoes={mockTalhoesMap}
-            centro={[-12.545, -55.695]}
-            zoom={13}
+            centro={[-12.9075, -55.7055]}
+            zoom={14}
             altura="500px"
           />
         </div>
