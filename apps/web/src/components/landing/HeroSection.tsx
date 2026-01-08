@@ -106,10 +106,13 @@ export function HeroSection() {
                 {t.hero.cta}
                 <ArrowRight className="w-4 h-4" />
               </a>
-              <Botao variante="secundario" tamanho="lg">
+              <a
+                href="/login"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 rounded-lg transition-colors"
+              >
                 <Play className="w-4 h-4" />
                 {t.hero.ctaSecundario}
-              </Botao>
+              </a>
             </div>
           </div>
 

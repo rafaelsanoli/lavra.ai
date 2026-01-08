@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, forwardRef } from 'react'
 import { cn } from '@/lib/utils'
 
 export interface BotaoProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variante?: 'primario' | 'secundario' | 'fantasma'
+  variante?: 'primario' | 'secundario' | 'fantasma' | 'outline'
   tamanho?: 'sm' | 'md' | 'lg'
   carregando?: boolean
 }
@@ -15,6 +15,7 @@ const Botao = forwardRef<HTMLButtonElement, BotaoProps>(
       primario: 'bg-brand-900 hover:bg-brand-950 active:bg-brand-950 text-white shadow-sm hover:shadow-md hover:-translate-y-px',
       secundario: 'bg-transparent border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800',
       fantasma: 'bg-transparent text-brand-900 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-950/20',
+      outline: 'bg-transparent border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-900',
     }
     
     const estilosTamanho = {
