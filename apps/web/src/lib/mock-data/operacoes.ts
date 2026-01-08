@@ -62,3 +62,92 @@ export const mockProdutividadeMensal = [
   { mes: 'Nov', soja: 70, milho: 145 },
   { mes: 'Dez', soja: 72, milho: 148 },
 ]
+
+// Dados mockados para talhões no mapa (coordenadas fictícias perto de Sorriso, MT)
+export const mockTalhoesM apa = [
+  {
+    id: 'T1',
+    nome: 'Talhão A1',
+    coordenadas: [
+      [-12.54, -55.71] as [number, number],
+      [-12.54, -55.70] as [number, number],
+      [-12.55, -55.70] as [number, number],
+      [-12.55, -55.71] as [number, number],
+    ],
+    scoreRisco: 35,
+    cultura: 'Soja',
+    area: 120,
+    status: 'saudavel' as const,
+  },
+  {
+    id: 'T2',
+    nome: 'Talhão A2',
+    coordenadas: [
+      [-12.54, -55.70] as [number, number],
+      [-12.54, -55.69] as [number, number],
+      [-12.55, -55.69] as [number, number],
+      [-12.55, -55.70] as [number, number],
+    ],
+    scoreRisco: 55,
+    cultura: 'Soja',
+    area: 150,
+    status: 'atencao' as const,
+  },
+  {
+    id: 'T3',
+    nome: 'Talhão A3',
+    coordenadas: [
+      [-12.55, -55.71] as [number, number],
+      [-12.55, -55.70] as [number, number],
+      [-12.56, -55.70] as [number, number],
+      [-12.56, -55.71] as [number, number],
+    ],
+    scoreRisco: 22,
+    cultura: 'Soja',
+    area: 135,
+    status: 'saudavel' as const,
+  },
+  {
+    id: 'T4',
+    nome: 'Talhão B1',
+    coordenadas: [
+      [-12.55, -55.69] as [number, number],
+      [-12.55, -55.68] as [number, number],
+      [-12.56, -55.68] as [number, number],
+      [-12.56, -55.69] as [number, number],
+    ],
+    scoreRisco: 85,
+    cultura: 'Milho',
+    area: 200,
+    status: 'critico' as const,
+  },
+  {
+    id: 'T5',
+    nome: 'Talhão B2',
+    coordenadas: [
+      [-12.56, -55.71] as [number, number],
+      [-12.56, -55.70] as [number, number],
+      [-12.57, -55.70] as [number, number],
+      [-12.57, -55.71] as [number, number],
+    ],
+    scoreRisco: 48,
+    cultura: 'Milho',
+    area: 180,
+    status: 'atencao' as const,
+  },
+  {
+    id: 'T6',
+    nome: 'Talhão C1',
+    coordenadas: [
+      [-12.56, -55.69] as [number, number],
+      [-12.56, -55.68] as [number, number],
+      [-12.57, -55.68] as [number, number],
+      [-12.57, -55.69] as [number, number],
+    ],
+    scoreRisco: 18,
+    cultura: 'Soja',
+    area: 165,
+    status: 'saudavel' as const,
+  },
+]
+

@@ -21,6 +21,8 @@ import {
   User,
   Moon,
   Sun,
+  Shield,
+  LineChart,
 } from 'lucide-react'
 import { useTema } from '@/hooks'
 
@@ -29,6 +31,8 @@ const menuItems = [
   { nome: 'Clima', href: '/clima', icone: CloudSun },
   { nome: 'Mercado', href: '/mercado', icone: TrendingUp },
   { nome: 'Operações', href: '/operacoes', icone: Tractor },
+  { nome: 'Seguros', href: '/seguros', icone: Shield },
+  { nome: 'Hedge', href: '/hedge', icone: LineChart },
   { nome: 'Alertas', href: '/alertas', icone: Bell },
   { nome: 'Cenários', href: '/cenarios', icone: Calculator },
   { nome: 'Configurações', href: '/configuracoes', icone: Settings },

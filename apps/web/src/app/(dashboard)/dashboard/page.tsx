@@ -4,12 +4,14 @@ import { CardMetrica } from '@/components/ui'
 import { GraficoLinha, GraficoPizza } from '@/components/charts'
 import { mockDashboardData, mockLucroMensal, mockCulturas } from '@/lib/mock-data/dashboard'
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
+import { AlertaDecisaoLista, useAlertasDecisao } from '@/components/widgets'
 import { TrendingUp, MapPin, Target, Zap, AlertCircle, CheckCircle, Info } from 'lucide-react'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
 export default function DashboardPage() {
   const { estatisticas, alertas, atividadesRecentes } = mockDashboardData
+  const { alertas: alertasDecisao } = useAlertasDecisao()
 
   const iconesAlerta: Record<string, JSX.Element> = {
     oportunidade: <CheckCircle className="w-5 h-5" />,
@@ -51,6 +53,14 @@ export default function DashboardPage() {
               }
             />
           ))}
+        </div>
+
+        {/* Alertas de Decisão */}
+        <div>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+            Alertas de Decisão
+          </h2>
+          <AlertaDecisaoLista alertas={alertasDecisao} maxVisible={2} />
         </div>
 
         {/* Gráficos */}

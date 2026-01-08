@@ -4,7 +4,8 @@ import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import { CardMetrica, Botao } from '@/components/ui'
 import { GraficoBarra } from '@/components/charts'
 import { ScoreRisco, criarFatoresRisco } from '@/components/risk'
-import { mockOperacoesData, mockProdutividadeMensal } from '@/lib/mock-data/operacoes'
+import { MapaInterativo } from '@/components/maps'
+import { mockOperacoesData, mockProdutividadeMensal, mockTalhoesMap a } from '@/lib/mock-data/operacoes'
 import { MapPin, Sprout, Users, Package, Plus, Calendar, CheckCircle, Clock, AlertCircle } from 'lucide-react'
 import { format } from 'date-fns'
 
@@ -81,6 +82,25 @@ export default function OperacoesPage() {
             hidrico: 55,
           })}
         />
+
+        {/* Mapa Interativo dos Talhões */}
+        <div className="p-6 rounded-xl bg-white dark:bg-[#1A1A1A] border border-neutral-200 dark:border-neutral-800">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">Mapa de Talhões</h3>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                Visualização geoespacial com níveis de risco por área
+              </p>
+            </div>
+          </div>
+
+          <MapaInterativo
+            talhoes={mockTalhoesMap a}
+            centro={[-12.545, -55.695]}
+            zoom={13}
+            altura="500px"
+          />
+        </div>
 
         {/* Fazendas */}
         <div className="p-6 rounded-xl bg-white dark:bg-[#1A1A1A] border border-neutral-200 dark:border-neutral-800">
