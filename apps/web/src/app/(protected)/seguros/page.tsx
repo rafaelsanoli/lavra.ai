@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import {
   Shield,
   FileText,
@@ -62,7 +63,8 @@ export default function SegurosPage() {
   }
 
   return (
-    <div className="p-6 space-y-6 max-w-[1600px] mx-auto">
+    <DashboardLayout>
+      <div className="p-6 space-y-6 max-w-[1600px] mx-auto">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -472,6 +474,7 @@ export default function SegurosPage() {
           </div>
         )}
       </motion.div>
-    </div>
+      </div>
+    </DashboardLayout>
   )
 }
