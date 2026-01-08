@@ -165,7 +165,7 @@ export function ChatWidget() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-50 w-96 h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-6 right-6 z-50 w-96 h-[600px] bg-white dark:bg-[#1A1A1A] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-neutral-200 dark:border-neutral-800"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-brand-600 to-green-600 p-4 flex items-center justify-between">
@@ -194,7 +194,7 @@ export function ChatWidget() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-[#0F0F0F]">
               {messages.map((message, index) => (
                 <motion.div
                   key={message.id}
@@ -207,7 +207,7 @@ export function ChatWidget() {
                     className={`max-w-[80%] rounded-2xl px-4 py-3 ${
                       message.sender === 'user'
                         ? 'bg-brand-600 text-white rounded-br-md'
-                        : 'bg-white text-gray-800 rounded-bl-md shadow-sm border border-gray-100'
+                        : 'bg-white dark:bg-neutral-800 text-gray-800 dark:text-white rounded-bl-md shadow-sm border border-gray-100 dark:border-neutral-700'
                     }`}
                   >
                     <p className="text-sm whitespace-pre-line">{message.text}</p>
@@ -232,7 +232,7 @@ export function ChatWidget() {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-white rounded-2xl rounded-bl-md px-4 py-3 shadow-sm border border-gray-100">
+                  <div className="bg-white dark:bg-neutral-800 rounded-2xl rounded-bl-md px-4 py-3 shadow-sm border border-gray-100 dark:border-neutral-700">
                     <div className="flex gap-1">
                       {[0, 1, 2].map((i) => (
                         <motion.div
@@ -263,7 +263,7 @@ export function ChatWidget() {
                     <button
                       key={q.key}
                       onClick={() => handleQuickQuestion(q.key)}
-                      className="flex items-center gap-1 px-3 py-2 bg-gray-100 hover:bg-brand-50 hover:text-brand-600 rounded-lg text-sm transition-colors"
+                      className="flex items-center gap-1 px-3 py-2 bg-gray-100 dark:bg-neutral-800 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 dark:hover:text-brand-400 rounded-lg text-sm transition-colors text-gray-700 dark:text-gray-300"
                     >
                       <q.icon className="w-4 h-4" />
                       {q.text}
@@ -274,7 +274,7 @@ export function ChatWidget() {
             )}
 
             {/* Input */}
-            <div className="p-4 bg-white border-t border-gray-100">
+            <div className="p-4 bg-white dark:bg-[#1A1A1A] border-t border-gray-100 dark:border-neutral-800">
               <form
                 onSubmit={(e) => {
                   e.preventDefault()
@@ -287,7 +287,7 @@ export function ChatWidget() {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   placeholder="Digite sua pergunta..."
-                  className="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-brand-400 focus:bg-white transition-colors"
+                  className="flex-1 px-4 py-3 bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-xl text-sm text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-brand-400 focus:bg-white dark:focus:bg-neutral-800 transition-colors"
                 />
                 <motion.button
                   type="submit"
