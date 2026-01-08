@@ -64,7 +64,7 @@ export const mockProdutividadeMensal = [
 ]
 
 // Dados mockados para talhões no mapa (coordenadas fictícias perto de Sorriso, MT)
-export const mockTalhoesM apa = [
+export const mockTalhoesMap = [
   {
     id: 'T1',
     nome: 'Talhão A1',

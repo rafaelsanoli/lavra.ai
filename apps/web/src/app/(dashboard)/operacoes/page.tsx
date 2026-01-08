@@ -5,7 +5,7 @@ import { CardMetrica, Botao } from '@/components/ui'
 import { GraficoBarra } from '@/components/charts'
 import { ScoreRisco, criarFatoresRisco } from '@/components/risk'
 import { MapaInterativo } from '@/components/maps'
-import { mockOperacoesData, mockProdutividadeMensal, mockTalhoesMap a } from '@/lib/mock-data/operacoes'
+import { mockOperacoesData, mockProdutividadeMensal, mockTalhoesMap } from '@/lib/mock-data/operacoes'
 import { MapPin, Sprout, Users, Package, Plus, Calendar, CheckCircle, Clock, AlertCircle } from 'lucide-react'
 import { format } from 'date-fns'
 
@@ -95,7 +95,7 @@ export default function OperacoesPage() {
           </div>
 
           <MapaInterativo
-            talhoes={mockTalhoesMap a}
+            talhoes={mockTalhoesMap}
             centro={[-12.545, -55.695]}
             zoom={13}
             altura="500px"
