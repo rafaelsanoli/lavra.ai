@@ -46,7 +46,7 @@ type MapaInterativoProps = {
 
 export function MapaInterativo({
   talhoes,
-  centro = [-15.7939, -47.8828], // Brasília como padrão
+  centro = [-12.9075, -55.7055], // Área rural de Sorriso, MT
   zoom = 13,
   altura = '600px',
   className = '',
