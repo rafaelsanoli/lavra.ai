@@ -4,7 +4,7 @@ import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import { CardMetrica, Botao } from '@/components/ui'
 import { mockAlertasData } from '@/lib/mock-data/alertas'
 import { Bell, BellOff, Filter, Settings, AlertTriangle, Info, AlertCircle, Check, X, Clock } from 'lucide-react'
-import { format, formatDistanceToNow } from 'date-fns'
+import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { useState } from 'react'
 

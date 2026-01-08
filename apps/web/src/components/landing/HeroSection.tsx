@@ -1,6 +1,6 @@
 'use client'
 
-import { Botao, Emblema } from '@/components/ui'
+import { Emblema } from '@/components/ui'
 import { useIdioma, useCountUp } from '@/hooks'
 import { ArrowRight, Play } from 'lucide-react'
 

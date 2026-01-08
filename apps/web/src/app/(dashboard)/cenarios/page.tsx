@@ -1,16 +1,15 @@
 'use client'
 
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
-import { CardMetrica, Botao } from '@/components/ui'
+import { Botao } from '@/components/ui'
 import { GraficoLinha, GraficoBarra } from '@/components/charts'
 import { mockCenariosData } from '@/lib/mock-data/cenarios'
-import { TrendingUp, TrendingDown, DollarSign, Target, Plus, Copy, Trash2, Play } from 'lucide-react'
+import { Plus, Copy, Trash2, Play } from 'lucide-react'
 import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
 import { useState } from 'react'
 
 export default function CenariosPage() {
-  const { cenarios, comparacao, sensibilidade, parametrosDisponiveis } = mockCenariosData
+  const { cenarios, comparacao, sensibilidade } = mockCenariosData
   const [cenarioAtivo, setCenarioAtivo] = useState(cenarios[0])
 
   const formatarMoeda = (valor: number) => {

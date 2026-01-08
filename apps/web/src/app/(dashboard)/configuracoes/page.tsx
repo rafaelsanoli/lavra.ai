@@ -3,7 +3,7 @@
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import { Botao } from '@/components/ui'
 import { useAuthStore } from '@/stores/useAuthStore'
-import { User, Bell, Shield, CreditCard, MapPin, Users, Settings, Save } from 'lucide-react'
+import { User, Bell, Shield, CreditCard, Settings, Save } from 'lucide-react'
 import { useState } from 'react'
 
 export default function ConfiguracoesPage() {

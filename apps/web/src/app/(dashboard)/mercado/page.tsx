@@ -1,13 +1,12 @@
 'use client'
 
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
-import { CardMetrica } from '@/components/ui'
 import { GraficoLinha } from '@/components/charts'
 import { mockMercadoData, mockComparacaoPrecos } from '@/lib/mock-data/mercado'
-import { TrendingUp, TrendingDown, DollarSign, Target } from 'lucide-react'
+import { TrendingUp, TrendingDown } from 'lucide-react'
 
 export default function MercadoPage() {
-  const { cotacoes, historicoSoja, analises, mercadoFisico, previsaoPrecos } = mockMercadoData
+  const { cotacoes, historicoSoja, analises, mercadoFisico } = mockMercadoData
 
   return (
     <DashboardLayout>

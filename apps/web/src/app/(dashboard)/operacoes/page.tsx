@@ -7,7 +7,6 @@ import { ScoreRisco, criarFatoresRisco } from '@/components/risk'
 import { mockOperacoesData, mockProdutividadeMensal } from '@/lib/mock-data/operacoes'
 import { MapPin, Sprout, Users, Package, Plus, Calendar, CheckCircle, Clock, AlertCircle } from 'lucide-react'
 import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
 
 export default function OperacoesPage() {
   const { fazendas, talhoes, atividades, insumos, equipe } = mockOperacoesData

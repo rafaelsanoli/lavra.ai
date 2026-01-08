@@ -4,7 +4,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { cn } from '@/lib/utils'
 
 interface GraficoLinhaProps {
-  data: any[]
+  data: Record<string, unknown>[]
   linhas: {
     dataKey: string
     nome: string

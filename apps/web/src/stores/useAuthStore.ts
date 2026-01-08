@@ -16,7 +16,7 @@ interface AuthState {
   carregando: boolean
   login: (email: string, senha: string) => Promise<void>
   logout: () => void
-  cadastrar: (dados: any) => Promise<void>
+  cadastrar: (dados: { nome: string; email: string; senha: string }) => Promise<void>
   register: (data: { nome: string; email: string; senha: string }) => Promise<void>
 }
 
@@ -27,7 +27,7 @@ export const useAuthStore = create<AuthState>()(
       autenticado: false,
       carregando: false,
 
-      login: async (email: string, senha: string) => {
+      login: async (email: string) => {
         set({ carregando: true })
         // Simular delay de API
         await new Promise((resolve) => setTimeout(resolve, 1000))
@@ -68,7 +68,7 @@ export const useAuthStore = create<AuthState>()(
         })
       },
 
-      cadastrar: async (dados: any) => {
+      cadastrar: async (dados: { nome: string; email: string; senha: string }) => {
         set({ carregando: true })
         await new Promise((resolve) => setTimeout(resolve, 1500))
         

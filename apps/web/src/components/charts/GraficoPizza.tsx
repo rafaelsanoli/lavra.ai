@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recha
 import { cn } from '@/lib/utils'
 
 interface GraficoPizzaProps {
-  data: any[]
+  data: Record<string, unknown>[]
   dataKey: string
   nameKey: string
   cores: string[]
@@ -33,7 +33,7 @@ export function GraficoPizza({
             cx="50%"
             cy="50%"
             outerRadius={80}
-            label={(entry: any) => `${entry[nameKey]}: ${entry[dataKey]}%`}
+            label
           >
             {data.map((_, index) => (
               <Cell key={`cell-${index}`} fill={cores[index % cores.length]} />

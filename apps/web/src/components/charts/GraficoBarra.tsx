@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { cn } from '@/lib/utils'
 
 interface GraficoBarraProps {
-  data: any[]
+  data: Record<string, unknown>[]
   barras: {
     dataKey: string
     nome: string
