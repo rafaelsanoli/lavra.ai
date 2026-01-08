@@ -63,16 +63,17 @@ export const mockProdutividadeMensal = [
   { mes: 'Dez', soja: 72, milho: 148 },
 ]
 
-// Dados mockados para talhões no mapa (coordenadas fictícias perto de Sorriso, MT)
+// Dados mockados para talhões no mapa (Fazenda em Sorriso, MT - coordenadas reais e agrupadas)
+// Centro aproximado: -12.5489° S, -55.7067° W
 export const mockTalhoesMap = [
   {
     id: 'T1',
     nome: 'Talhão A1',
     coordenadas: [
-      [-12.54, -55.71] as [number, number],
-      [-12.54, -55.70] as [number, number],
-      [-12.55, -55.70] as [number, number],
-      [-12.55, -55.71] as [number, number],
+      [-12.540, -55.710] as [number, number],
+      [-12.540, -55.705] as [number, number],
+      [-12.545, -55.705] as [number, number],
+      [-12.545, -55.710] as [number, number],
     ],
     scoreRisco: 35,
     cultura: 'Soja',
@@ -83,10 +84,10 @@ export const mockTalhoesMap = [
     id: 'T2',
     nome: 'Talhão A2',
     coordenadas: [
-      [-12.54, -55.70] as [number, number],
-      [-12.54, -55.69] as [number, number],
-      [-12.55, -55.69] as [number, number],
-      [-12.55, -55.70] as [number, number],
+      [-12.540, -55.705] as [number, number],
+      [-12.540, -55.700] as [number, number],
+      [-12.545, -55.700] as [number, number],
+      [-12.545, -55.705] as [number, number],
     ],
     scoreRisco: 55,
     cultura: 'Soja',
@@ -97,10 +98,10 @@ export const mockTalhoesMap = [
     id: 'T3',
     nome: 'Talhão A3',
     coordenadas: [
-      [-12.55, -55.71] as [number, number],
-      [-12.55, -55.70] as [number, number],
-      [-12.56, -55.70] as [number, number],
-      [-12.56, -55.71] as [number, number],
+      [-12.545, -55.710] as [number, number],
+      [-12.545, -55.705] as [number, number],
+      [-12.550, -55.705] as [number, number],
+      [-12.550, -55.710] as [number, number],
     ],
     scoreRisco: 22,
     cultura: 'Soja',
@@ -111,10 +112,10 @@ export const mockTalhoesMap = [
     id: 'T4',
     nome: 'Talhão B1',
     coordenadas: [
-      [-12.55, -55.69] as [number, number],
-      [-12.55, -55.68] as [number, number],
-      [-12.56, -55.68] as [number, number],
-      [-12.56, -55.69] as [number, number],
+      [-12.545, -55.705] as [number, number],
+      [-12.545, -55.700] as [number, number],
+      [-12.550, -55.700] as [number, number],
+      [-12.550, -55.705] as [number, number],
     ],
     scoreRisco: 85,
     cultura: 'Milho',
@@ -125,10 +126,10 @@ export const mockTalhoesMap = [
     id: 'T5',
     nome: 'Talhão B2',
     coordenadas: [
-      [-12.56, -55.71] as [number, number],
-      [-12.56, -55.70] as [number, number],
-      [-12.57, -55.70] as [number, number],
-      [-12.57, -55.71] as [number, number],
+      [-12.550, -55.710] as [number, number],
+      [-12.550, -55.705] as [number, number],
+      [-12.555, -55.705] as [number, number],
+      [-12.555, -55.710] as [number, number],
     ],
     scoreRisco: 48,
     cultura: 'Milho',
@@ -139,10 +140,10 @@ export const mockTalhoesMap = [
     id: 'T6',
     nome: 'Talhão C1',
     coordenadas: [
-      [-12.56, -55.69] as [number, number],
-      [-12.56, -55.68] as [number, number],
-      [-12.57, -55.68] as [number, number],
-      [-12.57, -55.69] as [number, number],
+      [-12.550, -55.705] as [number, number],
+      [-12.550, -55.700] as [number, number],
+      [-12.555, -55.700] as [number, number],
+      [-12.555, -55.705] as [number, number],
     ],
     scoreRisco: 18,
     cultura: 'Soja',
