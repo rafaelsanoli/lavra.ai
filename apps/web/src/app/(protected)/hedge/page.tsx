@@ -3,19 +3,14 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
-  TrendingUp,
-  TrendingDown,
   Calculator,
   Shield,
-  DollarSign,
-  BarChart3,
-  AlertCircle,
-  CheckCircle,
   Plus,
   ArrowRight,
   ArrowUp,
   ArrowDown,
   Zap,
+  AlertCircle,
 } from 'lucide-react'
 import { mockHedgeData } from '@/lib/mock-data/hedge'
 

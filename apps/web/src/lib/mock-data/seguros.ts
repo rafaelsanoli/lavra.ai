@@ -152,8 +152,8 @@ export const mockSegurosData = {
   ],
 }
 
-// Dados para gráfico de sinistralidade
-export const mockSinistralidade = [
+// Dados para gráfico de sinistralidade (disponível para uso futuro)
+const mockSinistralidade = [
   { ano: '2021', sinistros: 45000, indenizacoes: 32000 },
   { ano: '2022', sinistros: 62000, indenizacoes: 48000 },
   { ano: '2023', sinistros: 38000, indenizacoes: 28000 },
@@ -161,8 +161,8 @@ export const mockSinistralidade = [
   { ano: '2025', sinistros: 128250, indenizacoes: 128250 },
 ]
 
-// Tipos de seguro disponíveis
-export const tiposSeguros = [
+// Tipos de seguro disponíveis (disponível para uso futuro)
+const tiposSeguros = [
   {
     id: 'multirrisco',
     nome: 'Seguro Multirrisco',

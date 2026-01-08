@@ -10,7 +10,6 @@ import {
   TrendingUp,
   TrendingDown,
   DollarSign,
-  Calendar,
   CheckCircle,
   Clock,
   AlertCircle,
@@ -19,7 +18,7 @@ import {
   Download,
   BarChart3,
 } from 'lucide-react'
-import { mockSegurosData, mockSinistralidade, tiposSeguros } from '@/lib/mock-data/seguros'
+import { mockSegurosData } from '@/lib/mock-data/seguros'
 
 type TabType = 'apolices' | 'cotacoes' | 'sinistros' | 'recomendacoes'
 

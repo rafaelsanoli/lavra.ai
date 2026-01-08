@@ -26,11 +26,6 @@ const Popup = dynamic(
   { ssr: false }
 )
 
-const Marker = dynamic(
-  () => import('react-leaflet').then((mod) => mod.Marker),
-  { ssr: false }
-)
-
 type Talhao = {
   id: string
   nome: string
