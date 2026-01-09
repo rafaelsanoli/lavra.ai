@@ -71,7 +71,7 @@ export const traducoes = {
       tituloDestaque: 'dá retorno',
       subtitulo: 'Nossos clientes recuperam o investimento já no primeiro mês. Escolha o plano ideal para sua operação.',
       maisPopular: 'Mais popular',
-      comecarAgora: 'Começar agora',
+      comecarAgora: 'Em Breve',
       falarVendas: 'Falar com vendas',
       planos: [
         {
