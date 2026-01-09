@@ -1,4 +1,4 @@
-# 🌱 LAVRA.AI - Documentação da Startup
+# 🌱 LAVRA.IA - Documentação da Startup
 
 > **"Inteligência que cultiva lucro"**
 
@@ -271,7 +271,7 @@
 │  • Lar                                                                  │
 │                                                                         │
 │  Parcerias com revendas de insumos:                                     │
-│  • Oferta conjunta: "Compre insumos + Lavra.ai"                         │
+│  • Oferta conjunta: "Compre insumos + Lavra.ia"                         │
 │  • Agrônomo da revenda indica                                           │
 │                                                                         │
 │  Marketing de conteúdo:                                                 │
@@ -519,7 +519,7 @@
 
 ### Elevator Pitch
 
-> **"O Lavra.ai é o Bloomberg Terminal do Agro Brasileiro."**
+> **"O Lavra.ia é o Bloomberg Terminal do Agro Brasileiro."**
 >
 > Transformamos dados climáticos, agronômicos e de mercado em decisões financeiras que valem milhões.
 >
@@ -605,7 +605,7 @@
 │  • 5 letras, fácil de lembrar e soletrar                                │
 │  • Soa premium e sofisticado                                            │
 │  • Funciona como verbo: "Vou lavrar minha decisão"                      │
-│  • Domínio lavra.ai disponível                                          │
+│  • Domínio lavra.ia disponível                                          │
 │                                                                         │
 │  🎯 PERMITE                                                             │
 │  • Logo icônico (sulco na terra, linha de crescimento)                  │
@@ -862,10 +862,10 @@ A dualidade visual comunica:
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                                                                         │
-│  🌱 LAVRA.AI                                                            │
+│  🌱 LAVRA.IA                                                            │
 │                                                                         │
-│  Website: https://lavra.ai                                              │
-│  Email: contato@lavra.ai                                                │
+│  Website: https://lavra.ia                                              │
+│  Email: contato@lavra.ia                                                │
 │                                                                         │
 │  Fundador: Rafael Sanoli                                                │
 │                                                                         │

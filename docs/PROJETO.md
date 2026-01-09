@@ -1,4 +1,4 @@
-# 🏗️ LAVRA.AI - Documentação do Projeto
+# 🏗️ LAVRA.IA - Documentação do Projeto
 
 > Guia técnico completo para desenvolvimento e manutenção
 
@@ -17,7 +17,7 @@
 
 ## 🏛️ Visão Geral da Arquitetura
 
-O Lavra.ai utiliza uma arquitetura de **microserviços** com separação clara de responsabilidades:
+O Lavra.ia utiliza uma arquitetura de **microserviços** com separação clara de responsabilidades:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -187,7 +187,7 @@ O Lavra.ai utiliza uma arquitetura de **microserviços** com separação clara d
 ## 📁 Estrutura de Pastas
 
 ```
-lavra.ai/
+lavra.ia/
 │
 ├── 📁 apps/                          # Aplicações
 │   ├── 📁 web/                       # Frontend Next.js
@@ -283,8 +283,8 @@ lavra.ai/
 | Ambiente | Uso | URL |
 |----------|-----|-----|
 | **development** | Desenvolvimento local | localhost:3000 |
-| **staging** | Testes e validação | staging.lavra.ai |
-| **production** | Produção | app.lavra.ai |
+| **staging** | Testes e validação | staging.lavra.ia |
+| **production** | Produção | app.lavra.ia |
 
 ---
 

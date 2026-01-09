@@ -1,4 +1,4 @@
-# 📝 LAVRA.AI - Padrões de Código
+# 📝 LAVRA.IA - Padrões de Código
 
 > Convenções e boas práticas para desenvolvimento
 
@@ -22,7 +22,7 @@
 
 ## 🎯 Princípios Gerais
 
-### Valores do Código Lavra.ai
+### Valores do Código Lavra.ia
 
 1. **Legibilidade** > Performance prematura
 2. **Simplicidade** > Complexidade desnecessária
@@ -769,7 +769,7 @@ MAX_EPOCAS_TREINAMENTO = 100
 Modelo de previsão climática baseado em LSTM + Transformers.
 
 Este módulo implementa o modelo principal de previsão climática
-do Lavra.ai, combinando LSTM para captura de padrões temporais
+do Lavra.ia, combinando LSTM para captura de padrões temporais
 e Transformers para relações de longo prazo.
 """
 
@@ -1113,7 +1113,7 @@ refactor(api): extrai lógica de validação para módulo separado
  * O score resultante é usado pelo motor de decisão para gerar
  * recomendações de hedge e momento ideal de venda.
  * 
- * @author Equipe Lavra.ai
+ * @author Equipe Lavra.ia
  * @since 1.0.0
  * @see {@link ../docs/ARQUITETURA.md} para visão geral do sistema
  */

@@ -23,7 +23,7 @@ export const traducoes = {
         precisao: { valor: '94%', label: 'Precisão climática' },
       },
       dashboard: {
-        url: 'app.lavra.ai/dashboard',
+        url: 'app.lavra.ia/dashboard',
         lucroProjetado: 'Lucro Projetado',
         lucroValor: 'R$ 2.847.000',
         clima: 'Clima',
@@ -136,7 +136,7 @@ export const traducoes = {
       badge: 'Dúvidas Frequentes',
       titulo: 'Perguntas',
       tituloDestaque: 'frequentes',
-      subtitulo: 'Tudo que você precisa saber sobre o Lavra.ai.',
+      subtitulo: 'Tudo que você precisa saber sobre o Lavra.ia.',
       items: [
         {
           pergunta: 'Como funciona a previsão?',
@@ -144,7 +144,7 @@ export const traducoes = {
         },
         {
           pergunta: 'Qual a diferença para o FieldView?',
-          resposta: 'O FieldView foca em dados agronômicos e de plantio. O Lavra.ai conecta esses dados com o mercado financeiro para te dizer QUANDO vender e QUANTO travar de preço.',
+          resposta: 'O FieldView foca em dados agronômicos e de plantio. O Lavra.ia conecta esses dados com o mercado financeiro para te dizer QUANDO vender e QUANTO travar de preço.',
         },
         {
           pergunta: 'Preciso instalar sensores?',
@@ -234,7 +234,7 @@ export const traducoes = {
         precisao: { valor: '94%', label: 'Weather accuracy' },
       },
       dashboard: {
-        url: 'app.lavra.ai/dashboard',
+        url: 'app.lavra.ia/dashboard',
         lucroProjetado: 'Projected Profit',
         lucroValor: '$ 567,400',
         clima: 'Weather',
@@ -347,7 +347,7 @@ export const traducoes = {
       badge: 'FAQ',
       titulo: 'Frequently Asked',
       tituloDestaque: 'Questions',
-      subtitulo: 'Everything you need to know about Lavra.ai.',
+      subtitulo: 'Everything you need to know about Lavra.ia.',
       items: [
         {
           pergunta: 'How does the forecast work?',
@@ -355,7 +355,7 @@ export const traducoes = {
         },
         {
           pergunta: 'How is it different from FieldView?',
-          resposta: 'FieldView focuses on agronomic and planting data. Lavra.ai connects this data with the financial market to tell you WHEN to sell and HOW MUCH to hedge.',
+          resposta: 'FieldView focuses on agronomic and planting data. Lavra.ia connects this data with the financial market to tell you WHEN to sell and HOW MUCH to hedge.',
         },
         {
           pergunta: 'Do I need to install sensors?',

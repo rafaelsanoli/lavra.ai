@@ -1,4 +1,4 @@
-# 🦄 Frontend Completo - Lavra.ai
+# 🦄 Frontend Completo - Lavra.ia
 
 ## ✅ Desenvolvimento Concluído
 

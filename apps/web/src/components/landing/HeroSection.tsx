@@ -132,7 +132,7 @@ export function HeroSection() {
                 </div>
                 <div className="flex-1 mx-4">
                   <div className="bg-neutral-200 dark:bg-neutral-700 rounded-md h-6 flex items-center px-3">
-                    <span className="text-xs text-neutral-500">app.lavra.ai/dashboard</span>
+                    <span className="text-xs text-neutral-500">app.lavra.ia/dashboard</span>
                   </div>
                 </div>
               </div>

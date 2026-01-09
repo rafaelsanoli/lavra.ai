@@ -1,11 +1,11 @@
 <div align="center">
 
-<img src="./public/logo.png" alt="Lavra.ai" height="100">
+<img src="./public/logo.png" alt="Lavra.ia" height="100">
 
 <br>
 <br>
 
-# lavra.ai/web
+# lavra.ia/web
 
 **Landing page & Aplicação Web**
 
@@ -61,5 +61,5 @@ src/
 ---
 
 <div align="center">
-<sub>Parte do monorepo <a href="https://github.com/rafaelsanoli/lavra.ai">lavra.ai</a></sub>
+<sub>Parte do monorepo <a href="https://github.com/rafaelsanoli/lavra.ia">lavra.ia</a></sub>
 </div>

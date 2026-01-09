@@ -181,7 +181,7 @@ export function ChatWidget() {
                   />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold">Assistente Lavra.ai</h3>
+                  <h3 className="text-white font-semibold">Assistente Lavra.ia</h3>
                   <p className="text-white/80 text-xs">Online • Respondendo em ~2s</p>
                 </div>
               </div>

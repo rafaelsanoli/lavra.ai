@@ -85,7 +85,7 @@ export function DocsSidebar() {
                         Fale com nosso time de suporte especializado.
                     </p>
                     <a
-                        href="mailto:suporte@lavra.ai"
+                        href="mailto:suporte@lavra.ia"
                         className="text-xs font-semibold text-brand-700 dark:text-brand-300 hover:underline"
                     >
                         Falar com suporte →

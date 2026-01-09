@@ -404,7 +404,7 @@ export default function CadastroPage() {
             transition={{ delay: 0.7 }}
             className="text-center text-sm text-white/40 mt-8"
           >
-            © 2026 Lavra.ai · O Bloomberg do Agro Brasileiro
+            © 2026 Lavra.ia · O Bloomberg do Agro Brasileiro
           </motion.p>
         </motion.div>
       </div>

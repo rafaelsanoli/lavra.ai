@@ -2,7 +2,7 @@
   
 <br>
 
-<img src="./apps/web/public/logo.png" alt="Lavra.ai" height="120">
+<img src="./apps/web/public/logo.png" alt="Lavra.ia" height="120">
 
 <br>
 <br>
@@ -23,19 +23,19 @@
 
 </div>
 
-## 🌱 Sobre a Lavra.ai
+## 🌱 Sobre a Lavra.ia
 
 Somos uma **AgTech brasileira** desenvolvendo inteligência artificial que conecta **clima**, **mercado** e **sua fazenda** em uma única plataforma preditiva.
 
 > **Tome decisões de milhões com confiança.**
 
-O produtor rural brasileiro toma decisões que envolvem milhões de reais baseado em informações fragmentadas e intuição. A Lavra.ai muda isso.
+O produtor rural brasileiro toma decisões que envolvem milhões de reais baseado em informações fragmentadas e intuição. A Lavra.ia muda isso.
 
 <br>
 
 ## 💡 O Problema
 
-| 🧠 Hoje | 🚀 Com Lavra.ai |
+| 🧠 Hoje | 🚀 Com Lavra.ia |
 |---------|-----------------|
 | Decisões baseadas em intuição | **Previsões de IA com 94% de precisão** |
 | Informações climáticas genéricas | **Dados hiper-localizados da sua fazenda** |
@@ -103,7 +103,7 @@ Seja um dos primeiros a ter acesso à plataforma que vai revolucionar a tomada d
 
 <div align="center">
 
-**Lavra.ai** — Inteligência que cultiva lucro 🌱
+**Lavra.ia** — Inteligência que cultiva lucro 🌱
 
 <br>
 

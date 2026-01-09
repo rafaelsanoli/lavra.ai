@@ -22,7 +22,7 @@ export function Logo({ className, tamanho = 'md', apenasIcone = false }: LogoPro
       <div className="relative">
         <Image 
           src="/logo.png" 
-          alt="Lavra.ai" 
+          alt="Lavra.ia" 
           width={tamanhos[tamanho].icone} 
           height={tamanhos[tamanho].icone}
           className="object-contain rounded-xl"
@@ -32,7 +32,7 @@ export function Logo({ className, tamanho = 'md', apenasIcone = false }: LogoPro
       {/* Texto */}
       {!apenasIcone && (
         <span className={cn('font-bold tracking-tight text-neutral-900 dark:text-white', tamanhos[tamanho].texto)}>
-          lavra<span className="text-brand-600 dark:text-brand-400">.ai</span>
+          lavra<span className="text-brand-600 dark:text-brand-400">.ia</span>
         </span>
       )}
     </div>

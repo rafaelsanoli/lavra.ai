@@ -1,4 +1,4 @@
-# 🦄 Frontend Lavra.ai - Roadmap de Melhorias
+# 🦄 Frontend Lavra.ia - Roadmap de Melhorias
 
 ## 📋 Análise da Documentação vs Frontend Atual
 

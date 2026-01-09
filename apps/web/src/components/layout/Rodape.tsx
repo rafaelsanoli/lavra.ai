@@ -48,7 +48,7 @@ export function Rodape() {
         <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-neutral-500">
-              © {new Date().getFullYear()} Lavra.ai. {t.footer.direitos}
+              © {new Date().getFullYear()} Lavra.ia. {t.footer.direitos}
             </p>
           </div>
         </div>

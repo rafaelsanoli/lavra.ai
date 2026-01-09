@@ -6,7 +6,7 @@ export default function TecnologiaPage() {
             <div>
                 <h1 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">Tecnologia & Diferenciais</h1>
                 <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                    Entenda a arquitetura proprietária que torna o Lavra.ai único e difícil de replicar.
+                    Entenda a arquitetura proprietária que torna o Lavra.ia único e difícil de replicar.
                 </p>
             </div>
 

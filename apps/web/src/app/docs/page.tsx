@@ -6,10 +6,10 @@ export default function DocsPage() {
         <div className="space-y-12">
             <div>
                 <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white mb-4">
-                    Documentação Lavra.ai
+                    Documentação Lavra.ia
                 </h1>
                 <p className="text-xl text-neutral-600 dark:text-neutral-400">
-                    Bem-vindo à central de conhecimento da Lavra.ai. Aqui você encontra detalhes técnicos, guias de funcionalidades e explicações sobre nossa tecnologia.
+                    Bem-vindo à central de conhecimento da Lavra.ia. Aqui você encontra detalhes técnicos, guias de funcionalidades e explicações sobre nossa tecnologia.
                 </p>
             </div>
 

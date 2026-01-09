@@ -1,4 +1,4 @@
-# 🌱 LAVRA.AI - Documentação do Produto
+# 🌱 LAVRA.IA - Documentação do Produto
 
 > **Inteligência que cultiva lucro**
 
@@ -19,13 +19,13 @@
 
 ## 🎯 Visão Geral
 
-**Lavra.ai** é uma plataforma de **Inteligência Preditiva para Gestão de Risco Climático e Financeiro Integrado** voltada para o produtor rural brasileiro.
+**Lavra.ia** é uma plataforma de **Inteligência Preditiva para Gestão de Risco Climático e Financeiro Integrado** voltada para o produtor rural brasileiro.
 
 A plataforma conecta em tempo real:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        LAVRA.AI                                 │
+│                        LAVRA.IA                                 │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐ │
@@ -84,9 +84,9 @@ PROBLEMA ATUAL:
 
 ## 💡 A Solução
 
-### O que é o Lavra.ai
+### O que é o Lavra.ia
 
-O Lavra.ai é uma plataforma de **Inteligência de Decisão Integrada** que transforma dados em decisões financeiras acionáveis.
+O Lavra.ia é uma plataforma de **Inteligência de Decisão Integrada** que transforma dados em decisões financeiras acionáveis.
 
 ### O GAP de Mercado
 
@@ -103,10 +103,10 @@ O Lavra.ai é uma plataforma de **Inteligência de Decisão Integrada** que tran
  ➜ QUANTO VOU GANHAR/PERDER com cada decisão?"
 ```
 
-### Valor Entregue pelo Lavra.ai
+### Valor Entregue pelo Lavra.ia
 
 ```
-VALOR ENTREGUE PELO LAVRA.AI:
+VALOR ENTREGUE PELO LAVRA.IA:
 • Otimização de venda: +R$ 3-5/saca = GANHO de R$ 540.000 - R$ 900.000
 • Decisões de colheita: +2% qualidade = GANHO de R$ 500.000
 • Hedge otimizado: redução de 40% no risco
@@ -263,7 +263,7 @@ Análise automática das apólices do produtor vs. risco real calculado:
 │  • Cobertura: R$ 8.500/ha                                      │
 │  • Prêmio anual: R$ 189.000                                    │
 │                                                                │
-│  Risco REAL calculado (Lavra.ai):                              │
+│  Risco REAL calculado (Lavra.ia):                              │
 │  • Exposição máxima: R$ 12.300/ha                              │
 │  • GAP descoberto: R$ 3.800/ha = R$ 9.120.000 em risco!        │
 │                                                                │
@@ -295,7 +295,7 @@ DIA 2-3: Calibração do modelo
 DIA 4-7: Primeiros insights
          ├─ Dashboard personalizado ativo
          ├─ Primeiro relatório de cenários
-         └─ Simulação: "Se você tivesse usado Lavra.ai na última safra..."
+         └─ Simulação: "Se você tivesse usado Lavra.ia na última safra..."
 ```
 
 ### Uso Diário
@@ -321,7 +321,7 @@ DIA 4-7: Primeiros insights
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│  🌾 LAVRA.AI - Fazenda Santa Maria (2.400 ha soja)                     │
+│  🌾 LAVRA.IA - Fazenda Santa Maria (2.400 ha soja)                     │
 ├────────────────────────────────────────────────────────────────────────┤
 │                                                                        │
 │  ⚠️  ALERTA DE DECISÃO - JANELA DE OPORTUNIDADE                        │
@@ -332,7 +332,7 @@ DIA 4-7: Primeiros insights
 │  ├─ Impacto estimado: -4.2 sacas/ha                                    │
 │  └─ Perda potencial: R$ 1.428.000                                      │
 │                                                                        │
-│  ✅ RECOMENDAÇÃO LAVRA.AI:                                              │
+│  ✅ RECOMENDAÇÃO LAVRA.IA:                                              │
 │  ┌──────────────────────────────────────────────────────────────────┐  │
 │  │  TRAVE 40% da produção AGORA a R$ 142/saca (mar/25)              │  │
 │  │  Lucro garantido: R$ 2.841.600                                   │  │

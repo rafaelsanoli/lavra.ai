@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       // ==========================================
-      // CORES LAVRA.AI
+      // CORES LAVRA.IA
       // ==========================================
       colors: {
         // Brand Green Scale
