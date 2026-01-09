@@ -72,7 +72,7 @@ export const traducoes = {
       subtitulo: 'Nossos clientes recuperam o investimento já no primeiro mês. Escolha o plano ideal para sua operação.',
       maisPopular: 'Mais popular',
       comecarAgora: 'Em Breve',
-      falarVendas: 'Falar com vendas',
+      falarVendas: 'Em Breve',
       planos: [
         {
           nome: 'Essencial',
@@ -104,7 +104,7 @@ export const traducoes = {
         },
         {
           nome: 'Enterprise',
-          preco: 'Sob consulta',
+          preco: 'À consultar',
           periodo: '',
           descricao: 'Para grandes operações e grupos.',
           recursos: [
