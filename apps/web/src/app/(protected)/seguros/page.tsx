@@ -69,24 +69,24 @@ export default function SegurosPage() {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between"
+        className="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
       >
-        <div>
-          <h1 className="text-3xl font-bold text-neutral-900 dark:text-white flex items-center gap-3">
-            <Shield className="w-8 h-8 text-brand-500" />
-            Módulo de Seguros
+        <div className="min-w-0 flex-1">
+          <h1 className="text-xl md:text-3xl font-bold text-neutral-900 dark:text-white flex items-center gap-2 md:gap-3">
+            <Shield className="w-6 h-6 md:w-8 md:h-8 text-brand-500 flex-shrink-0" />
+            <span className="break-words">Módulo de Seguros</span>
           </h1>
-          <p className="text-neutral-600 dark:text-gray-400 mt-1">
+          <p className="text-sm md:text-base text-neutral-600 dark:text-gray-400 mt-1">
             Gestão completa de apólices, cotações e análise de riscos
           </p>
         </div>
-        <div className="flex gap-3">
-          <button className="px-4 py-2 bg-white/5 hover:bg-neutral-100 dark:hover:bg-white/10 backdrop-blur-xl border border-white/10 rounded-xl text-neutral-900 dark:text-white transition-all flex items-center gap-2">
-            <Download className="w-4 h-4" />
-            Exportar
+        <div className="flex gap-2 md:gap-3 flex-shrink-0">
+          <button className="px-3 py-2 md:px-4 bg-white/5 hover:bg-neutral-100 dark:hover:bg-white/10 backdrop-blur-xl border border-white/10 rounded-xl text-neutral-900 dark:text-white transition-all flex items-center gap-2 text-sm md:text-base">
+            <Download className="w-4 h-4 flex-shrink-0" />
+            <span className="hidden sm:inline">Exportar</span>
           </button>
-          <button className="px-4 py-2 bg-gradient-to-r from-brand-600 to-green-600 hover:from-brand-500 hover:to-green-500 rounded-xl text-neutral-900 dark:text-white font-medium transition-all flex items-center gap-2">
-            <Plus className="w-4 h-4" />
+          <button className="px-3 py-2 md:px-4 bg-gradient-to-r from-brand-600 to-green-600 hover:from-brand-500 hover:to-green-500 rounded-xl text-neutral-900 dark:text-white font-medium transition-all flex items-center gap-2 text-sm md:text-base whitespace-nowrap">
+            <Plus className="w-4 h-4 flex-shrink-0" />
             Nova Cotação
           </button>
         </div>
@@ -188,7 +188,7 @@ export default function SegurosPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 border-b border-white/10">
+      <div className="flex gap-2 border-b border-white/10 overflow-x-auto">
         {[
           { id: 'apolices', label: 'Apólices Ativas', icon: FileText },
           { id: 'cotacoes', label: 'Cotações', icon: Calculator },
@@ -198,14 +198,14 @@ export default function SegurosPage() {
           <button
             key={tab.id}
             onClick={() => setTabAtiva(tab.id as TabType)}
-            className={`px-6 py-3 flex items-center gap-2 font-medium transition-all ${
+            className={`px-4 md:px-6 py-3 flex items-center gap-2 font-medium transition-all whitespace-nowrap flex-shrink-0 ${
               tabAtiva === tab.id
                 ? 'text-brand-400 border-b-2 border-brand-400'
-                : 'text-neutral-600 dark:text-gray-400 hover:text-neutral-900 dark:text-white'
+                : 'text-neutral-600 dark:text-gray-400 hover:text-neutral-900 dark:hover:text-white'
             }`}
           >
-            <tab.icon className="w-4 h-4" />
-            {tab.label}
+            <tab.icon className="w-4 h-4 flex-shrink-0" />
+            <span className="text-sm md:text-base">{tab.label}</span>
           </button>
         ))}
       </div>
@@ -386,46 +386,46 @@ export default function SegurosPage() {
             {mockSegurosData.sinistros.map((sinistro) => (
               <div
                 key={sinistro.id}
-                className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6"
+                className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-4 md:p-6 w-full max-w-full box-border overflow-hidden"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white">{sinistro.tipo}</h3>
-                      <span className={`px-3 py-1 rounded-lg text-xs font-medium border ${getStatusColor(sinistro.status)}`}>
+                <div className="flex items-start justify-between mb-4 gap-2">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-2 flex-wrap">
+                      <h3 className="text-lg md:text-xl font-bold text-neutral-900 dark:text-white break-words">{sinistro.tipo}</h3>
+                      <span className={`px-3 py-1 rounded-lg text-xs font-medium border whitespace-nowrap flex-shrink-0 ${getStatusColor(sinistro.status)}`}>
                         {sinistro.status.replace('_', ' ').toUpperCase()}
                       </span>
                     </div>
-                    <p className="text-neutral-600 dark:text-gray-400">Apólice: {sinistro.apolice}</p>
-                    <p className="text-sm text-gray-500 mt-1">
+                    <p className="text-sm md:text-base text-neutral-600 dark:text-gray-400 break-words">Apólice: {sinistro.apolice}</p>
+                    <p className="text-xs md:text-sm text-gray-500 mt-1">
                       Ocorrência: {formatarData(sinistro.dataOcorrencia)}
                     </p>
                   </div>
                   {sinistro.status === 'pago' ? (
-                    <CheckCircle className="w-6 h-6 text-green-400" />
+                    <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0" />
                   ) : (
-                    <Clock className="w-6 h-6 text-yellow-400" />
+                    <Clock className="w-5 h-5 md:w-6 md:h-6 text-yellow-400 flex-shrink-0" />
                   )}
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="min-w-0">
-                    <p className="text-sm text-neutral-600 dark:text-gray-400">Área Afetada</p>
-                    <p className="text-lg font-bold text-neutral-900 dark:text-white">{sinistro.areaAfetada} ha</p>
+                    <p className="text-xs md:text-sm text-neutral-600 dark:text-gray-400">Área Afetada</p>
+                    <p className="text-base md:text-lg font-bold text-neutral-900 dark:text-white break-words">{sinistro.areaAfetada} ha</p>
                   </div>
                   <div className="min-w-0">
-                    <p className="text-sm text-neutral-600 dark:text-gray-400">Perda Estimada</p>
-                    <p className="text-lg font-bold text-red-400">{formatarMoeda(sinistro.perdaEstimada)}</p>
+                    <p className="text-xs md:text-sm text-neutral-600 dark:text-gray-400">Perda Estimada</p>
+                    <p className="text-sm md:text-base font-bold text-red-400 break-words">{formatarMoeda(sinistro.perdaEstimada)}</p>
                   </div>
                   <div className="min-w-0">
-                    <p className="text-sm text-neutral-600 dark:text-gray-400">Indenização</p>
-                    <p className="text-lg font-bold text-green-400">
+                    <p className="text-xs md:text-sm text-neutral-600 dark:text-gray-400">Indenização</p>
+                    <p className="text-sm md:text-base font-bold text-green-400 break-words">
                       {sinistro.indenizacaoPaga > 0 ? formatarMoeda(sinistro.indenizacaoPaga) : '-'}
                     </p>
                   </div>
                   <div className="min-w-0">
-                    <p className="text-sm text-neutral-600 dark:text-gray-400">Data Pagamento</p>
-                    <p className="text-sm text-neutral-900 dark:text-white">
+                    <p className="text-xs md:text-sm text-neutral-600 dark:text-gray-400">Data Pagamento</p>
+                    <p className="text-xs md:text-sm text-neutral-900 dark:text-white break-words">
                       {sinistro.dataPagamento ? formatarData(sinistro.dataPagamento) : 'Pendente'}
                     </p>
                   </div>
@@ -441,30 +441,30 @@ export default function SegurosPage() {
             {mockSegurosData.recomendacoes.map((rec) => (
               <div
                 key={rec.id}
-                className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6 hover:bg-neutral-100 dark:hover:bg-white/10 transition-all w-full max-w-full box-border overflow-hidden"
+                className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-4 md:p-6 hover:bg-neutral-100 dark:hover:bg-white/10 transition-all w-full max-w-full box-border overflow-hidden"
               >
                 <div className="flex items-start justify-between mb-4 min-w-0">
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-2">
-                      <AlertCircle className="w-5 h-5 text-yellow-400" />
-                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white">{rec.titulo}</h3>
-                      <span className={`px-3 py-1 rounded-lg text-xs font-medium border ${getPrioridadeColor(rec.prioridade)}`}>
+                    <div className="flex items-center gap-2 mb-2 flex-wrap">
+                      <AlertCircle className="w-4 h-4 md:w-5 md:h-5 text-yellow-400 flex-shrink-0" />
+                      <h3 className="text-base md:text-xl font-bold text-neutral-900 dark:text-white break-words">{rec.titulo}</h3>
+                      <span className={`px-3 py-1 rounded-lg text-xs font-medium border whitespace-nowrap flex-shrink-0 ${getPrioridadeColor(rec.prioridade)}`}>
                         {rec.prioridade.toUpperCase()}
                       </span>
                     </div>
-                    <p className="text-neutral-600 dark:text-gray-400 mt-2">{rec.descricao}</p>
+                    <p className="text-sm md:text-base text-neutral-600 dark:text-gray-400 mt-2 break-words">{rec.descricao}</p>
                   </div>
                 </div>
-                <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/10 flex-wrap gap-4">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-4 pt-4 border-t border-white/10 gap-4">
                   <div className="flex items-center gap-4 min-w-0">
-                    <div className="min-w-0">
-                      <p className="text-sm text-neutral-600 dark:text-gray-400">Impacto Financeiro</p>
-                      <p className={`text-lg font-bold ${rec.impactoFinanceiro > 0 ? 'text-red-400' : 'text-green-400'}`}>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs md:text-sm text-neutral-600 dark:text-gray-400">Impacto Financeiro</p>
+                      <p className={`text-base md:text-lg font-bold break-words ${rec.impactoFinanceiro > 0 ? 'text-red-400' : 'text-green-400'}`}>
                         {rec.impactoFinanceiro > 0 ? '+' : ''}{formatarMoeda(Math.abs(rec.impactoFinanceiro))}
                       </p>
                     </div>
                   </div>
-                  <button className="px-4 py-2 bg-gradient-to-r from-brand-600 to-green-600 hover:from-brand-500 hover:to-green-500 rounded-xl text-neutral-900 dark:text-white font-medium transition-all w-full md:w-auto">
+                  <button className="px-4 py-2 bg-gradient-to-r from-brand-600 to-green-600 hover:from-brand-500 hover:to-green-500 rounded-xl text-neutral-900 dark:text-white font-medium transition-all w-full md:w-auto text-sm md:text-base whitespace-nowrap">
                     {rec.acaoSugerida}
                   </button>
                 </div>
