@@ -115,18 +115,18 @@ export default function HedgePage() {
           transition={{ delay: 0.1 }}
           className="bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-white/10 dark:border-white/10 rounded-2xl p-6"
         >
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-4 min-w-0">
             <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Proteção Soja</h3>
             <Shield className="w-5 h-5 text-green-400" />
           </div>
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
+            <div className="space-y-3">
+            <div className="flex items-center justify-between min-w-0">
               <span className="text-neutral-600 dark:text-gray-400">Produção Total</span>
-              <span className="text-neutral-900 dark:text-white font-bold">{formatarNumero(producao.producaoTotal)} sc</span>
+              <span className="text-neutral-900 dark:text-white font-bold whitespace-nowrap">{formatarNumero(producao.producaoTotal)} sc</span>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between min-w-0">
               <span className="text-neutral-600 dark:text-gray-400">Hedge Atual</span>
-              <span className="text-brand-400 font-bold">
+              <span className="text-brand-400 font-bold whitespace-nowrap">
                 {formatarNumero(mockHedgeData.producaoEstimada.soja.hedgeAtual)} sc
               </span>
             </div>
@@ -151,20 +151,20 @@ export default function HedgePage() {
           transition={{ delay: 0.2 }}
           className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6"
         >
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-4 min-w-0">
             <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Proteção Milho</h3>
             <Shield className="w-5 h-5 text-yellow-400" />
           </div>
           <div className="space-y-3">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between min-w-0">
               <span className="text-neutral-600 dark:text-gray-400">Produção Total</span>
-              <span className="text-neutral-900 dark:text-white font-bold">
+              <span className="text-neutral-900 dark:text-white font-bold whitespace-nowrap">
                 {formatarNumero(mockHedgeData.producaoEstimada.milho.producaoTotal)} sc
               </span>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between min-w-0">
               <span className="text-neutral-600 dark:text-gray-400">Hedge Atual</span>
-              <span className="text-brand-400 font-bold">
+              <span className="text-brand-400 font-bold whitespace-nowrap">
                 {formatarNumero(mockHedgeData.producaoEstimada.milho.hedgeAtual)} sc
               </span>
             </div>
@@ -243,31 +243,31 @@ export default function HedgePage() {
         {/* Detalhes da Estratégia Selecionada */}
         {estrategiaSelecionada && (
           <div className="bg-white/5 rounded-xl p-4 mb-6">
-            <div className="flex items-start justify-between mb-3">
-              <div>
-                <h4 className="font-bold text-neutral-900 dark:text-white mb-1">{estrategiaSelecionada.nome}</h4>
-                <p className="text-sm text-neutral-600 dark:text-gray-400">{estrategiaSelecionada.descricao}</p>
+            <div className="flex items-start justify-between mb-3 min-w-0">
+              <div className="min-w-0">
+                <h4 className="font-bold text-neutral-900 dark:text-white mb-1 truncate">{estrategiaSelecionada.nome}</h4>
+                <p className="text-sm text-neutral-600 dark:text-gray-400 break-words">{estrategiaSelecionada.descricao}</p>
               </div>
-              <span className={`px-3 py-1 rounded-lg text-xs font-medium border ${getRiscoColor(estrategiaSelecionada.risco)}`}>
+              <span className={`flex-shrink-0 px-3 py-1 rounded-lg text-xs font-medium border ${getRiscoColor(estrategiaSelecionada.risco)}`}>
                 Risco {estrategiaSelecionada.risco}
               </span>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-              <div>
+              <div className="min-w-0">
                 <p className="text-xs text-neutral-600 dark:text-gray-400">Custo Operacional</p>
-                <p className="text-neutral-900 dark:text-white font-bold">{estrategiaSelecionada.custoOperacional}%</p>
+                <p className="text-neutral-900 dark:text-white font-bold break-words">{estrategiaSelecionada.custoOperacional}%</p>
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="text-xs text-neutral-600 dark:text-gray-400">Margem Necessária</p>
-                <p className="text-neutral-900 dark:text-white font-bold">{estrategiaSelecionada.margemNecessaria}%</p>
+                <p className="text-neutral-900 dark:text-white font-bold break-words">{estrategiaSelecionada.margemNecessaria}%</p>
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="text-xs text-neutral-600 dark:text-gray-400">Liquidez</p>
-                <p className="text-neutral-900 dark:text-white font-bold capitalize">{estrategiaSelecionada.liquidez}</p>
+                <p className="text-neutral-900 dark:text-white font-bold capitalize break-words">{estrategiaSelecionada.liquidez}</p>
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="text-xs text-neutral-600 dark:text-gray-400">Melhor Para</p>
-                <p className="text-xs text-neutral-900 dark:text-white line-clamp-2">{estrategiaSelecionada.melhorPara}</p>
+                <p className="text-xs text-neutral-900 dark:text-white line-clamp-2 break-words">{estrategiaSelecionada.melhorPara}</p>
               </div>
             </div>
           </div>
@@ -275,21 +275,21 @@ export default function HedgePage() {
 
         {/* Resumo da Operação */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white/5 rounded-xl p-4">
+          <div className="bg-white/5 rounded-xl p-4 min-w-0">
             <p className="text-sm text-neutral-600 dark:text-gray-400 mb-1">Preço Futuro</p>
-            <p className="text-xl font-bold text-neutral-900 dark:text-white">{formatarMoeda(precoAtual)}/sc</p>
+            <p className="text-xl font-bold text-neutral-900 dark:text-white break-words md:whitespace-nowrap">{formatarMoeda(precoAtual)}/sc</p>
           </div>
-          <div className="bg-white/5 rounded-xl p-4">
+          <div className="bg-white/5 rounded-xl p-4 min-w-0">
             <p className="text-sm text-neutral-600 dark:text-gray-400 mb-1">Valor da Operação</p>
-            <p className="text-xl font-bold text-brand-400">{formatarMoeda(valorOperacao)}</p>
+            <p className="text-xl font-bold text-brand-400 break-words md:whitespace-nowrap">{formatarMoeda(valorOperacao)}</p>
           </div>
-          <div className="bg-white/5 rounded-xl p-4">
+          <div className="bg-white/5 rounded-xl p-4 min-w-0">
             <p className="text-sm text-neutral-600 dark:text-gray-400 mb-1">Custo Operacional</p>
-            <p className="text-xl font-bold text-yellow-400">{formatarMoeda(custoOperacional)}</p>
+            <p className="text-xl font-bold text-yellow-400 break-words md:whitespace-nowrap">{formatarMoeda(custoOperacional)}</p>
           </div>
-          <div className="bg-white/5 rounded-xl p-4">
+          <div className="bg-white/5 rounded-xl p-4 min-w-0">
             <p className="text-sm text-neutral-600 dark:text-gray-400 mb-1">Margem Necessária</p>
-            <p className="text-xl font-bold text-purple-400">{formatarMoeda(margemNecessaria)}</p>
+            <p className="text-xl font-bold text-purple-400 break-words md:whitespace-nowrap">{formatarMoeda(margemNecessaria)}</p>
           </div>
         </div>
 
@@ -302,31 +302,31 @@ export default function HedgePage() {
               className="bg-white/5 rounded-xl p-4 hover:bg-neutral-100 dark:hover:bg-white/10 transition-all"
             >
               <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <h4 className="font-bold text-neutral-900 dark:text-white">{resultado.cenario}</h4>
-                  <span className="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-lg">
+                <div className="flex items-center gap-3 min-w-0">
+                  <h4 className="font-bold text-neutral-900 dark:text-white truncate">{resultado.cenario}</h4>
+                  <span className="flex-shrink-0 px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-lg">
                     {resultado.probabilidade}% probabilidade
                   </span>
                 </div>
-                <div className="text-right">
+                <div className="text-right min-w-0">
                   <p className="text-xs text-neutral-600 dark:text-gray-400">Preço Final</p>
-                  <p className="font-bold text-neutral-900 dark:text-white">{formatarMoeda(resultado.precoFinal)}/sc</p>
+                  <p className="font-bold text-neutral-900 dark:text-white whitespace-nowrap">{formatarMoeda(resultado.precoFinal)}/sc</p>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-4">
-                <div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="min-w-0">
                   <p className="text-xs text-neutral-600 dark:text-gray-400">Sem Hedge</p>
-                  <p className="font-bold text-neutral-900 dark:text-white">{formatarMoeda(resultado.semHedge)}</p>
+                  <p className="font-bold text-neutral-900 dark:text-white break-words md:whitespace-nowrap">{formatarMoeda(resultado.semHedge)}</p>
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs text-neutral-600 dark:text-gray-400">Com Hedge</p>
-                  <p className="font-bold text-brand-400">{formatarMoeda(resultado.comHedge)}</p>
+                  <p className="font-bold text-brand-400 break-words md:whitespace-nowrap">{formatarMoeda(resultado.comHedge)}</p>
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs text-neutral-600 dark:text-gray-400">Diferença</p>
-                  <p className={`font-bold flex items-center gap-1 ${resultado.diferenca >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                    {resultado.diferenca >= 0 ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
-                    {formatarMoeda(Math.abs(resultado.diferenca))}
+                  <p className={`font-bold flex items-center gap-1 min-w-0 ${resultado.diferenca >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                    {resultado.diferenca >= 0 ? <ArrowUp className="w-4 h-4 flex-shrink-0" /> : <ArrowDown className="w-4 h-4 flex-shrink-0" />}
+                    <span className="break-words md:whitespace-nowrap">{formatarMoeda(Math.abs(resultado.diferenca))}</span>
                   </p>
                 </div>
               </div>
@@ -353,12 +353,12 @@ export default function HedgePage() {
               key={rec.id}
               className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6 hover:bg-neutral-100 dark:hover:bg-white/10 transition-all"
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <AlertCircle className="w-5 h-5 text-yellow-400" />
-                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white">{rec.titulo}</h3>
-                    <span className={`px-3 py-1 rounded-lg text-xs font-medium border ${
+              <div className="flex items-start justify-between mb-4 min-w-0">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-3 mb-2 min-w-0">
+                    <AlertCircle className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white truncate">{rec.titulo}</h3>
+                    <span className={`flex-shrink-0 px-3 py-1 rounded-lg text-xs font-medium border ${
                       rec.prioridade === 'alta'
                         ? 'bg-red-500/20 text-red-400 border-red-500/50'
                         : rec.prioridade === 'media'
@@ -368,20 +368,20 @@ export default function HedgePage() {
                       {rec.prioridade.toUpperCase()}
                     </span>
                   </div>
-                  <p className="text-neutral-600 dark:text-gray-400">{rec.descricao}</p>
+                  <p className="text-neutral-600 dark:text-gray-400 break-words">{rec.descricao}</p>
                 </div>
               </div>
               <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                <div className="flex items-center gap-6">
-                  <div>
+                <div className="flex items-center gap-6 min-w-0">
+                  <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Estratégia Sugerida</p>
-                    <p className="font-bold text-neutral-900 dark:text-white capitalize">
+                    <p className="font-bold text-neutral-900 dark:text-white capitalize break-words">
                       {mockHedgeData.estrategias.find((e) => e.id === rec.estrategiaSugerida)?.nome}
                     </p>
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Impacto Financeiro</p>
-                    <p className="font-bold text-brand-400">{formatarMoeda(rec.impactoFinanceiro)}</p>
+                    <p className="font-bold text-brand-400 break-words">{formatarMoeda(rec.impactoFinanceiro)}</p>
                   </div>
                 </div>
                 <button className="px-4 py-2 bg-gradient-to-r from-brand-600 to-green-600 hover:from-brand-500 hover:to-green-500 rounded-xl text-neutral-900 dark:text-white font-medium transition-all flex items-center gap-2">
