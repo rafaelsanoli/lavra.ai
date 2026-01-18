@@ -310,7 +310,7 @@ export default function HedgePage() {
                 </div>
                 <div className="text-right min-w-0">
                   <p className="text-xs text-neutral-600 dark:text-gray-400">Preço Final</p>
-                  <p className="font-bold text-neutral-900 dark:text-white whitespace-nowrap">{formatarMoeda(resultado.precoFinal)}/sc</p>
+                  <p className="font-bold text-neutral-900 dark:text-white text-base md:text-lg whitespace-normal md:whitespace-nowrap break-words">{formatarMoeda(resultado.precoFinal)}/sc</p>
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -371,8 +371,8 @@ export default function HedgePage() {
                   <p className="text-neutral-600 dark:text-gray-400 break-words">{rec.descricao}</p>
                 </div>
               </div>
-              <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                <div className="flex items-center gap-6 min-w-0">
+              <div className="flex items-center justify-between pt-4 border-t border-white/10 flex-wrap gap-4">
+                <div className="flex items-center gap-6 min-w-0 flex-1">
                   <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Estratégia Sugerida</p>
                     <p className="font-bold text-neutral-900 dark:text-white capitalize break-words">
@@ -384,8 +384,8 @@ export default function HedgePage() {
                     <p className="font-bold text-brand-400 break-words">{formatarMoeda(rec.impactoFinanceiro)}</p>
                   </div>
                 </div>
-                <button className="px-4 py-2 bg-gradient-to-r from-brand-600 to-green-600 hover:from-brand-500 hover:to-green-500 rounded-xl text-neutral-900 dark:text-white font-medium transition-all flex items-center gap-2">
-                  {rec.acaoSugerida}
+                <button className="w-full md:w-auto px-4 py-2 bg-gradient-to-r from-brand-600 to-green-600 hover:from-brand-500 hover:to-green-500 rounded-xl text-neutral-900 dark:text-white font-medium transition-all flex items-center justify-center gap-2">
+                  <span className="truncate">{rec.acaoSugerida}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
