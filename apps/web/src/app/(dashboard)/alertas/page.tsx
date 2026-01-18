@@ -100,16 +100,16 @@ export default function AlertasPage() {
         </div>
 
         {/* Filtros */}
-        <div className="p-4 rounded-xl bg-white dark:bg-[#1A1A1A] border border-neutral-200 dark:border-neutral-800">
-          <div className="flex items-center gap-2">
-            <Filter className="w-4 h-4 text-neutral-500" />
-            <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Filtrar:</span>
-            <div className="flex gap-2">
+        <div className="p-3 md:p-4 rounded-xl bg-white dark:bg-[#1A1A1A] border border-neutral-200 dark:border-neutral-800 overflow-x-auto">
+          <div className="flex items-center gap-2 min-w-max">
+            <Filter className="w-4 h-4 text-neutral-500 flex-shrink-0" />
+            <span className="text-xs md:text-sm font-medium text-neutral-700 dark:text-neutral-300 whitespace-nowrap">Filtrar:</span>
+            <div className="flex gap-2 flex-shrink-0">
               {['todos', 'naoLidos', 'critico', 'atencao', 'informativo'].map((f) => (
                 <button
                   key={f}
                   onClick={() => setFiltro(f as typeof filtro)}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-2.5 md:px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium transition-colors whitespace-nowrap ${
                     filtro === f
                       ? 'bg-brand-600 text-white'
                       : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'
