@@ -89,7 +89,7 @@ export default function HedgePage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6 space-y-6 max-w-[1600px] mx-auto">
+      <div className="p-6 space-y-6 max-w-[1600px] mx-auto overflow-x-hidden">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -113,7 +113,7 @@ export default function HedgePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-white/10 dark:border-white/10 rounded-2xl p-6"
+          className="bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-white/10 dark:border-white/10 rounded-2xl p-6 w-full max-w-full box-border overflow-hidden"
         >
           <div className="flex items-center justify-between mb-4 min-w-0">
             <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Proteção Soja</h3>
@@ -122,11 +122,11 @@ export default function HedgePage() {
             <div className="space-y-3">
             <div className="flex items-center justify-between min-w-0">
               <span className="text-neutral-600 dark:text-gray-400">Produção Total</span>
-              <span className="text-neutral-900 dark:text-white font-bold whitespace-nowrap">{formatarNumero(producao.producaoTotal)} sc</span>
+              <span className="text-neutral-900 dark:text-white font-bold break-words md:whitespace-nowrap">{formatarNumero(producao.producaoTotal)} sc</span>
             </div>
             <div className="flex items-center justify-between min-w-0">
               <span className="text-neutral-600 dark:text-gray-400">Hedge Atual</span>
-              <span className="text-brand-400 font-bold whitespace-nowrap">
+              <span className="text-brand-400 font-bold break-words md:whitespace-nowrap">
                 {formatarNumero(mockHedgeData.producaoEstimada.soja.hedgeAtual)} sc
               </span>
             </div>
@@ -149,7 +149,7 @@ export default function HedgePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6"
+          className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6 w-full max-w-full box-border overflow-hidden"
         >
           <div className="flex items-center justify-between mb-4 min-w-0">
             <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Proteção Milho</h3>
@@ -158,13 +158,13 @@ export default function HedgePage() {
           <div className="space-y-3">
             <div className="flex items-center justify-between min-w-0">
               <span className="text-neutral-600 dark:text-gray-400">Produção Total</span>
-              <span className="text-neutral-900 dark:text-white font-bold whitespace-nowrap">
+              <span className="text-neutral-900 dark:text-white font-bold break-words md:whitespace-nowrap">
                 {formatarNumero(mockHedgeData.producaoEstimada.milho.producaoTotal)} sc
               </span>
             </div>
             <div className="flex items-center justify-between min-w-0">
               <span className="text-neutral-600 dark:text-gray-400">Hedge Atual</span>
-              <span className="text-brand-400 font-bold whitespace-nowrap">
+              <span className="text-brand-400 font-bold break-words md:whitespace-nowrap">
                 {formatarNumero(mockHedgeData.producaoEstimada.milho.hedgeAtual)} sc
               </span>
             </div>
@@ -189,7 +189,7 @@ export default function HedgePage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6"
+        className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6 w-full max-w-full box-border overflow-hidden"
       >
         <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6 flex items-center gap-2">
           <Zap className="w-6 h-6 text-brand-400" />
@@ -351,7 +351,7 @@ export default function HedgePage() {
           {mockHedgeData.recomendacoes.map((rec) => (
             <div
               key={rec.id}
-              className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6 hover:bg-neutral-100 dark:hover:bg-white/10 transition-all"
+              className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6 hover:bg-neutral-100 dark:hover:bg-white/10 transition-all w-full max-w-full box-border overflow-hidden"
             >
               <div className="flex items-start justify-between mb-4 min-w-0">
                 <div className="flex-1 min-w-0">
@@ -384,9 +384,9 @@ export default function HedgePage() {
                     <p className="font-bold text-brand-400 break-words">{formatarMoeda(rec.impactoFinanceiro)}</p>
                   </div>
                 </div>
-                <button className="w-full md:w-auto px-4 py-2 bg-gradient-to-r from-brand-600 to-green-600 hover:from-brand-500 hover:to-green-500 rounded-xl text-neutral-900 dark:text-white font-medium transition-all flex items-center justify-center gap-2">
+                <button className="w-full md:w-auto max-w-full box-border px-4 py-2 bg-gradient-to-r from-brand-600 to-green-600 hover:from-brand-500 hover:to-green-500 rounded-xl text-neutral-900 dark:text-white font-medium transition-all flex items-center justify-center gap-2 overflow-hidden">
                   <span className="truncate">{rec.acaoSugerida}</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 flex-shrink-0" />
                 </button>
               </div>
             </div>
