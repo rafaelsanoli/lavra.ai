@@ -161,6 +161,36 @@
     @apply focus:ring-2 focus:ring-brand-900/10 dark:focus:ring-brand-400/20;
   }
 
+  /* Selects (global) - ensure dropdown and options follow theme */
+  select {
+    background-color: rgb(var(--color-surface));
+    color: rgb(var(--color-text-primary));
+    border-color: rgb(var(--color-border));
+  }
+
+  select:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(var(--color-brand), 0.08);
+  }
+
+  /* Try to style native option lists; some UAs limit styling but these help in most browsers */
+  option {
+    background-color: rgb(var(--color-surface)) !important;
+    color: rgb(var(--color-text-primary)) !important;
+  }
+
+  /* Dark-mode explicit (for UAs that don't inherit) */
+  .dark select {
+    background-color: rgb(var(--color-surface));
+    color: rgb(var(--color-text-primary));
+    border-color: rgb(var(--color-border));
+  }
+
+  .dark option {
+    background-color: rgb(var(--color-surface)) !important;
+    color: rgb(var(--color-text-primary)) !important;
+  }
+
   /* Badge */
   .badge {
     @apply inline-flex items-center px-2.5 py-0.5;
