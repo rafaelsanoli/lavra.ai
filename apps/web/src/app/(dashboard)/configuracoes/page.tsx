@@ -20,31 +20,33 @@ export default function ConfiguracoesPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6 space-y-6">
+      <div className="p-4 md:p-6 space-y-4 md:space-y-6 overflow-x-hidden">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold text-neutral-900 dark:text-white">Configurações</h1>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-1">
+          <h1 className="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-white">Configurações</h1>
+          <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 mt-1">
             Gerencie suas preferências e configurações da conta
           </p>
         </div>
 
         {/* Navegação por Abas */}
-        <div className="flex gap-2 border-b border-neutral-200 dark:border-neutral-800">
-          {abas.map((aba) => (
-            <button
-              key={aba.id}
-              onClick={() => setAbaAtiva(aba.id as typeof abaAtiva)}
-              className={`flex items-center gap-2 px-4 py-3 font-medium transition-colors border-b-2 ${
-                abaAtiva === aba.id
-                  ? 'border-brand-600 text-brand-600'
-                  : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
-              }`}
-            >
-              {aba.icone}
-              {aba.nome}
-            </button>
-          ))}
+        <div className="-mx-4 md:mx-0 px-4 md:px-0 overflow-x-auto">
+          <div className="flex gap-2 border-b border-neutral-200 dark:border-neutral-800 min-w-max">
+            {abas.map((aba) => (
+              <button
+                key={aba.id}
+                onClick={() => setAbaAtiva(aba.id as typeof abaAtiva)}
+                className={`flex items-center gap-2 px-3 md:px-4 py-2.5 md:py-3 font-medium transition-colors border-b-2 whitespace-nowrap text-sm md:text-base ${
+                  abaAtiva === aba.id
+                    ? 'border-brand-600 text-brand-600'
+                    : 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                }`}
+              >
+                {aba.icone}
+                {aba.nome}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Conteúdo das Abas */}
@@ -52,12 +54,12 @@ export default function ConfiguracoesPage() {
           {/* Perfil */}
           {abaAtiva === 'perfil' && (
             <div className="space-y-6">
-              <div className="p-6 rounded-xl bg-white dark:bg-[#1A1A1A] border border-neutral-200 dark:border-neutral-800">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">
+              <div className="p-4 md:p-6 rounded-xl bg-white dark:bg-[#1A1A1A] border border-neutral-200 dark:border-neutral-800">
+                <h3 className="text-base md:text-lg font-semibold text-neutral-900 dark:text-white mb-4">
                   Informações Pessoais
                 </h3>
                 <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                         Nome Completo
@@ -65,7 +67,7 @@ export default function ConfiguracoesPage() {
                       <input
                         type="text"
                         defaultValue={usuario?.nome}
-                        className="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white"
+                        className="w-full px-3 md:px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white text-sm md:text-base"
                       />
                     </div>
                     <div>
@@ -75,7 +77,7 @@ export default function ConfiguracoesPage() {
                       <input
                         type="email"
                         defaultValue={usuario?.email}
-                        className="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white"
+                        className="w-full px-3 md:px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white text-sm md:text-base"
                       />
                     </div>
                   </div>
@@ -87,7 +89,7 @@ export default function ConfiguracoesPage() {
                     <input
                       type="tel"
                       placeholder="(00) 00000-0000"
-                      className="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white"
+                      className="w-full px-3 md:px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white text-sm md:text-base"
                     />
                   </div>
 
@@ -98,7 +100,7 @@ export default function ConfiguracoesPage() {
                     <textarea
                       rows={4}
                       placeholder="Conte um pouco sobre você..."
-                      className="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white"
+                      className="w-full px-3 md:px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white text-sm md:text-base"
                     />
                   </div>
                 </div>
@@ -111,17 +113,17 @@ export default function ConfiguracoesPage() {
                 </div>
               </div>
 
-              <div className="p-6 rounded-xl bg-white dark:bg-[#1A1A1A] border border-neutral-200 dark:border-neutral-800">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">
+              <div className="p-4 md:p-6 rounded-xl bg-white dark:bg-[#1A1A1A] border border-neutral-200 dark:border-neutral-800">
+                <h3 className="text-base md:text-lg font-semibold text-neutral-900 dark:text-white mb-4">
                   Localização
                 </h3>
                 <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                         Estado
                       </label>
-                      <select className="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white">
+                      <select className="w-full px-3 md:px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white text-sm md:text-base">
                         <option>Paraná</option>
                         <option>São Paulo</option>
                         <option>Rio Grande do Sul</option>
@@ -135,7 +137,7 @@ export default function ConfiguracoesPage() {
                       <input
                         type="text"
                         placeholder="Sua cidade"
-                        className="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white"
+                        className="w-full px-3 md:px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white text-sm md:text-base"
                       />
                     </div>
                   </div>
