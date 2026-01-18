@@ -64,7 +64,7 @@ export default function SegurosPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6 space-y-6 max-w-[1600px] mx-auto">
+      <div className="p-6 space-y-6 max-w-[1600px] mx-auto overflow-x-hidden">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -100,10 +100,10 @@ export default function SegurosPage() {
           transition={{ delay: 0.1 }}
           className="bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-white/10 dark:border-white/10 rounded-2xl p-6 w-full max-w-full box-border overflow-hidden"
         >
-          <div className="flex items-center justify-between">
-            <div>
+          <div className="flex items-center justify-between min-w-0">
+            <div className="min-w-0">
               <p className="text-neutral-600 dark:text-gray-400 text-sm">Cobertura Total</p>
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mt-1">
+              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mt-1 break-words">
                 {formatarMoeda(mockSegurosData.estatisticas.coberturaTotal)}
               </h3>
             </div>
@@ -123,10 +123,10 @@ export default function SegurosPage() {
           transition={{ delay: 0.2 }}
           className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6 w-full max-w-full box-border overflow-hidden"
         >
-          <div className="flex items-center justify-between">
-            <div>
+          <div className="flex items-center justify-between min-w-0">
+            <div className="min-w-0">
               <p className="text-neutral-600 dark:text-gray-400 text-sm">Prêmio Total</p>
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mt-1">
+              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mt-1 break-words">
                 {formatarMoeda(mockSegurosData.estatisticas.premioTotal)}
               </h3>
             </div>
@@ -147,10 +147,10 @@ export default function SegurosPage() {
           transition={{ delay: 0.3 }}
           className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6 w-full max-w-full box-border overflow-hidden"
         >
-          <div className="flex items-center justify-between">
-            <div>
+          <div className="flex items-center justify-between min-w-0">
+            <div className="min-w-0">
               <p className="text-neutral-600 dark:text-gray-400 text-sm">Taxa de Sinistralidade</p>
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mt-1">
+              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mt-1 break-words">
                 {mockSegurosData.estatisticas.taxaSinistralidade}%
               </h3>
             </div>
@@ -170,10 +170,10 @@ export default function SegurosPage() {
           transition={{ delay: 0.4 }}
           className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6 w-full max-w-full box-border overflow-hidden"
         >
-          <div className="flex items-center justify-between">
-            <div>
+          <div className="flex items-center justify-between min-w-0">
+            <div className="min-w-0">
               <p className="text-neutral-600 dark:text-gray-400 text-sm">Economia Fiscal</p>
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mt-1">
+              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mt-1 break-words">
                 {formatarMoeda(mockSegurosData.estatisticas.economiaFiscal)}
               </h3>
             </div>
@@ -227,8 +227,8 @@ export default function SegurosPage() {
               >
                   <div className="flex items-start justify-between mb-4 min-w-0">
                     <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white">{apolice.seguradora}</h3>
+                    <div className="flex items-center gap-3 mb-2 min-w-0">
+                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white truncate">{apolice.seguradora}</h3>
                       <span className={`px-3 py-1 rounded-lg text-xs font-medium border ${getStatusColor(apolice.status)}`}>
                         {apolice.status.toUpperCase()}
                       </span>
@@ -249,11 +249,11 @@ export default function SegurosPage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                   <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Cobertura</p>
-                    <p className="text-lg font-bold text-neutral-900 dark:text-white">{formatarMoeda(apolice.cobertura)}</p>
+                    <p className="text-lg font-bold text-neutral-900 dark:text-white break-words">{formatarMoeda(apolice.cobertura)}</p>
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Prêmio</p>
-                    <p className="text-lg font-bold text-brand-400">{formatarMoeda(apolice.premio)}</p>
+                    <p className="text-lg font-bold text-brand-400 break-words">{formatarMoeda(apolice.premio)}</p>
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Vigência</p>
@@ -312,8 +312,8 @@ export default function SegurosPage() {
               >
                   <div className="flex items-start justify-between mb-4 min-w-0">
                     <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white">{cotacao.seguradora}</h3>
+                    <div className="flex items-center gap-3 mb-2 min-w-0">
+                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white truncate">{cotacao.seguradora}</h3>
                       <span className={`px-3 py-1 rounded-lg text-xs font-medium border ${getStatusColor(cotacao.status)}`}>
                         {cotacao.status.replace('_', ' ').toUpperCase()}
                       </span>
@@ -331,11 +331,11 @@ export default function SegurosPage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                   <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Cobertura Proposta</p>
-                    <p className="text-lg font-bold text-neutral-900 dark:text-white">{formatarMoeda(cotacao.cobertura)}</p>
+                    <p className="text-lg font-bold text-neutral-900 dark:text-white break-words">{formatarMoeda(cotacao.cobertura)}</p>
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Prêmio Estimado</p>
-                    <p className="text-lg font-bold text-brand-400">{formatarMoeda(cotacao.premioEstimado)}</p>
+                    <p className="text-lg font-bold text-brand-400 break-words">{formatarMoeda(cotacao.premioEstimado)}</p>
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Vigência</p>
