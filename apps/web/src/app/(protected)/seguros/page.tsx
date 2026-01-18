@@ -98,16 +98,16 @@ export default function SegurosPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-white/10 dark:border-white/10 rounded-2xl p-6 w-full max-w-full box-border overflow-hidden"
+          className="bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-white/10 dark:border-white/10 rounded-2xl p-4 md:p-6 w-full max-w-full box-border overflow-hidden"
         >
-          <div className="flex items-center justify-between min-w-0">
-            <div className="min-w-0">
+          <div className="flex items-center justify-between min-w-0 gap-2">
+            <div className="min-w-0 flex-1">
               <p className="text-neutral-600 dark:text-gray-400 text-sm">Cobertura Total</p>
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mt-1 break-words">
+              <h3 className="text-lg md:text-2xl font-bold text-neutral-900 dark:text-white mt-1 break-words">
                 {formatarMoeda(mockSegurosData.estatisticas.coberturaTotal)}
               </h3>
             </div>
-            <div className="bg-brand-500/20 p-3 rounded-xl">
+            <div className="bg-brand-500/20 p-3 rounded-xl flex-shrink-0">
               <Shield className="w-6 h-6 text-brand-400" />
             </div>
           </div>
@@ -121,16 +121,16 @@ export default function SegurosPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6 w-full max-w-full box-border overflow-hidden"
+          className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-4 md:p-6 w-full max-w-full box-border overflow-hidden"
         >
-          <div className="flex items-center justify-between min-w-0">
-            <div className="min-w-0">
+          <div className="flex items-center justify-between min-w-0 gap-2">
+            <div className="min-w-0 flex-1">
               <p className="text-neutral-600 dark:text-gray-400 text-sm">Prêmio Total</p>
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mt-1 break-words">
+              <h3 className="text-lg md:text-2xl font-bold text-neutral-900 dark:text-white mt-1 break-words">
                 {formatarMoeda(mockSegurosData.estatisticas.premioTotal)}
               </h3>
             </div>
-            <div className="bg-purple-500/20 p-3 rounded-xl">
+            <div className="bg-purple-500/20 p-3 rounded-xl flex-shrink-0">
               <DollarSign className="w-6 h-6 text-purple-400" />
             </div>
           </div>
@@ -145,16 +145,16 @@ export default function SegurosPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6 w-full max-w-full box-border overflow-hidden"
+          className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-4 md:p-6 w-full max-w-full box-border overflow-hidden"
         >
-          <div className="flex items-center justify-between min-w-0">
-            <div className="min-w-0">
+          <div className="flex items-center justify-between min-w-0 gap-2">
+            <div className="min-w-0 flex-1">
               <p className="text-neutral-600 dark:text-gray-400 text-sm">Taxa de Sinistralidade</p>
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mt-1 break-words">
+              <h3 className="text-lg md:text-2xl font-bold text-neutral-900 dark:text-white mt-1 break-words">
                 {mockSegurosData.estatisticas.taxaSinistralidade}%
               </h3>
             </div>
-            <div className="bg-yellow-500/20 p-3 rounded-xl">
+            <div className="bg-yellow-500/20 p-3 rounded-xl flex-shrink-0">
               <BarChart3 className="w-6 h-6 text-yellow-400" />
             </div>
           </div>
@@ -168,16 +168,16 @@ export default function SegurosPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-6 w-full max-w-full box-border overflow-hidden"
+          className="bg-white dark:bg-white/5 backdrop-blur-xl border border-neutral-200 dark:border-white/10 rounded-2xl p-4 md:p-6 w-full max-w-full box-border overflow-hidden"
         >
-          <div className="flex items-center justify-between min-w-0">
-            <div className="min-w-0">
+          <div className="flex items-center justify-between min-w-0 gap-2">
+            <div className="min-w-0 flex-1">
               <p className="text-neutral-600 dark:text-gray-400 text-sm">Economia Fiscal</p>
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mt-1 break-words">
+              <h3 className="text-lg md:text-2xl font-bold text-neutral-900 dark:text-white mt-1 break-words">
                 {formatarMoeda(mockSegurosData.estatisticas.economiaFiscal)}
               </h3>
             </div>
-            <div className="bg-green-500/20 p-3 rounded-xl">
+            <div className="bg-green-500/20 p-3 rounded-xl flex-shrink-0">
               <TrendingUp className="w-6 h-6 text-green-400" />
             </div>
           </div>
@@ -249,11 +249,11 @@ export default function SegurosPage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                   <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Cobertura</p>
-                    <p className="text-lg font-bold text-neutral-900 dark:text-white break-words">{formatarMoeda(apolice.cobertura)}</p>
+                    <p className="text-base md:text-lg font-bold text-neutral-900 dark:text-white break-words">{formatarMoeda(apolice.cobertura)}</p>
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Prêmio</p>
-                    <p className="text-lg font-bold text-brand-400 break-words">{formatarMoeda(apolice.premio)}</p>
+                    <p className="text-base md:text-lg font-bold text-brand-400 break-words">{formatarMoeda(apolice.premio)}</p>
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Vigência</p>
@@ -331,11 +331,11 @@ export default function SegurosPage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                   <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Cobertura Proposta</p>
-                    <p className="text-lg font-bold text-neutral-900 dark:text-white break-words">{formatarMoeda(cotacao.cobertura)}</p>
+                    <p className="text-base md:text-lg font-bold text-neutral-900 dark:text-white break-words">{formatarMoeda(cotacao.cobertura)}</p>
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Prêmio Estimado</p>
-                    <p className="text-lg font-bold text-brand-400 break-words">{formatarMoeda(cotacao.premioEstimado)}</p>
+                    <p className="text-base md:text-lg font-bold text-brand-400 break-words">{formatarMoeda(cotacao.premioEstimado)}</p>
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm text-neutral-600 dark:text-gray-400">Vigência</p>
