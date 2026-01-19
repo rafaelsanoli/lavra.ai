@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { useTema } from '@/hooks/useTema'
 
 interface LogoProps {
   className?: string
@@ -10,22 +11,28 @@ interface LogoProps {
 }
 
 export function Logo({ className, tamanho = 'md', apenasIcone = false }: LogoProps) {
+  const { tema } = useTema()
+  
   const tamanhos = {
     sm: { icone: 32, texto: 'text-lg' },
     md: { icone: 40, texto: 'text-xl' },
     lg: { icone: 52, texto: 'text-2xl' },
   }
 
+  // Seleciona a logo baseada no tema atual
+  const logoSrc = tema === 'dark' ? '/logo-dark.png' : '/logo-light.png'
+
   return (
     <div className={cn('flex items-center gap-2.5', className)}>
-      {/* Logo PNG com estilo */}
+      {/* Logo PNG adaptativa ao tema */}
       <div className="relative">
         <Image 
-          src="/logo.png" 
-          alt="Lavra.ia" 
+          src={logoSrc} 
+          alt="Lavra" 
           width={tamanhos[tamanho].icone} 
           height={tamanhos[tamanho].icone}
-          className="object-contain rounded-xl"
+          className="object-contain"
+          priority
         />
       </div>
       
