@@ -8,10 +8,88 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### 🚀 Em Desenvolvimento
+- Simulations module
+- WebSockets (Socket.io)
+- Bull queues para jobs assíncronos
+- Microserviços Go
+- Machine Learning (Python/FastAPI)
 - Testes E2E
-- Swagger/OpenAPI documentation
-- WebSockets para alertas em tempo real
-- Deploy em produção
+
+---
+
+## [0.8.0] - 2026-01-29
+
+### ✨ Adicionado
+
+#### 📦 **Módulo Transactions Completo**
+- **Service** (`TransactionsService`):
+  - CRUD completo com 5 operações básicas
+  - Operações analytics:
+    * `getSummary()` - Agreg por tipo e commodity (totalQuantity, totalValue, avgPrice, count)
+    * `getBalance()` - Saldo de estoque (purchases - sales)
+    * `getProfitLoss()` - Análise financeira (revenue, cost, profit, margin)
+  - Filtros avançados:
+    * Por tipo (SALE, PURCHASE, HEDGE, OPTION)
+    * Por commodity
+    * Por período (startDate, endDate)
+  - Cálculos automáticos:
+    * Average price = totalValue / totalQuantity
+    * Balance = purchases - sales
+    * Profit margin = ((revenue - cost) / revenue) * 100
+  
+- **Resolver** (`TransactionsResolver`):
+  - 6 operações GraphQL:
+    * Básicas: `createTransaction`, `transactions` (list), `transaction`, `updateTransaction`, `removeTransaction`
+    * Analytics: `transactionsSummary`
+  - Filtros: tipo, commodity, período
+  - Proteção com `JwtAuthGuard`
+
+- **DTOs**:
+  - `CreateTransactionInput` (type, commodity, quantity, price, totalValue, executedAt, notes?)
+  - `UpdateTransactionInput` (price?, totalValue?, notes?)
+  - Enum `TransactionType`: SALE, PURCHASE, HEDGE, OPTION
+  - Validações:
+    * Quantity/price: mínimo 0
+    * Commodity: máximo 100 caracteres
+    * Notes: máximo 500 caracteres
+
+- **Entities**:
+  - `Transaction` - Transação completa
+  - `TransactionSummary` - Agregação (type, commodity, totalQuantity, totalValue, avgPrice, count)
+
+- **Testes** (`transactions.service.spec.ts`):
+  - ✅ 23 testes unitários passando (100% cobertura)
+  - Cenários completos:
+    - Criação (2 casos - basic/auto-calc)
+    - Listagem e filtros (4 casos - all/tipo/commodity/período)
+    - Busca individual (2 casos)
+    - Atualização (3 casos - basic/recalc/not-found)
+    - Remoção (2 casos)
+    - getSummary (3 casos - grouping/avgPrice/filter)
+    - getBalance (2 casos - calc/filter)
+    - getProfitLoss (4 casos - calc/margin/period/zero-revenue)
+
+### 📊 **Estatísticas do Release**
+- **Arquivos criados**: 7 (Service, Resolver, DTOs, Entity, Tests, Module)
+- **Linhas de código**: ~1100 linhas
+- **Testes**: 23/23 passando (100% cobertura)
+- **Total de testes acumulados**: 138 (Plots: 18, Plantings: 21, Harvests: 17, ClimateData: 17, Alerts: 20, MarketPrices: 22, Transactions: 23)
+- **Operações GraphQL**: 6 (5 básicas + 1 analytics)
+- **Tempo de desenvolvimento**: ~45 minutos
+
+### 🎯 **Funcionalidades de Analytics**
+- **Summary**: Agregação multi-dimensional (tipo × commodity)
+- **Balance**: Controle de estoque em tempo real
+- **P&L**: Análise de rentabilidade com margem percentual
+- **Filtros**: Multi-dimensional (tipo + commodity + período)
+
+### 📄 **Documentação**
+- **Novo arquivo:** `docs/BACKEND-TODO.md`
+  - Checklist completo de desenvolvimento
+  - 5 fases: NestJS, Go, ML, Infraestrutura, Testes
+  - 6 sprints de 7 dias
+  - Critérios de conclusão
+  - Progresso: 35% → 40% completo
 
 ---
 
