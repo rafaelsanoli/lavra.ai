@@ -1,0 +1,8 @@
+export { HeroSection } from './HeroSection'
+export { FeaturesSection } from './FeaturesSection'
+export { PricingSection } from './PricingSection'
+export { WaitlistSection } from './WaitlistSection'
+export { FaqSection } from './FaqSection'
+export { HowItWorksSection } from './HowItWorksSection'
+export { AiChatMockup } from './AiChatMockup'
+export { LogoCloud } from './LogoCloud'

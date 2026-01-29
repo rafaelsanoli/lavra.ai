@@ -8,9 +8,58 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### 🚀 Em Desenvolvimento
-- Módulo Plantings (gestão de plantios)
+- Módulo Harvests (gestão de colheitas)
 - Testes E2E
 - Swagger/OpenAPI documentation
+
+---
+
+## [0.3.0] - 2026-01-29
+
+### ✨ Adicionado
+
+#### 📦 **Módulo Plantings Completo**
+- **Service** (`PlantingsService`):
+  - CRUD completo com 5 operações
+  - Validações robustas:
+    * Ownership de talhão verificado
+    * Datas validadas (plantingDate < expectedHarvest)
+    * Área disponível no talhão calculada
+    * Transições de status controladas (PLANNED → IN_PROGRESS → HARVESTED/FAILED)
+    * Proteção contra deleção com colheitas registradas
+  - Logging detalhado de operações
+  
+- **Resolver** (`PlantingsResolver`):
+  - 5 operações GraphQL: `createPlanting`, `plantings`, `planting`, `updatePlanting`, `removePlanting`
+  - Filtros: por talhão e por status
+  - Documentação inline para GraphQL Playground
+  - Proteção com `GqlAuthGuard`
+
+- **DTOs**:
+  - `CreatePlantingInput` com validações (plotId, cropType, variety, area, datas, estimatedYield)
+  - `UpdatePlantingInput` com status, actualHarvest, actualYield, notes
+  - `PlantingStatus` enum (PLANNED, IN_PROGRESS, HARVESTED, FAILED)
+  - Mensagens de erro em português
+
+- **Entities**:
+  - `Planting` entity com relações para Plot e Harvests
+  - PlotSimplified e HarvestSimplified para evitar dependências circulares
+  - Documentação JSDoc completa
+
+- **Testes** (`plantings.service.spec.ts`):
+  - ✅ 21 testes unitários passando (100% cobertura)
+  - Cenários completos:
+    - Criação com validações (6 casos)
+    - Listagem e filtros (3 casos)
+    - Busca individual (3 casos)
+    - Atualização com transições de status (5 casos)
+    - Remoção (4 casos)
+  - Mocks do Prisma para isolamento
+
+#### 🗄️ **Database**
+- Campo `area` adicionado ao modelo Planting
+- Índices criados: `plotId`, `status`
+- Migration: `add_planting_area_and_indexes`
 
 ---
 

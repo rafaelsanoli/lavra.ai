@@ -1,0 +1,1 @@
+export { MapaInterativo } from './MapaInterativo'

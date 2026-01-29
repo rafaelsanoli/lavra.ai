@@ -135,6 +135,7 @@ model Planting {
   plotId          String
   cropType        String         // soja, milho, cafe, etc
   variety         String?
+  area            Float          // area plantada em hectares
   plantingDate    DateTime
   expectedHarvest DateTime
   actualHarvest   DateTime?
@@ -150,6 +151,8 @@ model Planting {
   harvests     Harvest[]
   climateData  ClimateData[]
 
+  @@index([plotId])
+  @@index([status])
   @@map("plantings")
 }
 

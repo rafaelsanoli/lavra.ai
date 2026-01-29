@@ -1,116 +1,143 @@
-<div align="center">
-  
-<br>
+# 🌱 LAVRA.IA - Inteligência que cultiva lucro
 
-<img src="./apps/web/public/logo.png" alt="Lavra.ia" height="120">
-
-<br>
-<br>
-
-# Inteligência que cultiva lucro
-
-### A primeira plataforma de IA preditiva para o agronegócio brasileiro
-
-<br>
-
-[🌐 Acesse o Site](https://lavra.com.br) · [📧 Contato](mailto:contato@lavra.com.br) · [🚀 Lista de Espera](https://lavra.com.br/#waitlist)
-
-<br>
+> Plataforma de Inteligência Preditiva para Gestão de Risco Climático e Financeiro Integrado no agronegócio brasileiro
 
 ---
 
-<br>
+## 📋 Sobre o Projeto
 
-</div>
+Lavra.ia é uma plataforma SaaS que conecta dados climáticos, mercado e operações da fazenda em **decisões financeiras acionáveis**, eliminando a fragmentação que custa milhões aos produtores rurais.
 
-## 🌱 Sobre a Lavra.ia
+### 💡 Proposta de Valor Única
 
-Somos uma **AgTech brasileira** desenvolvendo inteligência artificial que conecta **clima**, **mercado** e **sua fazenda** em uma única plataforma preditiva.
-
-> **Tome decisões de milhões com confiança.**
-
-O produtor rural brasileiro toma decisões que envolvem milhões de reais baseado em informações fragmentadas e intuição. A Lavra.ia muda isso.
-
-<br>
-
-## 💡 O Problema
-
-| 🧠 Hoje | 🚀 Com Lavra.ia |
-|---------|-----------------|
-| Decisões baseadas em intuição | **Previsões de IA com 94% de precisão** |
-| Informações climáticas genéricas | **Dados hiper-localizados da sua fazenda** |
-| Perda de timing de venda | **Alertas de janela ideal em tempo real** |
-| Planilhas e WhatsApp | **Dashboard centralizado e inteligente** |
-
-<br>
-
-## 📊 Resultados
-
-<div align="center">
-
-| +30% | 15 dias | 94% |
-|:----:|:-------:|:---:|
-| Aumento no lucro | Previsão antecipada | Precisão climática |
-
-</div>
-
-<br>
-
-## ✨ Como funciona
-
-**1. Conecte sua fazenda** → Cadastre suas propriedades e culturas
-
-**2. IA analisa em tempo real** → Cruzamos dados de clima, mercado e solo
-
-**3. Receba previsões** → Saiba o melhor momento para plantar, manejar e vender
-
-**4. Maximize seus lucros** → Decisões baseadas em dados, não em sorte
-
-<br>
-
-## 🎯 Para quem é
-
-- 🌾 **Produtores rurais** que querem maximizar rentabilidade
-- 🏢 **Cooperativas** buscando inteligência para seus associados  
-- 📈 **Tradings** que precisam de previsões de safra confiáveis
-- 🏦 **Instituições financeiras** que financiam o agro
-
-<br>
-
-## 🛣️ Roadmap
-
-- [x] 🚀 **2025** — Landing page e lista de espera
-- [ ] 📱 **Q1 2026** — Lançamento do MVP
-- [ ] 🌍 **Q2 2026** — Expansão para principais regiões produtoras
-- [ ] 🤖 **Q3 2026** — IA generativa para insights personalizados
-- [ ] 🌎 **2027** — Expansão LATAM
-
-<br>
-
-## 📬 Entre na Lista de Espera
-
-Seja um dos primeiros a ter acesso à plataforma que vai revolucionar a tomada de decisão no agro brasileiro.
-
-<div align="center">
-
-### [🚀 Quero Acesso Antecipado](https://lavra.com.br)
-
-</div>
-
-<br>
+> "Transformamos dados climáticos, agronômicos e de mercado em DECISÕES FINANCEIRAS ACIONÁVEIS com valor monetário calculado."
 
 ---
 
-<div align="center">
+## 📁 Estrutura do Repositório
 
-**Lavra.ia** — Inteligência que cultiva lucro 🌱
+```
+lavra.ai/
+├── apps/
+│   ├── web/                 # Frontend PRODUCTION (em desenvolvimento)
+│   ├── demo-web/            # Frontend MOCKADO (demonstração)
+│   └── api/                 # Backend API (NestJS) - PLANEJADO
+├── services/                # Microserviços Go - PLANEJADO
+├── ml/                      # Machine Learning Python - PLANEJADO
+├── packages/                # Código compartilhado
+├── infra/                   # Infraestrutura (Docker, K8s, Terraform)
+└── docs/                    # 📚 Documentação completa
+```
 
-<br>
+---
 
-[Website](https://lavra.com.br) · [LinkedIn](https://linkedin.com/company/lavra-ai) · [Twitter](https://twitter.com/lavra_ai)
+## 🎯 Status Atual
 
-<br>
+### ✅ Concluído
+- [x] Frontend completo e mockado (apps/demo-web)
+- [x] Documentação completa do produto
+- [x] Planejamento técnico do backend
+- [x] Estrutura de pastas criada
 
-<sub>Feito com 💚 no Brasil para o agronegócio que alimenta o mundo</sub>
+### 🚧 Em Desenvolvimento
+- [ ] Backend NestJS
+- [ ] Microserviços Go
+- [ ] Modelos de ML
+- [ ] Infraestrutura AWS
 
-</div>
+---
+
+## 📚 Documentação Principal
+
+| Documento | Descrição |
+|-----------|-----------|
+| [PLANO-BACKEND.md](docs/PLANO-BACKEND.md) | ⭐ **Roadmap completo de 12 meses** |
+| [ARQUITETURA-BACKEND.md](docs/ARQUITETURA-BACKEND.md) | Especificações técnicas detalhadas |
+| [PRODUTO.md](docs/PRODUTO.md) | Visão do produto e funcionalidades |
+| [STARTUP.md](docs/STARTUP.md) | Modelo de negócio e Go-to-Market |
+| [FRONTEND-COMPLETO.md](docs/FRONTEND-COMPLETO.md) | Documentação do frontend |
+
+---
+
+## 🚀 Quick Start
+
+### Frontend Demo (Mockado)
+```bash
+cd apps/demo-web
+npm install
+npm run dev
+# Acesse http://localhost:3000
+```
+
+### Backend (Quando estiver pronto)
+Consultar [PLANO-BACKEND.md](docs/PLANO-BACKEND.md)
+
+---
+
+## 💰 Modelo de Negócio
+
+### Pricing
+
+| Plano | Área | Preço/Mês |
+|-------|------|-----------|
+| Produtor | até 1.000 ha | R$ 1.200 |
+| Enterprise | 1.000-5.000 ha | R$ 3.500 |
+| Corporativo | 5.000+ ha | R$ 8.000+ |
+
+### Projeções
+
+| Ano | Clientes | MRR | ARR |
+|-----|----------|-----|-----|
+| 1 | 50 | R$ 100K | R$ 1.2M |
+| 2 | 200 | R$ 500K | R$ 6M |
+| 3 | 500 | R$ 1.5M | R$ 18M |
+
+---
+
+## 🏗️ Stack
+
+**Frontend:** Next.js 14, TypeScript, Tailwind CSS, Zustand  
+**Backend:** NestJS, GraphQL, PostgreSQL, Redis  
+**Microserviços:** Go, gRPC, TimescaleDB  
+**ML/AI:** Python, PyTorch, FastAPI, OpenAI  
+**Infra:** AWS/GCP, Docker, Kubernetes, Terraform  
+
+---
+
+## 📅 Roadmap
+
+| Marco | Data | Descrição |
+|-------|------|-----------|
+| ✅ Frontend Demo | Jan 2026 | Completo |
+| ✅ Planejamento | Jan 2026 | Completo |
+| 🎯 MVP | Mai 2026 | 5 beta users |
+| 🚀 V1.0 | Jul 2026 | 25 clientes |
+| 📈 Scale | Jan 2027 | 100+ clientes |
+
+---
+
+## 👥 Equipe Necessária (MVP)
+
+- 1x Tech Lead
+- 2x Backend (NestJS)
+- 2x Backend (Go)
+- 1x ML Engineer
+- 1x Frontend Developer
+- 1x DevOps
+- 0.5x Product Manager
+
+**Total:** 7.5 pessoas por 4 meses
+
+---
+
+## 📞 Contato
+
+**Produto:** produto@lavra.ai  
+**Técnico:** tech@lavra.ai  
+**Comercial:** comercial@lavra.ai
+
+---
+
+**🌱 Inteligência que cultiva lucro**
+
+Copyright © 2026 Lavra.ia. Todos os direitos reservados.
