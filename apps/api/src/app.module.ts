@@ -15,6 +15,8 @@ import { HarvestsModule } from './modules/harvests/harvests.module';
 import { ClimateDataModule } from './modules/climate-data/climate-data.module';
 import { AlertsModule } from './modules/alerts/alerts.module';
 import { MarketPricesModule } from './modules/market-prices/market-prices.module';
+import { TransactionsModule } from './modules/transactions/transactions.module';
+import { SimulationsModule } from './modules/simulations/simulations.module';
 
 @Module({
   imports: [
@@ -46,6 +48,8 @@ import { MarketPricesModule } from './modules/market-prices/market-prices.module
     ClimateDataModule,
     AlertsModule,
     MarketPricesModule,
+    TransactionsModule,
+    SimulationsModule,
   ],
 })
 export class AppModule {}
