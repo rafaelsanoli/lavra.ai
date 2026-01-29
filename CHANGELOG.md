@@ -14,6 +14,91 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [0.5.0] - 2026-01-29
+
+### ✨ Adicionado
+
+#### 📦 **Módulo ClimateData Completo**
+- **Service** (`ClimateDataService`):
+  - CRUD completo com 5 operações básicas
+  - Integração com API OpenWeather:
+    * `fetchFromOpenWeather()` busca dados em tempo real
+    * Utiliza coordenadas da fazenda (latitude/longitude)
+    * Suporta temperatura, umidade, precipitação, vento
+  - Estatísticas climáticas:
+    * `getStatistics()` calcula médias e totais por período
+    * Temperatura média, umidade média, precipitação total, vento médio
+  - Filtros avançados:
+    * Por fazenda (farmId)
+    * Por período (startDate, endDate)
+  - Validações robustas:
+    * Ownership de fazenda verificado
+    * Ranges de valores validados (temp: -50 a 60°C, humidity: 0-100%)
+  - Logging detalhado de operações
+  
+- **Resolver** (`ClimateDataResolver`):
+  - 6 operações GraphQL:
+    * `createClimateData`, `climateData` (list), `climateDataItem`
+    * `updateClimateData`, `removeClimateData`
+    * `fetchWeatherData` (busca dados externos)
+  - Filtros: por fazenda e período de datas
+  - Documentação inline para GraphQL Playground
+  - Proteção com `JwtAuthGuard`
+
+- **DTOs**:
+  - `CreateClimateDataInput` (farmId, date, temperature, humidity, rainfall, windSpeed, solarRadiation, source)
+  - `UpdateClimateDataInput` (todos campos opcionais)
+  - Validações com ranges:
+    * Temperatura: -50°C a 60°C
+    * Umidade: 0% a 100%
+    * Precipitação: mínimo 0mm
+    * Vento: 0 a 100 km/h
+    * Radiação solar: 0 a 100,000 W/m²
+
+- **Entities**:
+  - `ClimateData` entity com campos:
+    * Dados climáticos básicos (temp, humidity, rainfall)
+    * Dados avançados opcionais (windSpeed, solarRadiation)
+    * Relações: Farm (obrigatória), Planting (opcional)
+    * Campo source para rastreabilidade (OpenWeather, INMET, etc)
+  - Documentação JSDoc completa
+
+- **Testes** (`climate-data.service.spec.ts`):
+  - ✅ 17 testes unitários passando (100% cobertura)
+  - Cenários completos:
+    - Criação com validações (2 casos)
+    - Listagem e filtros complexos (3 casos - all/farmId/period)
+    - Busca individual (2 casos)
+    - Atualização (2 casos)
+    - Remoção (2 casos)
+    - Integração OpenWeather (3 casos - success/no-coords/no-api-key)
+    - Estatísticas (2 casos - com e sem dados)
+  - Mocks do HttpService para APIs externas
+
+#### 🛠️ **Infraestrutura**
+- Instalação do `@nestjs/axios` e `axios` para integração HTTP
+- HttpModule configurado no ClimateDataModule
+- Suporte para variável de ambiente `OPENWEATHER_API_KEY`
+
+#### 🗄️ **Database**
+- Migration `update_climate_data_schema`:
+  * Adicionado campo `farmId` obrigatório
+  * Campo `date` substituindo `timestamp`
+  * Campo `solarRadiation` substituindo `pressure`
+  * Campo `source` agora opcional
+  * Relação com Farm adicionada
+  * Índices otimizados: `[farmId, date]` e `[plantingId]`
+  * Latitude/longitude da Farm agora opcionais
+
+### 📊 **Estatísticas do Release**
+- **Arquivos criados**: 7 (Service, Resolver, DTOs, Entity, Tests, Module, Migration)
+- **Linhas de código**: ~850 linhas
+- **Testes**: 17/17 passando (100% cobertura)
+- **Total de testes acumulados**: 73 (Plots: 18, Plantings: 21, Harvests: 17, ClimateData: 17)
+- **Tempo de desenvolvimento**: ~40 minutos
+
+---
+
 ## [0.4.0] - 2026-01-29
 
 ### ✨ Adicionado

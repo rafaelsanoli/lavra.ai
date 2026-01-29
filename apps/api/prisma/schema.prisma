@@ -100,16 +100,17 @@ model Farm {
   id          String   @id @default(uuid())
   name        String
   location    String
-  latitude    Float
-  longitude   Float
+  latitude    Float?
+  longitude   Float?
   totalArea   Float    // hectares
   userId      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   // Relations
-  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  plots  Plot[]
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plots       Plot[]
+  climateData ClimateData[]
 
   @@map("farms")
 }
@@ -174,23 +175,25 @@ model Harvest {
 }
 
 model ClimateData {
-  id          String   @id @default(uuid())
-  plantingId  String?
-  latitude    Float
-  longitude   Float
-  timestamp   DateTime
-  temperature Float    // Celsius
-  humidity    Float    // %
-  rainfall    Float    // mm
-  windSpeed   Float?   // km/h
-  pressure    Float?   // hPa
-  source      String   // INMET, NASA, etc
-  createdAt   DateTime @default(now())
+  id             String   @id @default(uuid())
+  farmId         String
+  plantingId     String?
+  date           DateTime
+  temperature    Float    // Celsius
+  humidity       Float    // %
+  rainfall       Float    // mm
+  windSpeed      Float?   // km/h
+  solarRadiation Float?   // W/m²
+  source         String?  // INMET, OpenWeather, NASA, etc
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   // Relations
+  farm     Farm      @relation(fields: [farmId], references: [id], onDelete: Cascade)
   planting Planting? @relation(fields: [plantingId], references: [id], onDelete: SetNull)
 
-  @@index([latitude, longitude, timestamp])
+  @@index([farmId, date])
+  @@index([plantingId])
   @@map("climate_data")
 }
 

@@ -12,6 +12,7 @@ import { FarmsModule } from './modules/farms/farms.module';
 import { PlotsModule } from './modules/plots/plots.module';
 import { PlantingsModule } from './modules/plantings/plantings.module';
 import { HarvestsModule } from './modules/harvests/harvests.module';
+import { ClimateDataModule } from './modules/climate-data/climate-data.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { HarvestsModule } from './modules/harvests/harvests.module';
     PlotsModule,
     PlantingsModule,
     HarvestsModule,
+    ClimateDataModule,
   ],
 })
 export class AppModule {}
