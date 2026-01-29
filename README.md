@@ -116,20 +116,6 @@ Consultar [PLANO-BACKEND.md](docs/PLANO-BACKEND.md)
 
 ---
 
-## 👥 Equipe Necessária (MVP)
-
-- 1x Tech Lead
-- 2x Backend (NestJS)
-- 2x Backend (Go)
-- 1x ML Engineer
-- 1x Frontend Developer
-- 1x DevOps
-- 0.5x Product Manager
-
-**Total:** 7.5 pessoas por 4 meses
-
----
-
 ## 📞 Contato
 
 **Produto:** produto@lavra.ai  
