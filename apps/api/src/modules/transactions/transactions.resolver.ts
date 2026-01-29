@@ -4,11 +4,11 @@ import { Transaction, TransactionSummary } from './entities/transaction.entity';
 import { CreateTransactionInput, TransactionType } from './dto/create-transaction.input';
 import { UpdateTransactionInput } from './dto/update-transaction.input';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { GqlAuthGuard } from '../../common/guards/gql-auth.guard';
+import { CurrentUser } from '../../common/decorators/current-user.decorator';
 
 @Resolver(() => Transaction)
-@UseGuards(JwtAuthGuard)
+@UseGuards(GqlAuthGuard)
 export class TransactionsResolver {
   constructor(private readonly transactionsService: TransactionsService) {}
 

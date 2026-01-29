@@ -8,11 +8,103 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### 🚀 Em Desenvolvimento
-- Bull queues para jobs assíncronos
 - WebSockets (Socket.io)
 - Microserviços Go
 - Machine Learning (Python/FastAPI)
 - Testes E2E
+
+---
+
+## [0.10.0] - 2026-01-29
+
+### ✨ Adicionado
+
+#### ⚙️ **Sistema de Filas (Bull Queues) Completo**
+- **Infraestrutura:**
+  - Integração Bull + Redis para processamento assíncrono
+  - 4 filas especializadas com processadores dedicados
+  - Sistema de retry exponencial (2s-3s delay)
+  - Limpeza automática de jobs completos
+  - Monitoramento de jobs (waiting, active, completed, failed, delayed)
+  
+- **Weather Queue** (`queues/weather/`):
+  - `addUpdateWeatherJob(farmId, userId)` - Atualização única
+  - `addBulkWeatherUpdate(farmIds[])` - Atualização em massa
+  - `schedulePeriodicUpdate(cron)` - Cron job (padrão: a cada 6 horas)
+  - **Processor:**
+    * Verifica coordenadas da fazenda
+    * Simula dados meteorológicos (TODO: integrar OpenWeather API)
+    * Salva ClimateData no banco
+    * Gera alertas automáticos:
+      - Temperatura >35°C → Alerta HIGH
+      - Temperatura <5°C → Alerta CRITICAL (risco de geada)
+      - Chuva >50mm → Alerta MEDIUM
+      - Vento >60km/h → Alerta HIGH
+  
+- **Market Queue** (`queues/market/`):
+  - `addUpdatePricesJob(commodity, market)` - Atualização única
+  - `addBulkPriceUpdate(commodities[], market)` - Múltiplas commodities
+  - `schedulePeriodicUpdate(cron)` - Cron job (padrão: 9h-17h, seg-sex)
+  - **Processor:**
+    * Simula preços de mercado (TODO: integrar B3/CBOT API)
+    * Salva MarketPrice no banco
+    * Analisa tendências (30 dias)
+    * Gera alertas automáticos:
+      - Alta >10% → Alerta MEDIUM
+      - Queda >10% → Alerta HIGH
+  
+- **Simulation Queue** (`queues/simulation/`):
+  - `addRunSimulationJob(simulationId, priority)` - Execução única (1-10)
+  - `addBulkSimulations(simulations[])` - Múltiplas simulações
+  - `pauseQueue() / resumeQueue()` - Controle de fila
+  - **Processor:**
+    * Executa SimulationsService.runSimulation()
+    * Progress tracking (10% → 100%)
+    * Timeout: 5 minutos
+    * Retry: 2 tentativas (fixed delay 5s)
+  
+- **Notification Queue** (`queues/notification/`):
+  - `addNotificationJob(userId, type, title, message)` - Envio único
+  - `addBulkNotifications(notifications[])` - Envio em massa
+  - `scheduleNotification(data, delay)` - Envio agendado
+  - **Tipos suportados:** email, sms, push, in-app
+  - **Prioridades:** low (10), normal (5), high (2), critical (1)
+  - **Processor:**
+    * Simula envio por canal (TODO: integrar SendGrid, Twilio, etc.)
+    * Retry exponencial (1s delay)
+  
+### 📊 **Configurações**
+- Redis connection via ConfigService (REDIS_HOST, REDIS_PORT, REDIS_PASSWORD)
+- forwardRef para resolver dependências circulares
+- Todos os services de queues exportados para uso em outros módulos
+
+### 📦 **Dependências**
+- ➕ `@nestjs/bull@^10.0.0` - NestJS wrapper para Bull
+- ➕ `bull@^4.11.0` - Queue system baseado em Redis
+
+### 🔧 **Correções**
+- Corrigido imports de AuthGuard (JwtAuthGuard → GqlAuthGuard)
+- Corrigido imports de CurrentUser decorator (auth/ → common/)
+- Corrigido uso de AlertType e AlertSeverity enums
+- Corrigido metadata (object → JSON.stringify)
+- Corrigido timestamp/date fields (Date → toISOString())
+- Corrigido getPriceTrend (percentageChange → changePercent)
+
+### 📄 **Arquivos Criados**
+- `queues/queues.module.ts` (módulo principal)
+- `queues/weather/` (module, service, processor) - 3 arquivos
+- `queues/market/` (module, service, processor) - 3 arquivos
+- `queues/simulation/` (module, service, processor) - 3 arquivos
+- `queues/notification/` (module, service, processor) - 3 arquivos
+- **Total:** 13 arquivos, ~1200 linhas
+
+### 🎯 **Recursos Chave**
+- **Retry automático:** Todas as queues com backoff exponencial
+- **Cron jobs:** Weather (6h) e Market (horário comercial) programáveis
+- **Priorização:** Simulation e Notification suportam prioridades
+- **Timeout:** Simulation com timeout de 5min para simulações complexas
+- **Alertas inteligentes:** Geração automática baseada em thresholds
+- **Bulk operations:** Suporte para processamento em massa em todas as queues
 
 ---
 

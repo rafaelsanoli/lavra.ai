@@ -17,6 +17,7 @@ import { AlertsModule } from './modules/alerts/alerts.module';
 import { MarketPricesModule } from './modules/market-prices/market-prices.module';
 import { TransactionsModule } from './modules/transactions/transactions.module';
 import { SimulationsModule } from './modules/simulations/simulations.module';
+import { QueuesModule } from './queues/queues.module';
 
 @Module({
   imports: [
@@ -50,6 +51,9 @@ import { SimulationsModule } from './modules/simulations/simulations.module';
     MarketPricesModule,
     TransactionsModule,
     SimulationsModule,
+
+    // Queues
+    QueuesModule,
   ],
 })
 export class AppModule {}

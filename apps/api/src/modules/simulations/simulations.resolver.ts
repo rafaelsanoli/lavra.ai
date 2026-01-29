@@ -13,11 +13,11 @@ import {
 } from './entities/simulation.entity';
 import { CreateSimulationInput } from './dto/create-simulation.input';
 import { UpdateSimulationInput } from './dto/update-simulation.input';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { GqlAuthGuard } from '../../common/guards/gql-auth.guard';
+import { CurrentUser } from '../../common/decorators/current-user.decorator';
 
 @Resolver(() => Simulation)
-@UseGuards(JwtAuthGuard)
+@UseGuards(GqlAuthGuard)
 export class SimulationsResolver {
   constructor(private readonly simulationsService: SimulationsService) {}
 

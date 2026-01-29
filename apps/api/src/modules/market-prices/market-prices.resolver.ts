@@ -4,10 +4,10 @@ import { MarketPrice, MarketPriceTrend, MarketPriceStatistics } from './entities
 import { CreateMarketPriceInput } from './dto/create-market-price.input';
 import { UpdateMarketPriceInput } from './dto/update-market-price.input';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { GqlAuthGuard } from '../../common/guards/gql-auth.guard';
 
 @Resolver(() => MarketPrice)
-@UseGuards(JwtAuthGuard)
+@UseGuards(GqlAuthGuard)
 export class MarketPricesResolver {
   constructor(private readonly marketPricesService: MarketPricesService) {}
 

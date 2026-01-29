@@ -4,11 +4,11 @@ import { Alert } from './entities/alert.entity';
 import { CreateAlertInput, AlertType, AlertSeverity } from './dto/create-alert.input';
 import { UpdateAlertInput, AlertStatus } from './dto/update-alert.input';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { GqlAuthGuard } from '../../common/guards/gql-auth.guard';
+import { CurrentUser } from '../../common/decorators/current-user.decorator';
 
 @Resolver(() => Alert)
-@UseGuards(JwtAuthGuard)
+@UseGuards(GqlAuthGuard)
 export class AlertsResolver {
   constructor(private readonly alertsService: AlertsService) {}
 

@@ -4,11 +4,11 @@ import { ClimateData } from './entities/climate-data.entity';
 import { CreateClimateDataInput } from './dto/create-climate-data.input';
 import { UpdateClimateDataInput } from './dto/update-climate-data.input';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { GqlAuthGuard } from '../../common/guards/gql-auth.guard';
+import { CurrentUser } from '../../common/decorators/current-user.decorator';
 
 @Resolver(() => ClimateData)
-@UseGuards(JwtAuthGuard)
+@UseGuards(GqlAuthGuard)
 export class ClimateDataResolver {
   constructor(private readonly climateDataService: ClimateDataService) {}
 
