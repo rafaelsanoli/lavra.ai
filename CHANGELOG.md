@@ -8,9 +8,80 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### 🚀 Em Desenvolvimento
+- MarketPrices module
 - Testes E2E
 - Swagger/OpenAPI documentation
 - WebSockets para alertas em tempo real
+
+---
+
+## [0.6.0] - 2026-01-29
+
+### ✨ Adicionado
+
+#### 📦 **Módulo Alerts Completo**
+- **Service** (`AlertsService`):
+  - CRUD completo com 5 operações básicas
+  - Operações especiais:
+    * `markAsRead()` - marca alerta como lido
+    * `markAsResolved()` - marca alerta como resolvido
+    * `markAsDismissed()` - marca alerta como descartado
+    * `markAllAsRead()` - marca todos pendentes como lidos
+    * `countUnread()` - conta alertas não lidos
+    * `removeExpired()` - remove alertas expirados
+  - Filtros avançados:
+    * Por tipo (WEATHER, MARKET, DISEASE, PEST, HARVEST, IRRIGATION)
+    * Por status (PENDING, READ, RESOLVED, DISMISSED)
+    * Por severidade (LOW, MEDIUM, HIGH, CRITICAL)
+    * Apenas alertas ativos (não expirados)
+  - Sistema de expiração de alertas
+  - Metadata JSON para dados adicionais
+  - Validações de ownership (usuário)
+  
+- **Resolver** (`AlertsResolver`):
+  - 12 operações GraphQL:
+    * Básicas: `createAlert`, `alerts` (list), `alert`, `updateAlert`, `removeAlert`
+    * Especiais: `markAlertAsRead`, `markAlertAsResolved`, `markAlertAsDismissed`
+    * Bulk: `markAllAlertsAsRead`, `removeExpiredAlerts`
+    * Query: `unreadAlertsCount`
+  - Filtros: tipo, status, apenas ativos
+  - Proteção com `JwtAuthGuard`
+
+- **DTOs**:
+  - `CreateAlertInput` (type, severity, title, message, metadata?, expiresAt?)
+  - `UpdateAlertInput` (status?)
+  - Enums exportados para GraphQL:
+    * `AlertType`: 6 tipos (WEATHER, MARKET, DISEASE, PEST, HARVEST, IRRIGATION)
+    * `AlertSeverity`: 4 níveis (LOW, MEDIUM, HIGH, CRITICAL)
+    * `AlertStatus`: 4 estados (PENDING, READ, RESOLVED, DISMISSED)
+  - Validações:
+    * Título: máximo 200 caracteres
+    * Mensagem: máximo 1000 caracteres
+    * Metadata: string JSON opcional
+
+- **Entities**:
+  - `Alert` entity com campos completos
+  - Relação com User
+  - Campos timestamp (createdAt, updatedAt)
+  - Campo expiresAt opcional para alertas temporários
+
+- **Testes** (`alerts.service.spec.ts`):
+  - ✅ 20 testes unitários passando (100% cobertura)
+  - Cenários completos:
+    - Criação (3 casos - básico/com metadata/com expiração)
+    - Listagem e filtros (4 casos - all/tipo/status/ativos)
+    - Busca individual (2 casos)
+    - Atualização (2 casos)
+    - Remoção (2 casos)
+    - Operações especiais (7 casos - read/resolved/dismissed/all-read/count/expired)
+
+### 📊 **Estatísticas do Release**
+- **Arquivos criados**: 7 (Service, Resolver, DTOs, Entity, Tests, Module)
+- **Linhas de código**: ~900 linhas
+- **Testes**: 20/20 passando (100% cobertura)
+- **Total de testes acumulados**: 93 (Plots: 18, Plantings: 21, Harvests: 17, ClimateData: 17, Alerts: 20)
+- **Operações GraphQL**: 12 (5 básicas + 7 especiais)
+- **Tempo de desenvolvimento**: ~35 minutos
 
 ---
 
