@@ -11,6 +11,7 @@ import { UsersModule } from './modules/users/users.module';
 import { FarmsModule } from './modules/farms/farms.module';
 import { PlotsModule } from './modules/plots/plots.module';
 import { PlantingsModule } from './modules/plantings/plantings.module';
+import { HarvestsModule } from './modules/harvests/harvests.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { PlantingsModule } from './modules/plantings/plantings.module';
     FarmsModule,
     PlotsModule,
     PlantingsModule,
+    HarvestsModule,
   ],
 })
 export class AppModule {}

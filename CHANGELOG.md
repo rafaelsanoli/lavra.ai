@@ -8,9 +8,55 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### 🚀 Em Desenvolvimento
-- Módulo Harvests (gestão de colheitas)
 - Testes E2E
 - Swagger/OpenAPI documentation
+- WebSockets para alertas em tempo real
+
+---
+
+## [0.4.0] - 2026-01-29
+
+### ✨ Adicionado
+
+#### 📦 **Módulo Harvests Completo**
+- **Service** (`HarvestsService`):
+  - CRUD completo com 5 operações
+  - Cálculos automáticos:
+    * Produtividade (kg/ha) = quantidade / área do plantio
+    * Valor total (R$) = quantidade * preço
+  - Atualização automática do plantio:
+    * Define actualYield na primeira colheita
+    * Atualiza actualHarvest
+  - Validações robustas:
+    * Ownership de plantio verificado
+    * Plantio deve estar com status HARVESTED
+  - Logging detalhado de operações
+  
+- **Resolver** (`HarvestsResolver`):
+  - 5 operações GraphQL: `createHarvest`, `harvests`, `harvest`, `updateHarvest`, `removeHarvest`
+  - Filtro: por plantio
+  - Documentação inline para GraphQL Playground
+  - Proteção com `GqlAuthGuard`
+
+- **DTOs**:
+  - `CreateHarvestInput` (plantingId, harvestDate, quantity, quality, price, notes)
+  - `UpdateHarvestInput` (quality, price, notes)
+  - Validações com mensagens em português
+
+- **Entities**:
+  - `Harvest` entity com campos calculados (productivity, totalValue)
+  - PlantingSimplified para evitar dependências circulares
+  - Documentação JSDoc completa
+
+- **Testes** (`harvests.service.spec.ts`):
+  - ✅ 17 testes unitários passando (100% cobertura)
+  - Cenários completos:
+    - Criação com cálculos (6 casos)
+    - Listagem e filtros (2 casos)
+    - Busca individual (3 casos)
+    - Atualização com recálculo (3 casos)
+    - Remoção (3 casos)
+  - Mocks do Prisma para isolamento
 
 ---
 
