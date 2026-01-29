@@ -1,0 +1,260 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== ENUMS ====================
+
+enum UserRole {
+  ADMIN
+  PRODUCER
+  AGRONOMIST
+  VIEWER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum PlantingStatus {
+  PLANNED
+  IN_PROGRESS
+  HARVESTED
+  FAILED
+}
+
+enum AlertType {
+  WEATHER
+  MARKET
+  DISEASE
+  PEST
+  HARVEST
+  IRRIGATION
+}
+
+enum AlertSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum AlertStatus {
+  PENDING
+  READ
+  RESOLVED
+  DISMISSED
+}
+
+enum TransactionType {
+  SALE
+  PURCHASE
+  HEDGE
+  OPTION
+}
+
+// ==================== MODELS ====================
+
+model User {
+  id        String     @id @default(uuid())
+  email     String     @unique
+  password  String
+  name      String
+  phone     String?
+  role      UserRole   @default(PRODUCER)
+  status    UserStatus @default(ACTIVE)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  // Relations
+  farms         Farm[]
+  alerts        Alert[]
+  transactions  Transaction[]
+  refreshTokens RefreshToken[]
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
+}
+
+model Farm {
+  id          String   @id @default(uuid())
+  name        String
+  location    String
+  latitude    Float
+  longitude   Float
+  totalArea   Float    // hectares
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plots  Plot[]
+
+  @@map("farms")
+}
+
+model Plot {
+  id        String   @id @default(uuid())
+  name      String
+  farmId    String
+  area      Float    // hectares
+  soilType  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  farm      Farm       @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  plantings Planting[]
+
+  @@map("plots")
+}
+
+model Planting {
+  id              String         @id @default(uuid())
+  plotId          String
+  cropType        String         // soja, milho, cafe, etc
+  variety         String?
+  plantingDate    DateTime
+  expectedHarvest DateTime
+  actualHarvest   DateTime?
+  status          PlantingStatus @default(PLANNED)
+  estimatedYield  Float?         // kg/hectare
+  actualYield     Float?         // kg/hectare
+  notes           String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  // Relations
+  plot         Plot          @relation(fields: [plotId], references: [id], onDelete: Cascade)
+  harvests     Harvest[]
+  climateData  ClimateData[]
+
+  @@map("plantings")
+}
+
+model Harvest {
+  id          String   @id @default(uuid())
+  plantingId  String
+  harvestDate DateTime
+  quantity    Float    // kg
+  quality     String?  // A, B, C
+  price       Float?   // R$ per kg
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  planting Planting @relation(fields: [plantingId], references: [id], onDelete: Cascade)
+
+  @@map("harvests")
+}
+
+model ClimateData {
+  id          String   @id @default(uuid())
+  plantingId  String?
+  latitude    Float
+  longitude   Float
+  timestamp   DateTime
+  temperature Float    // Celsius
+  humidity    Float    // %
+  rainfall    Float    // mm
+  windSpeed   Float?   // km/h
+  pressure    Float?   // hPa
+  source      String   // INMET, NASA, etc
+  createdAt   DateTime @default(now())
+
+  // Relations
+  planting Planting? @relation(fields: [plantingId], references: [id], onDelete: SetNull)
+
+  @@index([latitude, longitude, timestamp])
+  @@map("climate_data")
+}
+
+model Alert {
+  id          String        @id @default(uuid())
+  userId      String
+  type        AlertType
+  severity    AlertSeverity
+  status      AlertStatus   @default(PENDING)
+  title       String
+  message     String
+  metadata    Json?         // Additional data
+  expiresAt   DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status, createdAt])
+  @@map("alerts")
+}
+
+model MarketPrice {
+  id        String   @id @default(uuid())
+  commodity String   // soja, milho, cafe
+  market    String   // CBOT, BM&F, etc
+  price     Float    // price in currency
+  currency  String   @default("BRL")
+  unit      String   @default("kg")
+  timestamp DateTime
+  source    String
+  createdAt DateTime @default(now())
+
+  @@index([commodity, timestamp])
+  @@map("market_prices")
+}
+
+model Transaction {
+  id          String          @id @default(uuid())
+  userId      String
+  type        TransactionType
+  commodity   String
+  quantity    Float           // kg or contracts
+  price       Float           // R$ per unit
+  totalValue  Float           // R$
+  executedAt  DateTime
+  notes       String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, executedAt])
+  @@map("transactions")
+}
+
+model MLPrediction {
+  id         String   @id @default(uuid())
+  modelName  String   // yield_predictor, price_forecast, etc
+  version    String
+  input      Json     // Input data used
+  output     Json     // Prediction results
+  confidence Float?   // 0-1
+  createdAt  DateTime @default(now())
+
+  @@index([modelName, createdAt])
+  @@map("ml_predictions")
+}

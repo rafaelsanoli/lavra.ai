@@ -1,0 +1,163 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: lavra-postgres
+    restart: unless-stopped
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_USER: lavra
+      POSTGRES_PASSWORD: lavra123
+      POSTGRES_DB: lavra_dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U lavra']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: lavra-redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # NestJS API (Backend)
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: lavra-api
+    restart: unless-stopped
+    ports:
+      - '4000:4000'
+    environment:
+      NODE_ENV: development
+      PORT: 4000
+      DATABASE_URL: postgresql://lavra:lavra123@postgres:5432/lavra_dev?schema=public
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: dev-secret-change-in-production
+      JWT_EXPIRES_IN: 15m
+      JWT_REFRESH_SECRET: dev-refresh-secret
+      JWT_REFRESH_EXPIRES_IN: 7d
+      CORS_ORIGIN: http://localhost:3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./apps/api:/app
+      - /app/node_modules
+    command: npm run start:dev
+
+  # Next.js Frontend
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: lavra-web
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4000/graphql
+      NODE_ENV: development
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev
+
+  # Climate Microservice (Go)
+  climate-service:
+    build:
+      context: ./services/climate-service
+      dockerfile: Dockerfile
+    container_name: lavra-climate
+    restart: unless-stopped
+    ports:
+      - '5001:5001'
+    environment:
+      PORT: 5001
+      DATABASE_URL: postgresql://lavra:lavra123@postgres:5432/lavra_dev
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      INMET_API_URL: https://api.inmet.gov.br
+      NASA_POWER_API_URL: https://power.larc.nasa.gov/api
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./services/climate-service:/app
+
+  # Market Microservice (Go)
+  market-service:
+    build:
+      context: ./services/market-service
+      dockerfile: Dockerfile
+    container_name: lavra-market
+    restart: unless-stopped
+    ports:
+      - '5002:5002'
+    environment:
+      PORT: 5002
+      DATABASE_URL: postgresql://lavra:lavra123@postgres:5432/lavra_dev
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./services/market-service:/app
+
+  # ML Service (Python/FastAPI)
+  ml-service:
+    build:
+      context: ./ml
+      dockerfile: Dockerfile
+    container_name: lavra-ml
+    restart: unless-stopped
+    ports:
+      - '8000:8000'
+    environment:
+      PORT: 8000
+      DATABASE_URL: postgresql://lavra:lavra123@postgres:5432/lavra_dev
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      MODEL_PATH: /app/models
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./ml:/app
+      - ml_models:/app/models
+
+volumes:
+  postgres_data:
+  redis_data:
+  ml_models:
+
+networks:
+  default:
+    name: lavra-network

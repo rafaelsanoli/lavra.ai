@@ -1,0 +1,160 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: UserPayload!
+}
+
+input CreateFarmInput {
+  latitude: Float!
+  location: String!
+  longitude: Float!
+  name: String!
+  totalArea: Float!
+}
+
+input CreatePlotInput {
+  area: Float!
+  farmId: String!
+  name: String!
+  soilType: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Farm {
+  createdAt: DateTime!
+  id: ID!
+  latitude: Float!
+  location: String!
+  longitude: Float!
+  name: String!
+  plots: [Plot!]
+  totalArea: Float!
+  updatedAt: DateTime!
+  userId: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  createFarm(createFarmInput: CreateFarmInput!): Farm!
+
+  """Cria um novo talhão em uma fazenda"""
+  createPlot(createPlotInput: CreatePlotInput!): Plot!
+  login(loginInput: LoginInput!): AuthResponse!
+  logout: Boolean!
+  refreshToken(token: String!): AuthResponse!
+  register(registerInput: RegisterInput!): AuthResponse!
+  removeFarm(id: String!): Boolean!
+
+  """Remove um talhão (não permite se há plantios ativos)"""
+  removePlot(
+    """ID do talhão"""
+    id: String!
+  ): Boolean!
+  updateFarm(id: String!, updateFarmInput: UpdateFarmInput!): Farm!
+
+  """Atualiza dados de um talhão"""
+  updatePlot(
+    """ID do talhão"""
+    id: String!
+    updatePlotInput: UpdatePlotInput!
+  ): Plot!
+  updateProfile(updateProfileInput: UpdateProfileInput!): User!
+}
+
+type Planting {
+  actualHarvest: DateTime
+  actualYield: Float
+  cropType: String!
+  estimatedYield: Float
+  expectedHarvest: DateTime!
+  id: ID!
+  plantingDate: DateTime!
+  status: String!
+  variety: String
+}
+
+type Plot {
+  area: Float!
+  createdAt: DateTime!
+  farm: Farm
+  farmId: String!
+  id: ID!
+  name: String!
+  plantings: [Planting!]
+  soilType: String
+  updatedAt: DateTime!
+}
+
+type Query {
+  farm(id: String!): Farm!
+  farms: [Farm!]!
+  me: User!
+
+  """Busca um talhão específico por ID"""
+  plot(
+    """ID do talhão"""
+    id: String!
+  ): Plot!
+
+  """Lista todos os talhões do usuário, opcionalmente filtrados por fazenda"""
+  plots(
+    """ID da fazenda para filtrar"""
+    farmId: String
+  ): [Plot!]!
+}
+
+input RegisterInput {
+  email: String!
+  name: String!
+  password: String!
+  phone: String
+}
+
+input UpdateFarmInput {
+  latitude: Float
+  location: String
+  longitude: Float
+  name: String
+  totalArea: Float
+}
+
+input UpdatePlotInput {
+  area: Float
+  name: String
+  soilType: String
+}
+
+input UpdateProfileInput {
+  name: String
+  phone: String
+}
+
+type User {
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+  name: String!
+  phone: String
+  role: String!
+  status: String!
+  updatedAt: DateTime!
+}
+
+type UserPayload {
+  email: String!
+  id: String!
+  name: String!
+  role: String!
+}
