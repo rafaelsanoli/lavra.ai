@@ -225,7 +225,7 @@ model MarketPrice {
   currency  String   @default("BRL")
   unit      String   @default("kg")
   timestamp DateTime
-  source    String
+  source    String?
   createdAt DateTime @default(now())
 
   @@index([commodity, timestamp])

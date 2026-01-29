@@ -8,10 +8,89 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### 🚀 Em Desenvolvimento
-- MarketPrices module
 - Testes E2E
 - Swagger/OpenAPI documentation
 - WebSockets para alertas em tempo real
+- Deploy em produção
+
+---
+
+## [0.7.0] - 2026-01-29
+
+### ✨ Adicionado
+
+#### 📦 **Módulo MarketPrices Completo**
+- **Service** (`MarketPricesService`):
+  - CRUD completo com 5 operações básicas
+  - Operações especiais:
+    * `getLatestPrice()` - busca último preço de commodity
+    * `getPriceTrend()` - calcula tendência (UP/DOWN/STABLE)
+    * `getPriceStatistics()` - estatísticas por período (min/max/avg)
+    * `getAvailableCommodities()` - lista commodities disponíveis
+  - Cálculo de tendências:
+    * Compara preço atual vs período anterior (default: 7 dias)
+    * Variação percentual calculada automaticamente
+    * Classificação: UP (> 1%), DOWN (< -1%), STABLE
+  - Estatísticas:
+    * Preço mínimo, máximo, médio
+    * Contagem de registros
+    * Filtro por período de datas
+  - Filtros avançados:
+    * Por commodity (Soja, Milho, Café, etc)
+    * Por mercado (CBOT, BM&F, etc)
+    * Por período (startDate, endDate)
+  
+- **Resolver** (`MarketPricesResolver`):
+  - 9 operações GraphQL:
+    * Básicas: `createMarketPrice`, `marketPrices` (list), `marketPrice`, `updateMarketPrice`, `removeMarketPrice`
+    * Especiais: `latestMarketPrice`, `marketPriceTrend`, `marketPriceStatistics`, `availableCommodities`
+  - Filtros: commodity, market, período
+  - Proteção com `JwtAuthGuard`
+
+- **DTOs**:
+  - `CreateMarketPriceInput` (commodity, market, price, currency, unit, timestamp, source?)
+  - `UpdateMarketPriceInput` (price?)
+  - Validações:
+    * Commodity/market: máximo 100 caracteres
+    * Price: mínimo 0
+    * Currency: máximo 10 caracteres (default: BRL)
+    * Unit: máximo 20 caracteres (default: kg)
+
+- **Entities**:
+  - `MarketPrice` - Preço com dados básicos
+  - `MarketPriceTrend` - Análise de tendência (current, previous, changePercent, trend)
+  - `MarketPriceStatistics` - Estatísticas agregadas (min, max, avg, count)
+
+- **Testes** (`market-prices.service.spec.ts`):
+  - ✅ 22 testes unitários passando (100% cobertura)
+  - Cenários completos:
+    - Criação (1 caso)
+    - Listagem e filtros (4 casos - all/commodity/market/período)
+    - Busca individual (2 casos)
+    - Atualização (2 casos)
+    - Remoção (2 casos)
+    - Último preço (3 casos)
+    - Tendências (4 casos - up/down/stable/not-found)
+    - Estatísticas (2 casos)
+    - Commodities disponíveis (1 caso)
+
+#### 🗄️ **Database**
+- Migration `make_market_price_source_optional`:
+  * Campo `source` agora opcional (permite inserção sem fonte)
+
+### 📊 **Estatísticas do Release**
+- **Arquivos criados**: 8 (Service, Resolver, DTOs, Entities, Tests, Module, Migration)
+- **Linhas de código**: ~1000 linhas
+- **Testes**: 22/22 passando (100% cobertura)
+- **Total de testes acumulados**: 115 (Plots: 18, Plantings: 21, Harvests: 17, ClimateData: 17, Alerts: 20, MarketPrices: 22)
+- **Operações GraphQL**: 9 (5 básicas + 4 especiais)
+- **Tempo de desenvolvimento**: ~40 minutos
+
+### 🎯 **Funcionalidades de Análise**
+- **Tendência de Preços**: Comparação automática com período anterior
+- **Estatísticas**: Min/max/média para análise histórica
+- **Filtros Avançados**: Multi-dimensional (commodity + market + período)
+- **Preço em Tempo Real**: Busca último preço registrado
 
 ---
 
