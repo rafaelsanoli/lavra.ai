@@ -8,9 +8,175 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### 🚀 Em Desenvolvimento
-- Microserviços Go
+- Climate Analysis Service (Go)
+- Decision Engine Service (Go)
+- Alert Worker Service (Go)
 - Machine Learning (Python/FastAPI)
 - Testes E2E
+
+---
+
+## [0.13.0] - 2026-01-30
+
+### ✨ Adicionado
+
+#### 🔷 **Go Microservices - Infraestrutura**
+
+Criada arquitetura base para microserviços Go com gRPC e Protocol Buffers.
+
+**Estrutura:**
+- 4 definições Protocol Buffers (.proto)
+- Makefile para build, test e deploy
+- Docker e docker-compose configs
+- go.mod com dependências
+- README completo com documentação
+
+**Tecnologias:**
+- Go 1.21+
+- gRPC (comunicação entre serviços)
+- Protocol Buffers v3 (serialização)
+- PostgreSQL + Redis clients
+- Logrus (logging estruturado)
+- Prometheus (métricas)
+
+#### 📊 **Market Analysis Service** (port 50051)
+
+Microserviço de análise avançada de mercado e preços.
+
+**6 RPCs implementados:**
+
+1. **AnalyzePriceTrend**
+   - Regressão linear para identificar tendências
+   - Cálculo de força de tendência (R²)
+   - Classificação: BULLISH, BEARISH, NEUTRAL
+   - Variação percentual e preço médio
+
+2. **CalculateVolatility**
+   - Retornos logarítmicos
+   - Volatilidade anualizada (252 dias úteis)
+   - Coeficiente de variação (CV)
+   - Classificação de risco: LOW, MEDIUM, HIGH
+
+3. **DetectPriceAnomalies**
+   - Detecção via Z-score
+   - Threshold configurável (padrão: 2σ)
+   - Severidade: LOW, MEDIUM, HIGH, CRITICAL
+   - Preço esperado vs observado
+
+4. **CalculateCorrelations**
+   - Correlação de Pearson entre pares de commodities
+   - Matriz de correlação completa
+   - Classificação: STRONG (>0.7), MODERATE (>0.4), WEAK
+   - Útil para diversificação de portfólio
+
+5. **ForecastPrice**
+   - Previsão de curto prazo (1-30 dias)
+   - Método: Tendência linear + ruído
+   - Intervalos de confiança 95%
+   - Acurácia estimada (RMSE/MAE)
+
+6. **AnalyzeSeasonality**
+   - Padrões mensais (índices sazonais)
+   - Identificação de picos e vales
+   - Força da sazonalidade (amplitude)
+   - Útil para timing de venda
+
+**Algoritmos implementados:**
+- Regressão linear (least squares)
+- Cálculo de R² (coeficiente de determinação)
+- Correlação de Pearson
+- Z-score para detecção de anomalias
+- Random walk para simulação de preços
+- Média móvel e desvio padrão
+- Retornos logarítmicos
+
+**Features:**
+- Graceful shutdown (SIGTERM/SIGINT)
+- Reflection API (suporte grpcurl)
+- Logging estruturado
+- Context propagation
+- Error handling robusto
+- Mock data para desenvolvimento
+
+### 📦 **Protocol Buffers**
+
+**4 arquivos .proto criados:**
+
+1. **market.proto** (~200 linhas)
+   - 6 métodos RPC
+   - 16 message types
+   - Suporte a múltiplas commodities
+   - Timestamps Unix
+
+2. **climate.proto** (~250 linhas)
+   - 6 métodos RPC para análise climática
+   - Cálculo de risco por estágio de crescimento
+   - GDD (Growing Degree Days)
+   - Balanço hídrico (P-ET)
+
+3. **decision.proto** (~300 linhas)
+   - 6 métodos RPC para decisões estratégicas
+   - Hedge, seguro, timing de venda
+   - Diversificação de portfólio
+   - Planos de ação personalizados
+
+4. **alert.proto** (~230 linhas)
+   - 6 métodos RPC para processamento de alertas
+   - Priorização inteligente (1-10)
+   - Enriquecimento contextual
+   - Agrupamento de alertas similares
+
+### 🏗️ **Arquitetura**
+
+**Comunicação:**
+```
+NestJS (GraphQL) <--gRPC--> Go Microservices
+                                ↓
+                        PostgreSQL + Redis
+```
+
+**Ports:**
+- Market Analysis: 50051
+- Climate Analysis: 50052
+- Decision Engine: 50053
+- Alert Worker: 50054
+- Metrics (Prometheus): 9090
+
+**Padrões:**
+- Clean Architecture (cmd, internal, pkg)
+- Dependency Injection
+- Interface-based design
+- Context propagation
+- Graceful shutdown
+- Health checks
+
+### 📄 **Arquivos Criados**
+
+**Market Analysis Service:**
+- `cmd/main.go` (servidor gRPC)
+- `internal/server/server.go` (interface)
+- `internal/service/market_service.go` (~400 linhas)
+- `internal/models/types.go` (estruturas de dados)
+
+**Infraestrutura:**
+- `go.mod` (dependências)
+- `Makefile` (automação)
+- `proto/*.proto` (4 arquivos, ~980 linhas)
+- `README.md` (documentação completa)
+
+**Total:** 9 arquivos, ~1,600 linhas Go + ~980 linhas proto
+
+### 🎯 **Progresso**
+
+**Sprint 3-4 (Dias 15-28):** 25% completo
+- ✅ Infraestrutura Go Microservices
+- ✅ Protocol Buffers (4 arquivos)
+- ✅ Market Analysis Service (6 RPCs)
+- ⏳ Climate Analysis Service
+- ⏳ Decision Engine Service
+- ⏳ Alert Worker Service
+
+**Backend:** 60% → 65% completo
 
 ---
 

@@ -1,0 +1,178 @@
+syntax = "proto3";
+
+package alert;
+
+option go_package = "github.com/rafaelsanoli/lavra.ai/go-services/pb/alert";
+
+// Worker de processamento de alertas
+service AlertWorkerService {
+  // Processar alerta (analisa e enriquece com contexto)
+  rpc ProcessAlert(ProcessAlertRequest) returns (ProcessAlertResponse);
+  
+  // Calcular prioridade de alerta
+  rpc CalculatePriority(PriorityRequest) returns (PriorityResponse);
+  
+  // Enriquecer alerta com dados contextuais
+  rpc EnrichAlert(EnrichAlertRequest) returns (EnrichAlertResponse);
+  
+  // Agrupar alertas similares
+  rpc GroupAlerts(GroupAlertsRequest) returns (GroupAlertsResponse);
+  
+  // Sugerir ações para alerta
+  rpc SuggestActions(ActionsRequest) returns (ActionsResponse);
+  
+  // Verificar regras de negócio
+  rpc ValidateBusinessRules(ValidationRequest) returns (ValidationResponse);
+}
+
+message ProcessAlertRequest {
+  string alert_id = 1;
+  string user_id = 2;
+  string type = 3; // "WEATHER", "MARKET", "OPERATIONAL", "SYSTEM"
+  string severity = 4; // "INFO", "WARNING", "ERROR", "CRITICAL"
+  string title = 5;
+  string message = 6;
+  map<string, string> metadata = 7;
+  int64 created_at = 8;
+}
+
+message ProcessAlertResponse {
+  string alert_id = 1;
+  bool is_valid = 2;
+  int32 priority = 3; // 1-10
+  string enriched_message = 4;
+  repeated string suggested_actions = 5;
+  repeated string related_alerts = 6;
+  bool should_notify = 7;
+  repeated string notification_channels = 8; // "EMAIL", "SMS", "PUSH", "IN_APP"
+  map<string, string> additional_context = 9;
+  int64 processed_at = 10;
+}
+
+message PriorityRequest {
+  string alert_type = 1;
+  string severity = 2;
+  string user_id = 3;
+  string crop_type = 4;
+  string growth_stage = 5;
+  double potential_impact = 6; // Impacto financeiro estimado (R$)
+  int32 time_sensitivity = 7; // Horas até ação necessária
+}
+
+message PriorityResponse {
+  int32 priority_score = 1; // 1-10
+  string priority_level = 2; // "LOW", "NORMAL", "HIGH", "URGENT", "CRITICAL"
+  string justification = 3;
+  repeated string factors = 4; // Fatores que influenciaram a prioridade
+  int32 response_time_hours = 5; // Tempo recomendado para ação
+  int64 timestamp = 6;
+}
+
+message EnrichAlertRequest {
+  string alert_id = 1;
+  string user_id = 2;
+  string alert_type = 3;
+  map<string, string> base_data = 4;
+}
+
+message EnrichedData {
+  string key = 1;
+  string value = 2;
+  string source = 3; // "WEATHER_API", "MARKET_API", "DATABASE", etc
+  int64 fetched_at = 4;
+}
+
+message EnrichAlertResponse {
+  string alert_id = 1;
+  repeated EnrichedData enriched_data = 2;
+  string enhanced_message = 3;
+  double context_relevance = 4; // 0-1 (quão relevante é o contexto)
+  repeated string data_sources = 5;
+  int64 timestamp = 6;
+}
+
+message GroupAlertsRequest {
+  repeated string alert_ids = 1;
+  string user_id = 2;
+  int32 time_window_hours = 3; // Janela temporal para agrupamento
+  double similarity_threshold = 4; // 0-1
+}
+
+message AlertGroup {
+  string group_id = 1;
+  string group_type = 2; // Tipo comum dos alertas
+  repeated string alert_ids = 3;
+  int32 count = 4;
+  string summary = 5;
+  string highest_severity = 6;
+  int32 highest_priority = 7;
+  string first_alert_time = 8;
+  string last_alert_time = 9;
+}
+
+message GroupAlertsResponse {
+  repeated AlertGroup groups = 1;
+  int32 total_groups = 2;
+  int32 ungrouped_alerts = 3;
+  string grouping_strategy = 4; // "BY_TYPE", "BY_LOCATION", "BY_IMPACT", etc
+  int64 timestamp = 5;
+}
+
+message ActionsRequest {
+  string alert_id = 1;
+  string alert_type = 2;
+  string severity = 3;
+  string user_id = 4;
+  map<string, string> context = 5;
+}
+
+message SuggestedAction {
+  int32 order = 1; // Ordem de execução
+  string action_type = 2; // "IMMEDIATE", "PREVENTIVE", "MONITORING"
+  string category = 3; // "OPERATIONAL", "FINANCIAL", "AGRONOMIC"
+  string description = 4;
+  repeated string steps = 5;
+  double effectiveness = 6; // 0-1 (efetividade estimada)
+  double cost_estimate = 7; // R$
+  string time_required = 8; // "minutes", "hours", "days"
+  repeated string prerequisites = 9;
+  repeated string expected_outcomes = 10;
+}
+
+message ActionsResponse {
+  string alert_id = 1;
+  repeated SuggestedAction actions = 2;
+  SuggestedAction primary_action = 3; // Ação mais importante
+  int32 total_actions = 4;
+  string urgency_level = 5; // "IMMEDIATE", "URGENT", "NORMAL", "LOW"
+  repeated string warnings = 6; // Avisos importantes
+  int64 timestamp = 7;
+}
+
+message ValidationRequest {
+  string alert_type = 1;
+  string user_id = 2;
+  map<string, string> alert_data = 3;
+  repeated string rules_to_check = 4; // Regras específicas a validar
+}
+
+message RuleViolation {
+  string rule_name = 1;
+  string rule_description = 2;
+  string violation_type = 3; // "ERROR", "WARNING", "INFO"
+  string message = 4;
+  repeated string affected_fields = 5;
+  repeated string suggested_fixes = 6;
+}
+
+message ValidationResponse {
+  bool is_valid = 1;
+  repeated RuleViolation violations = 2;
+  int32 total_violations = 3;
+  int32 errors = 4;
+  int32 warnings = 5;
+  repeated string passed_rules = 6;
+  bool can_proceed = 7; // Pode prosseguir apesar de violações
+  string summary = 8;
+  int64 timestamp = 9;
+}

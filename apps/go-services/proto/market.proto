@@ -1,0 +1,138 @@
+syntax = "proto3";
+
+package market;
+
+option go_package = "github.com/rafaelsanoli/lavra.ai/go-services/pb/market";
+
+// Serviço de análise de mercado
+service MarketAnalysisService {
+  // Analisar tendência de preços
+  rpc AnalyzePriceTrend(PriceTrendRequest) returns (PriceTrendResponse);
+  
+  // Calcular volatilidade
+  rpc CalculateVolatility(VolatilityRequest) returns (VolatilityResponse);
+  
+  // Detectar anomalias de preço
+  rpc DetectPriceAnomalies(AnomaliesRequest) returns (AnomaliesResponse);
+  
+  // Calcular correlações entre commodities
+  rpc CalculateCorrelations(CorrelationsRequest) returns (CorrelationsResponse);
+  
+  // Previsão de preço (curto prazo)
+  rpc ForecastPrice(ForecastRequest) returns (ForecastResponse);
+  
+  // Análise de sazonalidade
+  rpc AnalyzeSeasonality(SeasonalityRequest) returns (SeasonalityResponse);
+}
+
+message PriceTrendRequest {
+  string commodity = 1;
+  string market = 2;
+  int32 days = 3; // Período de análise
+}
+
+message PriceTrendResponse {
+  string commodity = 1;
+  string trend = 2; // "BULLISH", "BEARISH", "NEUTRAL"
+  double trend_strength = 3; // 0-1
+  double change_percent = 4;
+  double average_price = 5;
+  int64 timestamp = 6;
+}
+
+message VolatilityRequest {
+  string commodity = 1;
+  string market = 2;
+  int32 window_days = 3;
+}
+
+message VolatilityResponse {
+  string commodity = 1;
+  double volatility = 2; // Desvio padrão
+  double coefficient_of_variation = 3;
+  string risk_level = 4; // "LOW", "MEDIUM", "HIGH"
+  int64 timestamp = 5;
+}
+
+message AnomaliesRequest {
+  string commodity = 1;
+  string market = 2;
+  int32 lookback_days = 3;
+  double threshold = 4; // Número de desvios padrão
+}
+
+message PriceAnomaly {
+  string date = 1;
+  double price = 2;
+  double expected_price = 3;
+  double deviation = 4;
+  string severity = 5; // "LOW", "MEDIUM", "HIGH", "CRITICAL"
+}
+
+message AnomaliesResponse {
+  string commodity = 1;
+  repeated PriceAnomaly anomalies = 2;
+  int32 total_count = 3;
+  int64 timestamp = 4;
+}
+
+message CorrelationsRequest {
+  repeated string commodities = 1;
+  string market = 2;
+  int32 days = 3;
+}
+
+message Correlation {
+  string commodity_a = 1;
+  string commodity_b = 2;
+  double correlation = 3; // -1 a 1
+  string strength = 4; // "STRONG", "MODERATE", "WEAK"
+}
+
+message CorrelationsResponse {
+  repeated Correlation correlations = 1;
+  int64 timestamp = 2;
+}
+
+message ForecastRequest {
+  string commodity = 1;
+  string market = 2;
+  int32 forecast_days = 3;
+  string model = 4; // "ARIMA", "EXPONENTIAL_SMOOTHING", "MOVING_AVERAGE"
+}
+
+message PriceForecast {
+  string date = 1;
+  double predicted_price = 2;
+  double confidence_lower = 3;
+  double confidence_upper = 4;
+}
+
+message ForecastResponse {
+  string commodity = 1;
+  repeated PriceForecast forecasts = 2;
+  double accuracy_score = 3; // RMSE, MAE, etc
+  int64 timestamp = 4;
+}
+
+message SeasonalityRequest {
+  string commodity = 1;
+  string market = 2;
+  int32 years = 3; // Anos de histórico
+}
+
+message MonthlyPattern {
+  int32 month = 1;
+  double average_price = 2;
+  double std_deviation = 3;
+  double seasonal_index = 4; // Relativo à média anual
+}
+
+message SeasonalityResponse {
+  string commodity = 1;
+  repeated MonthlyPattern monthly_patterns = 2;
+  string peak_month = 3;
+  string trough_month = 4;
+  double seasonality_strength = 5; // 0-1
+  int64 timestamp = 6;
+}

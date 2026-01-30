@@ -1,0 +1,176 @@
+syntax = "proto3";
+
+package climate;
+
+option go_package = "github.com/rafaelsanoli/lavra.ai/go-services/pb/climate";
+
+// Serviço de análise climática
+service ClimateAnalysisService {
+  // Calcular risco climático para lavoura
+  rpc CalculateClimateRisk(ClimateRiskRequest) returns (ClimateRiskResponse);
+  
+  // Analisar condições de plantio
+  rpc AnalyzePlantingConditions(PlantingConditionsRequest) returns (PlantingConditionsResponse);
+  
+  // Prever janela ideal de colheita
+  rpc PredictHarvestWindow(HarvestWindowRequest) returns (HarvestWindowResponse);
+  
+  // Calcular déficit/excesso hídrico
+  rpc CalculateWaterBalance(WaterBalanceRequest) returns (WaterBalanceResponse);
+  
+  // Detectar eventos climáticos extremos
+  rpc DetectExtremeEvents(ExtremeEventsRequest) returns (ExtremeEventsResponse);
+  
+  // Análise de crescimento (GDD)
+  rpc AnalyzeCropGrowth(CropGrowthRequest) returns (CropGrowthResponse);
+}
+
+message ClimateRiskRequest {
+  double latitude = 1;
+  double longitude = 2;
+  string crop_type = 3; // SOJA, MILHO, CAFE, etc
+  string growth_stage = 4; // PLANTING, VEGETATIVE, FLOWERING, MATURITY
+  int32 forecast_days = 5;
+}
+
+message ClimateRiskFactor {
+  string factor = 1; // "FROST", "DROUGHT", "HEAT_STRESS", "EXCESS_RAIN"
+  string severity = 2; // "LOW", "MEDIUM", "HIGH", "CRITICAL"
+  double probability = 3; // 0-1
+  string description = 4;
+}
+
+message ClimateRiskResponse {
+  string crop_type = 1;
+  double overall_risk_score = 2; // 0-1
+  string risk_level = 3; // "LOW", "MEDIUM", "HIGH", "CRITICAL"
+  repeated ClimateRiskFactor risk_factors = 4;
+  repeated string recommendations = 5;
+  int64 timestamp = 6;
+}
+
+message PlantingConditionsRequest {
+  double latitude = 1;
+  double longitude = 2;
+  string crop_type = 3;
+  string target_date = 4; // Data pretendida de plantio
+}
+
+message PlantingConditionsResponse {
+  string crop_type = 1;
+  bool is_suitable = 2;
+  double suitability_score = 3; // 0-1
+  string soil_moisture_status = 4; // "DRY", "ADEQUATE", "EXCESSIVE"
+  double temperature_avg = 5;
+  double precipitation_forecast_7d = 6;
+  repeated string favorable_factors = 7;
+  repeated string unfavorable_factors = 8;
+  string recommendation = 9;
+  int64 timestamp = 10;
+}
+
+message HarvestWindowRequest {
+  double latitude = 1;
+  double longitude = 2;
+  string crop_type = 3;
+  string planting_date = 4;
+  int32 expected_cycle_days = 5;
+}
+
+message HarvestWindow {
+  string start_date = 1;
+  string end_date = 2;
+  double confidence = 3; // 0-1
+  repeated string conditions = 4; // Condições esperadas
+}
+
+message HarvestWindowResponse {
+  string crop_type = 1;
+  HarvestWindow optimal_window = 2;
+  HarvestWindow acceptable_window = 3;
+  double accumulated_gdd = 4; // Graus-dia acumulados
+  double maturity_progress = 5; // 0-1
+  repeated string recommendations = 6;
+  int64 timestamp = 7;
+}
+
+message WaterBalanceRequest {
+  double latitude = 1;
+  double longitude = 2;
+  string crop_type = 3;
+  int32 analysis_days = 4; // Período de análise
+}
+
+message DailyWaterBalance {
+  string date = 1;
+  double precipitation = 2;
+  double evapotranspiration = 3;
+  double balance = 4; // P - ET
+  double accumulated_deficit = 5;
+  string status = 6; // "SURPLUS", "ADEQUATE", "DEFICIT", "SEVERE_DEFICIT"
+}
+
+message WaterBalanceResponse {
+  string crop_type = 1;
+  repeated DailyWaterBalance daily_balances = 2;
+  double total_precipitation = 3;
+  double total_evapotranspiration = 4;
+  double cumulative_deficit = 5;
+  string water_stress_level = 6; // "NONE", "MILD", "MODERATE", "SEVERE"
+  double irrigation_recommendation = 7; // mm
+  int64 timestamp = 8;
+}
+
+message ExtremeEventsRequest {
+  double latitude = 1;
+  double longitude = 2;
+  int32 forecast_days = 3;
+  repeated string event_types = 4; // "FROST", "HEAT_WAVE", "HEAVY_RAIN", "DROUGHT", "HAIL"
+}
+
+message ExtremeEvent {
+  string event_type = 1;
+  string start_date = 2;
+  string end_date = 3;
+  double intensity = 4; // Magnitude do evento
+  double probability = 5; // 0-1
+  string severity = 6; // "LOW", "MEDIUM", "HIGH", "CRITICAL"
+  repeated string impacts = 7;
+  repeated string mitigation_actions = 8;
+}
+
+message ExtremeEventsResponse {
+  repeated ExtremeEvent events = 1;
+  int32 total_events = 2;
+  string highest_risk_period = 3;
+  int64 timestamp = 4;
+}
+
+message CropGrowthRequest {
+  double latitude = 1;
+  double longitude = 2;
+  string crop_type = 3;
+  string planting_date = 4;
+  int32 analysis_days = 5;
+}
+
+message GrowthStage {
+  string stage_name = 1; // "GERMINATION", "VEGETATIVE", "FLOWERING", "MATURITY"
+  string start_date = 2;
+  string end_date = 3;
+  double gdd_required = 4;
+  bool is_current = 5;
+}
+
+message CropGrowthResponse {
+  string crop_type = 1;
+  double accumulated_gdd = 2; // Graus-dia acumulados
+  double gdd_target = 3; // GDD total necessário para ciclo completo
+  double growth_progress = 4; // 0-1 (% do ciclo completado)
+  GrowthStage current_stage = 5;
+  repeated GrowthStage all_stages = 6;
+  string estimated_harvest_date = 7;
+  double development_rate = 8; // Velocidade de desenvolvimento (GDD/dia)
+  string health_status = 9; // "EXCELLENT", "GOOD", "FAIR", "POOR"
+  int64 timestamp = 10;
+}
