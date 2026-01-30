@@ -8,11 +8,159 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### 🚀 Em Desenvolvimento
-- Machine Learning (Python/FastAPI)
-- Infrastructure (TimescaleDB, Kafka, Docker Compose)
-- Testes E2E
+- Infrastructure (TimescaleDB, Kafka, Docker Compose completo)
+- Testes E2E (30+ testes)
+- Deployment automation
 
 ---
+
+## [0.17.0] - 2026-01-30
+
+### ✨ Adicionado
+
+#### 🤖 **ML Service (FastAPI + Python)** (port 8000)
+
+Serviço de Machine Learning para previsões agrícolas e detecção de anomalias.
+
+**3 Modelos implementados:**
+
+1. **Yield Predictor (LSTM)**
+   - Arquitetura: 3 LSTM layers (128, 64, 32 units) + Dense layers
+   - Input: Sequência de 30 dias de dados climáticos
+   - Output: Produtividade prevista (t/ha)
+   - Features: 6 variáveis (temperatura, precipitação, umidade, radiação solar, GDD, umidade do solo)
+   - Métricas: MSE, MAE, MAPE
+   - Dropout: 0.2 para regularização
+   - Confidence interval: 95% (±1.96σ)
+   - Factor importance: Climate (35%), Soil (25%), Management (20%), Historical (15%), Season (5%)
+
+2. **Price Forecaster (Transformer)**
+   - Arquitetura: 4 Transformer encoder layers
+   - Multi-head attention: 8 heads
+   - Model dimension: 128
+   - FFN dimension: 512
+   - Input: Sequência de 60 dias de preços históricos
+   - Output: Previsão 1-90 dias futuros
+   - Positional encoding para captura temporal
+   - Log returns para normalização
+   - Multi-step forecasting iterativo
+   - Trend classification: BULLISH, BEARISH, NEUTRAL (±5% threshold)
+   - Volatility calculation: Coeficiente de variação
+
+3. **Anomaly Detector (Isolation Forest)**
+   - Arquitetura: Ensemble de 100 árvores
+   - Contamination rate: 10% esperado
+   - Features: Value, change, volatility, rolling stats (7 dias)
+   - Severity classification: CRITICAL, HIGH, MEDIUM, LOW
+   - Threshold ajustável por sensitivity (0-1)
+   - Z-score normalization
+   - Health score global (0-1)
+   - Anomaly score por data point
+
+**4 APIs REST implementadas:**
+
+1. **POST /api/v1/yield/predict**
+   - Entrada: farm_id, crop_type, area_hectares, planting_date, climate_data, historical_yields
+   - Saída: predicted_yield, confidence, bounds (95% CI), factors, recommendations
+   - Validação de dados climáticos mínimos
+   - Recomendações contextualizadas por cultura
+
+2. **POST /api/v1/prices/forecast**
+   - Entrada: commodity, forecast_horizon (1-90 dias), historical_prices, external_factors
+   - Saída: forecasted_prices (array), trend, volatility, confidence, recommendations
+   - Mínimo 7 dias de histórico
+   - Confidence decay exponencial (0.02/dia)
+   - Identificação de picos de preço
+
+3. **POST /api/v1/anomaly/detect**
+   - Entrada: farm_id, data_type (YIELD/CLIMATE/SOIL/HEALTH), time_series, sensitivity
+   - Saída: anomalies (timestamp, score, severity, explanation), overall_health_score
+   - Mínimo 10 data points
+   - Explicação de desvio percentual
+   - Recomendações por severidade e tipo
+
+4. **POST /api/v1/training/train + GET /api/v1/training/{job_id}**
+   - Background training jobs
+   - Progress tracking (epochs, metrics)
+   - Status: PENDING, TRAINING, COMPLETED, FAILED
+   - Job management in-memory (Redis em produção)
+
+**Features gerais:**
+
+- FastAPI com async/await
+- Pydantic schemas para validação
+- CORS middleware configurável
+- Health check endpoint
+- Model info endpoints
+- Logging estruturado
+- Lifespan events (startup/shutdown)
+- Dependency injection para model loader
+- Background tasks para training
+- Error handling robusto
+
+**Model Loader:**
+- Carregamento centralizado de modelos
+- Status tracking de cada modelo
+- Lazy loading (build se não existir)
+- Model info com hyperparameters
+- Unload para liberar memória
+
+**Preprocessing:**
+- Normalization (min-max para LSTM, standard para Isolation Forest)
+- Sequence padding para LSTM
+- Log returns para Transformer
+- Rolling statistics para Anomaly Detector
+- Missing data handling
+
+**Recommendations Engine:**
+- Yield-based: Baixa/Alta produtividade
+- Climate-based: Precipitação, temperatura
+- Crop-specific: SOJA, MILHO, CAFE
+- Price-based: Hedge, timing de venda
+- Volatility-based: Collar, options
+- Anomaly-based: Inspeção, análise de solo
+
+### 📄 **Arquivos Criados**
+
+**ML Service (FastAPI/Python):**
+- `main.py` (~100 linhas) - FastAPI app
+- `app/core/config.py` (~60 linhas) - Settings
+- `app/schemas/schemas.py` (~150 linhas) - Pydantic models
+- `app/models/yield_predictor.py` (~280 linhas) - LSTM
+- `app/models/price_forecaster.py` (~320 linhas) - Transformer
+- `app/models/anomaly_detector.py` (~260 linhas) - Isolation Forest
+- `app/models/model_loader.py` (~90 linhas) - Model manager
+- `app/routers/yield_router.py` (~60 linhas)
+- `app/routers/price_router.py` (~70 linhas)
+- `app/routers/anomaly_router.py` (~80 linhas)
+- `app/routers/training_router.py` (~140 linhas)
+- `requirements.txt` (~20 linhas)
+- `.env.example` (~25 linhas)
+- `.gitignore` (~45 linhas)
+- `README.md` (~300 linhas)
+- `__init__.py` (5 arquivos)
+
+**Total:** 19 arquivos, ~2,000 linhas Python
+
+### 📊 **Progresso**
+
+**Sprint 5-6 (Dias 29-42):** 0% → 70% completo
+- ✅ FastAPI service structure
+- ✅ 3 ML models (LSTM, Transformer, Isolation Forest)
+- ✅ 4 API endpoints
+- ✅ Model loader & management
+- ✅ Preprocessing pipelines
+- ✅ Recommendations engine
+- ⏳ Model training pipelines
+- ⏳ Data ingestion from database
+
+**Backend:** 78% → 83% completo
+
+**Próximo:** Finalizar training pipelines + Infrastructure (TimescaleDB, Kafka, Docker)
+
+---
+
+## [0.16.0] - 2026-01-30
 
 ## [0.16.0] - 2026-01-30
 
