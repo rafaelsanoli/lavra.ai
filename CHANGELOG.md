@@ -8,10 +8,144 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### 🚀 Em Desenvolvimento
-- Decision Engine Service (Go)
 - Alert Worker Service (Go)
 - Machine Learning (Python/FastAPI)
 - Testes E2E
+
+---
+
+## [0.15.0] - 2026-01-30
+
+### ✨ Adicionado
+
+#### 🧠 **Decision Engine Service** (port 50053)
+
+Microserviço de análise de decisões e otimização estratégica.
+
+**6 RPCs implementados:**
+
+1. **EvaluateDecision**
+   - Análise multi-critério com pesos customizáveis
+   - Normalização automática de pesos
+   - Risk-adjusted scoring
+   - Análise de sensibilidade
+   - Identificação de fatores críticos
+   - Confidence score (0-1)
+   - Recomendação: RECOMENDADO/AVALIAR/NÃO RECOMENDADO
+
+2. **OptimizePlantingStrategy**
+   - Otimização de mix de culturas
+   - 3 cenários: monocultura, diversificação 50-50, diversificação máxima
+   - 4 objetivos: MAXIMIZE_REVENUE, MINIMIZE_RISK, MAXIMIZE_SHARPE, BALANCE_RISK_RETURN
+   - Ranking por objetivo e apetite ao risco
+   - Análise de trade-offs
+   - Distribuição ótima de área por cultura
+   - Consideração de constraints
+
+3. **CompareScenarios**
+   - Comparação de múltiplos cenários
+   - Métricas calculadas:
+     * Expected Value (receita - custo)
+     * Risk-Adjusted Return
+     * Sharpe Ratio
+     * Success Probability
+     * Worst Case / Best Case
+   - Matriz de trade-offs
+   - Análise de sensibilidade
+   - Ranking por critério escolhido
+
+4. **RecommendHedgeStrategy**
+   - 3 estratégias: Hedge Parcial (60%), Hedge Total (100%), Collar Opções
+   - Análise de proteção vs upside
+   - Cálculo de efetividade por apetite ao risco
+   - VaR 95% para proteção esperada
+   - Custo-benefício: custo vs proteção
+   - Recomendações por estratégia (FUTURES, OPTIONS, SWAP)
+
+5. **AssessInsuranceNeed**
+   - Avaliação de necessidade: NONE, LOW, MEDIUM, HIGH
+   - Risco agregado: CLIMATE, MARKET, OPERATIONAL, FINANCIAL
+   - VaR 95% para perda máxima esperada
+   - 3 produtos:
+     * CROP_PRODUCTIVITY (4% prêmio, 70% cobertura)
+     * REVENUE_PROTECTION (6% prêmio, 80% cobertura)
+     * PARAMETRIC (3% prêmio, 60% cobertura, sem franquia)
+   - Análise custo-benefício (ratio cobertura/prêmio)
+   - Recomendação por nível de risco
+
+6. **CalculateExpectedValue**
+   - Expected Value com múltiplos outcomes
+   - Desvio padrão e variância
+   - Coeficiente de variação
+   - Percentis 10%, 50%, 90%
+   - Downside Risk (semi-variância)
+   - Upside Potential
+   - Sortino Ratio (EV / Downside Risk)
+   - Interpretação de risco: BAIXO/MÉDIO/ALTO
+
+**Algoritmos de decisão:**
+- **Multi-Criteria Decision Analysis (MCDA):** Pesos normalizados, scores ponderados
+- **Portfolio Optimization:** Sharpe Ratio, risk-adjusted returns
+- **Value at Risk (VaR):** Percentil 95% para downside risk
+- **Sortino Ratio:** Foco em downside risk (penaliza apenas variações negativas)
+- **Expected Value Theory:** Probabilidades × outcomes
+- **Sensitivity Analysis:** Impacto de variações em cada critério
+
+**Features:**
+- Risk appetite adjustment (CONSERVATIVE, MODERATE, AGGRESSIVE)
+- Confidence scoring baseado em consistência de critérios
+- Trade-off analysis entre cenários
+- Cost-benefit analysis para hedge e seguros
+- Percentile-based risk assessment
+- Context-aware recommendations
+
+### 🎯 **Use Cases Implementados**
+
+1. **Decisão de plantio:**
+   - Avaliar viabilidade multi-critério
+   - Otimizar mix de culturas
+   - Considerar objetivos e constraints
+
+2. **Estratégia de hedge:**
+   - Comparar estratégias (futuros, opções, collar)
+   - Avaliar proteção vs custo
+   - Determinar % ideal de hedge
+
+3. **Contratação de seguros:**
+   - Avaliar necessidade por risco agregado
+   - Comparar produtos disponíveis
+   - Análise de custo-benefício
+
+4. **Comparação de cenários:**
+   - Avaliar alternativas
+   - Quantificar trade-offs
+   - Identificar melhor cenário por critério
+
+5. **Análise de valor esperado:**
+   - Calcular EV de investimentos
+   - Avaliar downside vs upside
+   - Sortino Ratio para decisões
+
+### 📄 **Arquivos Criados**
+
+**Decision Engine Service:**
+- `cmd/main.go` (~50 linhas)
+- `internal/server/server.go` (~25 linhas)
+- `internal/service/decision_service.go` (~950 linhas)
+- `internal/models/types.go` (~100 linhas)
+
+**Total:** 4 arquivos, ~1,125 linhas Go
+
+### 📊 **Progresso**
+
+**Sprint 3-4 (Dias 15-28):** 50% → 75% completo
+- ✅ Infraestrutura Go Microservices
+- ✅ Market Analysis Service (6 RPCs)
+- ✅ Climate Analysis Service (6 RPCs)
+- ✅ Decision Engine Service (6 RPCs)
+- ⏳ Alert Worker Service
+
+**Backend:** 70% → 75% completo
 
 ---
 
