@@ -1,21 +1,22 @@
-# Dockerfile para NestJS API
-FROM node:20-alpine AS development
+FROM node:18-alpine
 
 WORKDIR /app
 
 # Copiar package files
 COPY package*.json ./
-COPY prisma ./prisma/
+COPY tsconfig*.json ./
 
 # Instalar dependências
-RUN npm install
-
-# Gerar Prisma Client
-RUN npx prisma generate
+RUN npm ci
 
 # Copiar código fonte
 COPY . .
 
-EXPOSE 4000
+# Gerar Prisma Client
+RUN npx prisma generate
 
+# Expor porta
+EXPOSE 3000
+
+# Comando padrão (pode ser sobrescrito no docker-compose)
 CMD ["npm", "run", "start:dev"]

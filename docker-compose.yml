@@ -1,60 +1,89 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  # PostgreSQL Database
+  # PostgreSQL - Banco principal
   postgres:
     image: postgres:16-alpine
     container_name: lavra-postgres
     restart: unless-stopped
-    ports:
-      - '5433:5432'
     environment:
+      POSTGRES_DB: lavra
       POSTGRES_USER: lavra
       POSTGRES_PASSWORD: lavra123
-      POSTGRES_DB: lavra_dev
+    ports:
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U lavra']
+      test: ["CMD-SHELL", "pg_isready -U lavra"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - lavra-network
 
-  # Redis Cache
+  # TimescaleDB - Para séries temporais (clima, preços)
+  timescaledb:
+    image: timescale/timescaledb:latest-pg16
+    container_name: lavra-timescaledb
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lavra_timeseries
+      POSTGRES_USER: lavra
+      POSTGRES_PASSWORD: lavra123
+    ports:
+      - "5433:5432"
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lavra"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - lavra-network
+
+  # Redis - Cache e filas
   redis:
     image: redis:7-alpine
     container_name: lavra-redis
     restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass lavra123
     ports:
-      - '6379:6379'
+      - "6379:6379"
     volumes:
       - redis_data:/data
     healthcheck:
-      test: ['CMD', 'redis-cli', 'ping']
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - lavra-network
 
-  # NestJS API (Backend)
+  # NestJS API (GraphQL + REST)
   api:
     build:
       context: ./apps/api
       dockerfile: Dockerfile
     container_name: lavra-api
     restart: unless-stopped
-    ports:
-      - '4000:4000'
     environment:
       NODE_ENV: development
-      PORT: 4000
-      DATABASE_URL: postgresql://lavra:lavra123@postgres:5432/lavra_dev?schema=public
+      DATABASE_URL: postgresql://lavra:lavra123@postgres:5432/lavra?schema=public
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      JWT_SECRET: dev-secret-change-in-production
-      JWT_EXPIRES_IN: 15m
-      JWT_REFRESH_SECRET: dev-refresh-secret
-      JWT_REFRESH_EXPIRES_IN: 7d
-      CORS_ORIGIN: http://localhost:3000
+      REDIS_PASSWORD: lavra123
+      MARKET_ANALYSIS_SERVICE_URL: market-analysis:50051
+      CLIMATE_ANALYSIS_SERVICE_URL: climate-analysis:50052
+      DECISION_ENGINE_SERVICE_URL: decision-engine:50053
+      ALERT_WORKER_SERVICE_URL: alert-worker:50054
+      ML_SERVICE_URL: http://ml-service:8000
+      JWT_SECRET: lavra-jwt-secret-key-development
+      PORT: 3000
+    ports:
+      - "3000:3000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -64,100 +93,156 @@ services:
       - ./apps/api:/app
       - /app/node_modules
     command: npm run start:dev
+    networks:
+      - lavra-network
 
-  # Next.js Frontend
-  web:
+  # Go - Market Analysis Service
+  market-analysis:
     build:
-      context: ./apps/web
+      context: ./apps/market-analysis-service
       dockerfile: Dockerfile
-    container_name: lavra-web
+    container_name: lavra-market-analysis
     restart: unless-stopped
-    ports:
-      - '3000:3000'
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:4000/graphql
-      NODE_ENV: development
-    volumes:
-      - ./apps/web:/app
-      - /app/node_modules
-      - /app/.next
-    command: npm run dev
+      PORT: 50051
+      DATABASE_URL: postgres://lavra:lavra123@timescaledb:5432/lavra_timeseries?sslmode=disable
+    ports:
+      - "50051:50051"
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+    networks:
+      - lavra-network
 
-  # Climate Microservice (Go)
-  climate-service:
+  # Go - Climate Analysis Service
+  climate-analysis:
     build:
-      context: ./services/climate-service
+      context: ./apps/climate-analysis-service
       dockerfile: Dockerfile
-    container_name: lavra-climate
+    container_name: lavra-climate-analysis
     restart: unless-stopped
-    ports:
-      - '5001:5001'
     environment:
-      PORT: 5001
-      DATABASE_URL: postgresql://lavra:lavra123@postgres:5432/lavra_dev
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      INMET_API_URL: https://api.inmet.gov.br
-      NASA_POWER_API_URL: https://power.larc.nasa.gov/api
+      PORT: 50052
+      DATABASE_URL: postgres://lavra:lavra123@timescaledb:5432/lavra_timeseries?sslmode=disable
+    ports:
+      - "50052:50052"
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+    networks:
+      - lavra-network
+
+  # Go - Decision Engine Service
+  decision-engine:
+    build:
+      context: ./apps/decision-engine-service
+      dockerfile: Dockerfile
+    container_name: lavra-decision-engine
+    restart: unless-stopped
+    environment:
+      PORT: 50053
+      DATABASE_URL: postgres://lavra:lavra123@postgres:5432/lavra?sslmode=disable
+    ports:
+      - "50053:50053"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - lavra-network
+
+  # Go - Alert Worker Service
+  alert-worker:
+    build:
+      context: ./apps/alert-worker-service
+      dockerfile: Dockerfile
+    container_name: lavra-alert-worker
+    restart: unless-stopped
+    environment:
+      PORT: 50054
+      DATABASE_URL: postgres://lavra:lavra123@postgres:5432/lavra?sslmode=disable
+      REDIS_URL: redis://redis:6379?password=lavra123
+    ports:
+      - "50054:50054"
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
-    volumes:
-      - ./services/climate-service:/app
+    networks:
+      - lavra-network
 
-  # Market Microservice (Go)
-  market-service:
-    build:
-      context: ./services/market-service
-      dockerfile: Dockerfile
-    container_name: lavra-market
-    restart: unless-stopped
-    ports:
-      - '5002:5002'
-    environment:
-      PORT: 5002
-      DATABASE_URL: postgresql://lavra:lavra123@postgres:5432/lavra_dev
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    volumes:
-      - ./services/market-service:/app
-
-  # ML Service (Python/FastAPI)
+  # Python - ML Service (FastAPI)
   ml-service:
     build:
-      context: ./ml
+      context: ./apps/ml-service
       dockerfile: Dockerfile
-    container_name: lavra-ml
+    container_name: lavra-ml-service
     restart: unless-stopped
-    ports:
-      - '8000:8000'
     environment:
+      HOST: 0.0.0.0
       PORT: 8000
-      DATABASE_URL: postgresql://lavra:lavra123@postgres:5432/lavra_dev
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      MODEL_PATH: /app/models
+      DEBUG: "true"
+      DATABASE_URL: postgresql://lavra:lavra123@postgres:5432/lavra
+      REDIS_URL: redis://:lavra123@redis:6379/0
+      MODELS_DIR: /app/models
+      YIELD_MODEL_PATH: /app/models/yield_predictor.h5
+      PRICE_MODEL_PATH: /app/models/price_forecaster.h5
+      ANOMALY_MODEL_PATH: /app/models/anomaly_detector.joblib
+    ports:
+      - "8000:8000"
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
     volumes:
-      - ./ml:/app
+      - ./apps/ml-service:/app
       - ml_models:/app/models
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - lavra-network
+
+  # PgAdmin - Interface para PostgreSQL (opcional)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: lavra-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@lavra.ai
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+      - timescaledb
+    networks:
+      - lavra-network
+
+  # Redis Commander - Interface para Redis (opcional)
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: lavra-redis-commander
+    restart: unless-stopped
+    environment:
+      REDIS_HOSTS: local:redis:6379:0:lavra123
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+    networks:
+      - lavra-network
+
+networks:
+  lavra-network:
+    driver: bridge
 
 volumes:
   postgres_data:
+    driver: local
+  timescale_data:
+    driver: local
   redis_data:
+    driver: local
   ml_models:
-
-networks:
-  default:
-    name: lavra-network
+    driver: local
