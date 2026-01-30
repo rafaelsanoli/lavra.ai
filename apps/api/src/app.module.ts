@@ -19,6 +19,7 @@ import { TransactionsModule } from './modules/transactions/transactions.module';
 import { SimulationsModule } from './modules/simulations/simulations.module';
 import { QueuesModule } from './queues/queues.module';
 import { WebsocketsModule } from './websockets/websockets.module';
+import { IntegrationsModule } from './integrations/integrations.module';
 
 @Module({
   imports: [
@@ -58,6 +59,9 @@ import { WebsocketsModule } from './websockets/websockets.module';
 
     // WebSockets
     WebsocketsModule,
+
+    // External Integrations
+    IntegrationsModule,
   ],
 })
 export class AppModule {}
