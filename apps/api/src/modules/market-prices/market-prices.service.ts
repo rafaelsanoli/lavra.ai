@@ -2,18 +2,31 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateMarketPriceInput } from './dto/create-market-price.input';
 import { UpdateMarketPriceInput } from './dto/update-market-price.input';
+import { PricesGateway } from '../../websockets/prices.gateway';
 
 @Injectable()
 export class MarketPricesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private pricesGateway: PricesGateway,
+  ) {}
 
   async create(createMarketPriceInput: CreateMarketPriceInput) {
-    return this.prisma.marketPrice.create({
+    const price = await this.prisma.marketPrice.create({
       data: {
         ...createMarketPriceInput,
         timestamp: new Date(createMarketPriceInput.timestamp),
       },
     });
+
+    // Emit WebSocket event for price update
+    try {
+      this.pricesGateway.sendPriceUpdate(price.commodity, price);
+    } catch (error) {
+      console.error('Failed to send WebSocket price update:', error);
+    }
+
+    return price;
   }
 
   async findAll(

@@ -8,10 +8,114 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### 🚀 Em Desenvolvimento
-- WebSockets (Socket.io)
 - Microserviços Go
 - Machine Learning (Python/FastAPI)
+- Módulo Integrations (APIs externas)
 - Testes E2E
+
+---
+
+## [0.11.0] - 2026-01-29
+
+### ✨ Adicionado
+
+#### 🔌 **WebSockets (Socket.io) Completo**
+- **Infraestrutura:**
+  - Integração Socket.io com NestJS
+  - CORS habilitado (configurável para produção)
+  - Sistema de rooms e namespaces
+  - Tracking de usuários conectados
+  - Auto-reconnection support
+  
+- **EventsGateway** (`websockets/events.gateway.ts`):
+  - Gateway base para comunicação WebSocket
+  - Lifecycle hooks: afterInit, handleConnection, handleDisconnect
+  - User tracking (socketId → userId mapping)
+  - **Métodos:**
+    * `emitToUser(userId, event, data)` - Enviar para usuário específico
+    * `emitToAll(event, data)` - Broadcast para todos
+    * `emitToRoom(room, event, data)` - Enviar para sala específica
+    * `getConnectedUsersCount()` - Contador de usuários online
+    * `isUserConnected(userId)` - Verificar status de conexão
+  - Sistema de rooms: `user:{userId}` para comunicação direcionada
+  
+- **AlertsGateway** (`websockets/alerts.gateway.ts`):
+  - Namespace: `/alerts`
+  - **Eventos emitidos:**
+    * `alert:new` - Novo alerta criado
+    * `alert:updated` - Alerta atualizado
+    * `alert:read` - Alerta marcado como lido
+    * `alert:resolved` - Alerta resolvido
+    * `alert:weather` - Alerta meteorológico específico
+    * `alert:market` - Alerta de mercado específico
+  - **Eventos de inscrição:**
+    * `alerts:subscribe` - Inscrever em alertas
+    * `alerts:unsubscribe` - Desinscrever
+    * `alerts:getUnreadCount` - Obter contagem de não lidos
+  - Integração automática com AlertsService
+  - Roteamento inteligente por tipo de alerta
+  
+- **PricesGateway** (`websockets/prices.gateway.ts`):
+  - Namespace: `/prices`
+  - **Eventos emitidos:**
+    * `price:update` - Atualização de preço
+    * `price:alert` - Alerta de mudança significativa
+    * `market:summary` - Resumo do mercado
+  - **Eventos de inscrição:**
+    * `prices:subscribe` - Inscrever em commodity específica
+    * `prices:unsubscribe` - Desinscrever
+    * `prices:subscribeAll` - Inscrever em todas commodities
+    * `prices:getSubscribersCount` - Contagem de assinantes
+  - Sistema de rooms por commodity: `commodity:{name}`
+  - Tracking de subscrições (commodity → Set<socketId>)
+  - Cleanup automático de subscrições ao desconectar
+  - Suporte para múltiplas commodities: soja, milho, café, trigo, algodão
+  - Integração automática com MarketPricesService
+  
+### 🔗 **Integrações Automáticas**
+- **AlertsService:**
+  - Emissão automática de WebSocket ao criar alerta
+  - Roteamento por tipo: WEATHER → alert:weather, MARKET → alert:market
+  - Tratamento de erros não-bloqueante
+  
+- **MarketPricesService:**
+  - Emissão automática ao criar/atualizar preço
+  - Notificação em tempo real para subscribers
+  - Tratamento de erros não-bloqueante
+
+### 📦 **Dependências**
+- ➕ `@nestjs/websockets@^10.0.0` - NestJS wrapper para WebSockets
+- ➕ `@nestjs/platform-socket.io@^10.0.0` - Adapter Socket.io
+- ➕ `socket.io@^4.6.0` - Engine WebSocket
+
+### 🎯 **Recursos Chave**
+- **Real-time bidirectional:** Cliente ↔ Servidor comunicação instantânea
+- **Namespaces:** Separação lógica (alerts, prices)
+- **Rooms:** Agrupamento dinâmico de clientes
+- **Event-driven:** Pub/Sub pattern para notificações
+- **Auto-reconnection:** Cliente reconecta automaticamente
+- **Scalable:** Suporta múltiplos clientes simultâneos
+- **Type-safe:** TypeScript decorators + DTOs
+
+### 📊 **Use Cases Implementados**
+1. **Alertas em tempo real:** Usuário recebe notificação instantânea de alertas críticos
+2. **Preços ao vivo:** Dashboard atualiza preços sem polling
+3. **Multi-client sync:** Múltiplas abas/dispositivos sincronizados
+4. **Selective updates:** Usuário só recebe dados relevantes (filtro por commodity)
+
+### 📄 **Arquivos Criados**
+- `websockets/websockets.module.ts` (módulo principal)
+- `websockets/events.gateway.ts` (gateway base)
+- `websockets/alerts.gateway.ts` (alertas real-time)
+- `websockets/prices.gateway.ts` (preços real-time)
+- **Total:** 4 arquivos, ~550 linhas
+
+### 🎉 **Sprint 1 COMPLETO!**
+- ✅ Simulations Module (22 testes)
+- ✅ Bull Queues (4 filas operacionais)
+- ✅ WebSockets (3 gateways + integrações)
+
+**Progresso Backend:** 50% → 55%
 
 ---
 

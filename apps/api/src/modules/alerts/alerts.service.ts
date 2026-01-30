@@ -4,10 +4,14 @@ import { CreateAlertInput } from './dto/create-alert.input';
 import { UpdateAlertInput } from './dto/update-alert.input';
 import { AlertType } from './dto/create-alert.input';
 import { AlertStatus } from './dto/update-alert.input';
+import { AlertsGateway } from '../../websockets/alerts.gateway';
 
 @Injectable()
 export class AlertsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private alertsGateway: AlertsGateway,
+  ) {}
 
   async create(userId: string, createAlertInput: CreateAlertInput) {
     const data: any = {
@@ -24,9 +28,25 @@ export class AlertsService {
       data.expiresAt = new Date(createAlertInput.expiresAt);
     }
 
-    return this.prisma.alert.create({
+    const alert = await this.prisma.alert.create({
       data,
     });
+
+    // Emit WebSocket event for new alert
+    try {
+      if (createAlertInput.type === 'WEATHER') {
+        this.alertsGateway.sendWeatherAlert(userId, alert);
+      } else if (createAlertInput.type === 'MARKET') {
+        this.alertsGateway.sendMarketAlert(userId, alert);
+      } else {
+        this.alertsGateway.sendAlertToUser(userId, alert);
+      }
+    } catch (error) {
+      // Log error but don't fail the request
+      console.error('Failed to send WebSocket alert:', error);
+    }
+
+    return alert;
   }
 
   async findAll(

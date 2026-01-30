@@ -18,6 +18,7 @@ import { MarketPricesModule } from './modules/market-prices/market-prices.module
 import { TransactionsModule } from './modules/transactions/transactions.module';
 import { SimulationsModule } from './modules/simulations/simulations.module';
 import { QueuesModule } from './queues/queues.module';
+import { WebsocketsModule } from './websockets/websockets.module';
 
 @Module({
   imports: [
@@ -54,6 +55,9 @@ import { QueuesModule } from './queues/queues.module';
 
     // Queues
     QueuesModule,
+
+    // WebSockets
+    WebsocketsModule,
   ],
 })
 export class AppModule {}
