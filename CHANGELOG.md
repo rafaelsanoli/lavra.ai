@@ -8,9 +8,161 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### 🚀 Em Desenvolvimento
-- Alert Worker Service (Go)
 - Machine Learning (Python/FastAPI)
+- Infrastructure (TimescaleDB, Kafka, Docker Compose)
 - Testes E2E
+
+---
+
+## [0.16.0] - 2026-01-30
+
+### ✨ Adicionado
+
+#### 🔔 **Alert Worker Service** (port 50054)
+
+Microserviço de processamento de alertas e dispatch de notificações.
+
+**6 RPCs implementados:**
+
+1. **ProcessAlert**
+   - Processamento individual de alertas
+   - Validação de campos obrigatórios
+   - Cálculo automático de prioridade (1-5)
+   - Enriquecimento com contexto
+   - Identificação de destinatários
+   - Criação de notificações multi-canal
+   - Determinação de ações (NOTIFY, LOG, UPDATE)
+   - Agendamento de próxima revisão
+
+2. **BatchProcessAlerts**
+   - Processamento em lote de alertas
+   - Validação paralela
+   - Estatísticas de processamento:
+     * Total/Success/Failure counts
+     * Processing time (ms)
+     * Throughput (alertas/segundo)
+   - Resultados individuais por alerta
+   - Performance otimizada para alta carga
+
+3. **PrioritizeAlerts**
+   - 3 estratégias de priorização:
+     * SEVERITY_FIRST: Foco em severidade
+     * TIME_SENSITIVE: Alertas recentes prioritários
+     * IMPACT_BASED: Tipos críticos (clima, saúde)
+   - Priority score (0-100)
+   - Ranking com explicação
+   - SLA recomendado (5min - 4h)
+   - Identificação de alertas críticos (top 20% ou score > 80)
+   - Reasoning detalhado
+
+4. **DispatchNotifications**
+   - Envio multi-canal:
+     * EMAIL: Notificação completa
+     * SMS: Mensagem curta (100 chars)
+     * PUSH: Notificação mobile
+     * IN_APP: Interface web
+     * WEBHOOK: Integração externa
+   - Status tracking: PENDING → SENT → DELIVERED / FAILED
+   - Taxa de sucesso 95%
+   - Retry automático para falhas
+   - Estatísticas por canal
+   - Delivery confirmation
+
+5. **AggregateAlerts**
+   - 4 estratégias de agregação:
+     * BY_TYPE: Agrupar por tipo
+     * BY_SEVERITY: Agrupar por severidade
+     * BY_FARM: Agrupar por fazenda
+     * BY_TYPE_AND_FARM: Combinado
+   - Janela de tempo configurável
+   - Mínimo de alertas para agregar
+   - Redução de ruído (reduction rate)
+   - Highest severity do grupo
+   - Entidades afetadas
+   - Título e mensagem agregados
+
+6. **ScheduleAlert**
+   - Agendamento de alertas futuros
+   - Validação de tempo (não pode ser passado)
+   - Recorrência: HOURLY, DAILY, WEEKLY
+   - Status: SCHEDULED, PENDING_EXECUTION
+   - Estimativa de delay
+   - Cálculo de próxima execução
+   - Schedule ID único
+
+**Algoritmos de processamento:**
+- **Priority Calculation:** Severidade + tipo + tempo
+- **Multi-Channel Selection:** Baseado em severidade e preferências
+- **Aggregation Logic:** Grouping + time window filtering
+- **Batch Processing:** Parallel validation + throughput optimization
+- **Retry Strategy:** Exponential backoff (5min, 15min, 1h)
+- **SLA Calculation:** Score-based (5min para emergency, 4h para info)
+
+**Features de notificação:**
+- Formatação por canal (SMS curto, Email completo)
+- Preferências de usuário (email/sms/push enabled)
+- Delivery tracking
+- Retry automático para falhas
+- Estatísticas em tempo real
+- Channel breakdown
+
+**Regras de priorização:**
+- **EMERGENCY (100):** SMS + Email + Push + In-App, SLA 5min
+- **CRITICAL (80):** Email + Push + In-App, SLA 15min
+- **WARNING (50):** Email + In-App, SLA 1h
+- **INFO (20):** In-App, SLA 4h
+
+### 🎯 **Use Cases Implementados**
+
+1. **Processamento em tempo real:**
+   - Alerta recebido → validação → priorização → dispatch
+   - Notificação multi-canal simultânea
+   - Ações automáticas (log, update)
+
+2. **Processamento em lote:**
+   - Importação de alertas históricos
+   - Migração de sistemas legados
+   - Processamento noturno de relatórios
+
+3. **Gestão de prioridades:**
+   - Fila de alertas ordenada por urgência
+   - SLA enforcement
+   - Escalation automático
+
+4. **Redução de ruído:**
+   - Agregação de alertas similares
+   - Deduplicação por janela de tempo
+   - Notificação única para múltiplos eventos
+
+5. **Agendamento:**
+   - Alertas recorrentes (relatórios)
+   - Lembretes futuros
+   - Manutenção programada
+
+### 📄 **Arquivos Criados**
+
+**Alert Worker Service:**
+- `cmd/main.go` (~50 linhas)
+- `internal/server/server.go` (~25 linhas)
+- `internal/service/alert_service.go` (~850 linhas)
+- `internal/models/types.go` (~120 linhas)
+
+**Total:** 4 arquivos, ~1,045 linhas Go
+
+### 📊 **Progresso**
+
+**Sprint 3-4 (Dias 15-28):** 75% → 100% ✅ COMPLETO
+- ✅ Infraestrutura Go Microservices
+- ✅ Market Analysis Service (6 RPCs)
+- ✅ Climate Analysis Service (6 RPCs)
+- ✅ Decision Engine Service (6 RPCs)
+- ✅ Alert Worker Service (6 RPCs)
+
+**Go Microservices:** 4 serviços, 24 RPCs, ~4,010 linhas
+
+**Backend:** 75% → 78% completo
+
+**Próximo:** Sprint 5-6 - ML Pipeline (Python/FastAPI)
 
 ---
 
