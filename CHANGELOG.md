@@ -8,11 +8,144 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### 🚀 Em Desenvolvimento
-- Climate Analysis Service (Go)
 - Decision Engine Service (Go)
 - Alert Worker Service (Go)
 - Machine Learning (Python/FastAPI)
 - Testes E2E
+
+---
+
+## [0.14.0] - 2026-01-30
+
+### ✨ Adicionado
+
+#### 🌡️ **Climate Analysis Service** (port 50052)
+
+Microserviço de análise climática e agronômica avançada.
+
+**6 RPCs implementados:**
+
+1. **CalculateClimateRisk**
+   - Análise integrada de risco por cultura e estágio
+   - 4 categorias: FROST, DROUGHT, HEAT_STRESS, EXCESS_RAIN
+   - Score de risco geral (0-1)
+   - Classificação: LOW, MEDIUM, HIGH, CRITICAL
+   - Recomendações contextualizadas
+   - Parâmetros por cultura (SOJA, MILHO, CAFE)
+
+2. **AnalyzePlantingConditions**
+   - Avaliação de adequação para plantio
+   - Temperatura, umidade do solo, previsão 7 dias
+   - Suitability score (0-1)
+   - Status de umidade: DRY, ADEQUATE, EXCESSIVE
+   - Fatores favoráveis vs desfavoráveis
+   - Recomendação: plantar/aguardar/não plantar
+
+3. **PredictHarvestWindow**
+   - Previsão de janela ótima de colheita
+   - Baseado em GDD (Growing Degree Days) acumulado
+   - Janela ótima (±3 dias, 85% confiança)
+   - Janela aceitável (±7 dias, 70% confiança)
+   - Progresso de maturação (0-1)
+   - Recomendações de monitoramento
+
+4. **CalculateWaterBalance**
+   - Balanço hídrico diário (P - ET)
+   - Evapotranspiração (método Hargreaves)
+   - Déficit acumulado
+   - Status: SURPLUS, ADEQUATE, DEFICIT, SEVERE_DEFICIT
+   - Nível de estresse hídrico: NONE, MILD, MODERATE, SEVERE
+   - Recomendação de irrigação (mm)
+
+5. **DetectExtremeEvents**
+   - Detecção de 6 tipos de eventos extremos
+   - FROST: Temperatura < 2°C
+   - HEAT_WAVE: 3+ dias > 35°C
+   - HEAVY_RAIN: Precipitação > 80mm/dia
+   - DROUGHT: < 10mm em 7 dias
+   - HAIL e STRONG_WIND (estrutura)
+   - Probabilidade, severidade e impactos
+   - Ações de mitigação específicas
+
+6. **AnalyzeCropGrowth**
+   - Análise fenológica completa
+   - GDD acumulado vs target
+   - 4 estágios: GERMINATION, VEGETATIVE, FLOWERING, MATURITY
+   - Progresso de crescimento (0-1)
+   - Taxa de desenvolvimento (GDD/dia)
+   - Status de saúde: EXCELLENT, GOOD, FAIR, POOR
+   - Estimativa de data de colheita
+
+**Algoritmos agronômicos:**
+- **GDD (Growing Degree Days):** Método térmico para fenologia
+- **Evapotranspiração:** Hargreaves simplificado
+- **Balanço hídrico:** P - ET com déficit acumulado
+- **Z-score:** Detecção de anomalias climáticas
+- **Regressão:** Estimativa de datas de colheita
+
+**Parâmetros de culturas:**
+- **SOJA:** 1800 GDD, base 10°C, ciclo 120 dias
+- **MILHO:** 1500 GDD, base 10°C, ciclo 110 dias
+- **CAFE:** 3000 GDD, base 12°C, ciclo 180 dias
+- Temperaturas críticas (geada, ótima, estresse)
+- Necessidade hídrica total
+
+**Features:**
+- Simulação de dados climáticos (desenvolvimento)
+- Previsão 7-30 dias
+- Análise histórica
+- Context-aware recommendations
+- Graceful shutdown
+- Error handling robusto
+
+### 🎯 **Use Cases Implementados**
+
+1. **Decisão de plantio:**
+   - Avaliar condições atuais
+   - Verificar previsão 7 dias
+   - Score de adequação
+   - Recomendação: plantar ou aguardar
+
+2. **Gestão de risco:**
+   - Identificar riscos climáticos
+   - Priorizar por severidade
+   - Ações preventivas
+
+3. **Planejamento de colheita:**
+   - Monitorar GDD acumulado
+   - Estimar janela ótima
+   - Considerar previsão do tempo
+
+4. **Manejo hídrico:**
+   - Balanço hídrico diário
+   - Déficit acumulado
+   - Recomendação de irrigação
+
+5. **Monitoramento fenológico:**
+   - Estágio de crescimento atual
+   - Progresso de maturação
+   - Desvios de desenvolvimento
+
+### 📄 **Arquivos Criados**
+
+**Climate Analysis Service:**
+- `cmd/main.go` (~50 linhas)
+- `internal/server/server.go` (~20 linhas)
+- `internal/service/climate_service.go` (~850 linhas)
+- `internal/models/types.go` (~100 linhas)
+
+**Total:** 4 arquivos, ~1,020 linhas Go
+
+### 📊 **Progresso**
+
+**Sprint 3-4 (Dias 15-28):** 25% → 50% completo
+- ✅ Infraestrutura Go Microservices
+- ✅ Market Analysis Service (6 RPCs)
+- ✅ Climate Analysis Service (6 RPCs)
+- ⏳ Decision Engine Service
+- ⏳ Alert Worker Service
+
+**Backend:** 65% → 70% completo
 
 ---
 
