@@ -8,9 +8,223 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [Unreleased]
 
 ### 🚀 Em Desenvolvimento
-- Infrastructure (TimescaleDB, Kafka, Docker Compose completo)
-- Testes E2E (30+ testes)
-- Deployment automation
+- Testes E2E completos (30+ testes)
+- Pipelines de training automatizados
+- Documentação de deployment
+
+---
+
+## [0.18.0] - 2026-01-30
+
+### ✨ Adicionado
+
+#### 🐳 **Infraestrutura Docker Completa**
+
+Ambiente completo para desenvolvimento local com 11 serviços orquestrados.
+
+**Docker Compose:**
+- Networks isoladas (`lavra-network`)
+- Health checks em todos os serviços
+- Volumes persistentes para dados
+- Restart policies configuradas
+- Dependency ordering correto
+
+**11 Serviços:**
+
+1. **PostgreSQL** (port 5432)
+   - Banco principal: users, fazendas, scenarios
+   - Volume: postgres_data
+   - Health check: pg_isready
+
+2. **TimescaleDB** (port 5433)
+   - Séries temporais: climate, prices, alerts
+   - Volume: timescale_data
+   - Extension: timescaledb
+
+3. **Redis** (port 6379)
+   - Cache + Bull Queues + Sessions
+   - Volume: redis_data
+   - Password: lavra123
+
+4. **NestJS API** (port 3000)
+   - GraphQL + REST API
+   - Hot reload (volume mount)
+   - Prisma + Bull + Socket.io
+
+5. **Market Analysis** (port 50051)
+   - Go + gRPC service
+   - Multi-stage build
+   - Health check
+
+6. **Climate Analysis** (port 50052)
+   - Go + gRPC service
+   - Algoritmos agronômicos
+
+7. **Decision Engine** (port 50053)
+   - Go + gRPC service
+   - MCDA + VaR + Sharpe
+
+8. **Alert Worker** (port 50054)
+   - Go + gRPC service
+   - Multi-channel notifications
+
+9. **ML Service** (port 8000)
+   - Python + FastAPI
+   - 3 modelos ML
+   - Hot reload
+
+10. **PgAdmin** (port 5050)
+    - UI para PostgreSQL/TimescaleDB
+    - Credentials: admin@lavra.ai / admin123
+
+11. **Redis Commander** (port 8081)
+    - UI web para Redis
+
+**Dockerfiles Criados:**
+
+- `apps/api/Dockerfile`:
+  * Node.js 18 Alpine
+  * npm ci + Prisma generate
+  * Hot reload support
+
+- `apps/market-analysis-service/Dockerfile`:
+  * Go 1.21 multi-stage build
+  * Builder stage + Alpine runtime
+  * CGO disabled, static binary
+
+- `apps/climate-analysis-service/Dockerfile`:
+  * Go 1.21 multi-stage
+  * Identical pattern
+
+- `apps/decision-engine-service/Dockerfile`:
+  * Go 1.21 multi-stage
+  * Lightweight runtime
+
+- `apps/alert-worker-service/Dockerfile`:
+  * Go 1.21 multi-stage
+  * CA certificates included
+
+- `apps/ml-service/Dockerfile`:
+  * Python 3.11 slim
+  * System dependencies (gcc, g++, libpq-dev)
+  * pip install requirements
+  * Models directory creation
+
+**Scripts de Automação (4 arquivos executáveis):**
+
+1. **`scripts/setup-local.sh`** (~180 linhas):
+   - Verifica Docker/Docker Compose instalados
+   - Cria `.env` files se não existirem
+   - Sobe bancos de dados (postgres, redis, timescaledb)
+   - Aguarda health checks
+   - Instala dependências npm (apps/api)
+   - Gera Prisma Client
+   - Executa migrations (prisma migrate deploy)
+   - Build Go microservices (4 serviços)
+   - Cria venv Python + pip install
+   - Output colorido com status
+   - Lista próximos passos
+
+2. **`scripts/start-local.sh`** (~120 linhas):
+   - Inicia todos serviços localmente (sem Docker)
+   - Background processes com PIDs trackados
+   - Trap para cleanup (Ctrl+C)
+   - Sobe bancos via Docker
+   - Inicia 4 Go services
+   - Inicia ML Service (Python)
+   - Inicia NestJS API
+   - Output formatado com portas
+   - Lista URLs de acesso
+
+3. **`scripts/test-all.sh`** (~100 linhas):
+   - Verifica conectividade de todos serviços
+   - Health checks: API, ML, PgAdmin, Redis Commander
+   - Testa GraphQL endpoint
+   - Testa ML Service (health + models info)
+   - Teste rápido yield prediction
+   - Verifica portas gRPC (lsof)
+   - Valida bancos: PostgreSQL, TimescaleDB, Redis
+   - Output colorizado (verde/vermelho)
+   - Links para docs
+
+4. **`scripts/test-ml-service.sh`** (~150 linhas):
+   - 3 testes completos de ML
+   - **Teste 1: Yield Prediction**
+     * Payload: 7 dias climate data, historical yields
+     * Valida: predicted_yield, confidence
+   - **Teste 2: Price Forecast**
+     * Payload: 60 dias preços históricos
+     * Valida: trend, volatility
+   - **Teste 3: Anomaly Detection**
+     * Payload: 12 data points com 2 anomalias
+     * Valida: anomalies_count, health_score
+   - Parse JSON com jq
+   - Output formatado
+
+**Database Init:**
+
+- `scripts/init-db.sql`:
+  * Executado automaticamente no primeiro start
+  * Extensões: uuid-ossp, pg_trgm, btree_gin
+  * Confirmation message
+
+**Features Técnicas:**
+
+- Multi-stage Docker builds (Go)
+- Hot reload em dev mode (volume mounts)
+- Health checks nativos
+- Dependency ordering (depends_on + condition)
+- Container naming consistente
+- Colored terminal output
+- Error handling robusto
+- Process management com traps
+- Idempotência (verifica antes de criar)
+
+**README.md Atualizado:**
+
+- **Quick Start** completo (5 comandos)
+- **Arquitetura** visual ASCII com todos os serviços
+- **Tabela de URLs** e portas
+- **Descrição detalhada** dos 6 serviços backend
+- **Instruções de desenvolvimento** (Docker + Local)
+- **Scripts disponíveis** documentados
+- **Variáveis de ambiente** (API + ML)
+- **Status do projeto**: 95% completo
+- **Métricas**: 25k LOC, 150 arquivos, 17 commits
+- **Contribuindo**: Convenções de commits/branches
+- **Licença** e autor
+
+**Environment Variables:**
+
+API (.env):
+- Database URLs (PostgreSQL, Redis)
+- gRPC service URLs (4 services)
+- ML Service URL
+- External API keys (B3, INMET, NASA, CEPEA)
+- JWT secrets
+
+ML Service (.env):
+- API config (host, port, debug)
+- Database/Redis URLs
+- Models paths
+- Training hyperparameters
+
+### 📊 **Progresso**
+
+**Backend:** 95% → 100% funcional localmente
+
+**Infraestrutura:** 0% → 100% completo
+- ✅ Docker Compose orquestrado
+- ✅ 6 Dockerfiles criados
+- ✅ 4 scripts de automação
+- ✅ Database initialization
+- ✅ README completo
+- ⏳ CI/CD pipelines (próximo)
+- ⏳ Deployment docs (próximo)
+
+**Total:** 13 arquivos novos/modificados, ~1,500 linhas adicionadas
+
+**Próximo:** Testes E2E + Training pipelines + Deployment docs
 
 ---
 
